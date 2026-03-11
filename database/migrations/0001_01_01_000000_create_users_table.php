@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('age');
-            $table->string('gender', 50);
-            $table->string('weight', 50);
-            $table->string('height', 50);
-            $table->decimal('bmi', 15);
-            $table->string('body_fat_pct', 50);
+            $table->string('gender');
+            $table->decimal('weight');
+            $table->decimal('height');
+            $table->decimal('bmi', 5);
+            $table->string('body_fat_pct');
             $table->text('goal');
             $table->string('subscription');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

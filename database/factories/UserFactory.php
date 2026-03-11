@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,19 +22,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $weight = $this->faker->numberBetween(40, 300);
+        $height = $this->faker->numberBetween(100, 300);
+
+        $heightInMeters = $height / 100;
+        $bmi = round($weight / ($heightInMeters * $heightInMeters), 2);
+
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'age' => $this->faker->numberBetween(1, 100),
+            'age' => $this->faker->numberBetween(1, 130),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
-            'weight' => $this->faker->numberBetween(1, 120),
-            'height' => $this->faker->numberBetween(1, 300),
-            'bmi' => $this->faker->numberBetween(1, 50),
+            'weight' => $weight,
+            'height' => $height,
+            'bmi' => $bmi,
             'body_fat_pct' => $this->faker->numberBetween(1, 100),
-            'goal' => $this->faker->text(),
-            'subscription' => $this->faker->text(),
+            'goal' => $this->faker->randomElement(['weight_loss', 'muscle_gain', 'maintenance']),
+            'subscription' => $this->faker->randomElement(['free', 'premium', 'ultra']),
         ];
     }
 }
