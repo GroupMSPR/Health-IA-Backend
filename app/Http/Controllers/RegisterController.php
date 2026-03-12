@@ -32,12 +32,8 @@ class RegisterController extends Controller
             'subscription' => 'free',
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'message' => 'Utilisateur inscrit avec succès',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
             'informations' => $user,
         ], 201);
     }
