@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,22 +22,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+        $weight = $this->faker->numberBetween(40, 300);
+        $height = $this->faker->numberBetween(100, 300);
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        $heightInMeters = $height / 100;
+        $bmi = round($weight / ($heightInMeters * $heightInMeters), 2);
+
+        return [
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => static::$password ??= Hash::make('password'),
+            'age' => $this->faker->numberBetween(1, 130),
+            'gender' => $this->faker->randomElement(['male', 'female', 'other']),
+            'weight' => $weight,
+            'height' => $height,
+            'bmi' => $bmi,
+            'body_fat_pct' => $this->faker->numberBetween(1, 100),
+            'goal' => $this->faker->randomElement(['weight_loss', 'muscle_gain', 'maintenance']),
+            'subscription' => $this->faker->randomElement(['free', 'premium', 'ultra']),
+        ];
     }
 }
