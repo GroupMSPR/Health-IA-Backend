@@ -19,5 +19,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         return \App\Models\User::all();
     });
-
 });
