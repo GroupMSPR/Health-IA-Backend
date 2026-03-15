@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
             'age' => 'required|integer|between:1,130',
             'gender' => 'required|string|in:male,female,other',
             'weight' => 'required|numeric|between:1,500',
-            'height' => 'required|numeric|between:1,300',
+            'height' => 'required|integer|between:1,300',
             'body_fat_pct' => 'required|integer|between:1,100',
             'disease_type' => 'required|string',
             'severity' => 'required|string',

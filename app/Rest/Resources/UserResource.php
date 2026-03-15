@@ -93,7 +93,7 @@ class UserResource extends Resource
             'age' => ['integer', 'between:1,130'],
             'gender' => ['string', 'in:male,female,other'],
             'weight' => ['numeric', 'between:1,500'],
-            'height' => ['numeric', 'between:1,300'],
+            'height' => ['integer', 'between:1,300'],
             'body_fat_pct' => ['integer', 'between:1,100'],
             'disease_type' => ['string'],
             'severity' => ['string'],
