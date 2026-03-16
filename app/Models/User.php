@@ -25,8 +25,6 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
         'email',
         'password',
         'age',
@@ -35,6 +33,10 @@ class User extends Authenticatable
         'height',
         'bmi',
         'body_fat_pct',
+        'disease_type',
+        'severity',
+        'physical_activity_level',
+        'daily_caloric_intake',
         'goal',
         'subscription',
     ];

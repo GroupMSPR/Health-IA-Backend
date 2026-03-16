@@ -14,12 +14,12 @@ class RegisterController extends Controller
 
         if (! empty($request->weight) && ! empty($request->height)) {
             $heightInMeters = $request->height / 100;
-            $bmi = $request->weight / ($heightInMeters * $heightInMeters);
+            if ($heightInMeters > 0) {
+                $bmi = $request->weight / ($heightInMeters * $heightInMeters);
+            }
         }
 
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'age' => $request->age,
@@ -28,6 +28,10 @@ class RegisterController extends Controller
             'height' => $request->height,
             'bmi' => $bmi,
             'body_fat_pct' => $request->body_fat_pct,
+            'disease_type' => $request->disease_type,
+            'severity' => $request->severity,
+            'physical_activity_level' => $request->physical_activity_level,
+            'daily_caloric_intake' => $request->daily_caloric_intake,
             'goal' => $request->goal,
             'subscription' => 'free',
         ]);
