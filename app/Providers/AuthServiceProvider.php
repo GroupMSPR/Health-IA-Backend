@@ -7,8 +7,8 @@ use App\Models\HealthMetric;
 use App\Models\User;
 use App\Policies\FoodPolicy;
 use App\Policies\HealthMetricPolicy;
+use App\Models\User;
 use App\Policies\UserPolicy;
-use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends \Illuminate\Foundation\Support\Providers\AuthServiceProvider
 {
@@ -21,10 +21,7 @@ class AuthServiceProvider extends \Illuminate\Foundation\Support\Providers\AuthS
     /**
      * Register services.
      */
-    public function register(): void
-    {
-
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
