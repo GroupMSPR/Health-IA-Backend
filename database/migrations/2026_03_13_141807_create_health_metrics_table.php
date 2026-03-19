@@ -22,7 +22,7 @@ return new class extends Migration
             $table->smallInteger('steps_count')->default(0);
             $table->time('sleep_time');
             $table->decimal('calories_burned')->default(0);
-            $table->decimal('active_minute')->default(0);
+            $table->unsignedSmallInteger('active_minute')->default(0);
             $table->string('workout_type')->default('none');
             $table->timestamps();
         });

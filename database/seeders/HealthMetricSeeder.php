@@ -13,8 +13,6 @@ class HealthMetricSeeder extends Seeder
      */
     public function run(): void
     {
-        HealthMetric::factory()->count(200)->create();
-
-        HealthMetric::factory()->count(50)->athletes()->create();
+        HealthMetric::factory()->count(30)->create();
     }
 }
