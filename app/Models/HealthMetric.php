@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HealthMetric extends Model
 {
-    use HasUuids, HasFactory, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes;
 
     protected $table = 'health_metrics';
+
     protected $fillable = [
         'date',
         'start_weight',
@@ -23,6 +24,6 @@ class HealthMetric extends Model
         'sleep_time',
         'calories_burned',
         'active_minute',
-        'workout_type'
+        'workout_type',
     ];
 }

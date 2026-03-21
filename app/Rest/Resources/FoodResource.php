@@ -79,7 +79,6 @@ class FoodResource extends Resource
     }
 
     /**
-     * @param RestRequest $request
      * @return array[]
      */
     public function rules(RestRequest $request): array
@@ -98,10 +97,6 @@ class FoodResource extends Resource
         ];
     }
 
-    /**
-     * @param RestRequest $request
-     * @return array
-     */
     public function createRules(RestRequest $request): array
     {
         return [
