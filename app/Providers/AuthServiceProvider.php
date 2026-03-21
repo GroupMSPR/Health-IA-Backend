@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Food;
+use App\Models\HealthMetric;
+use App\Models\User;
+use App\Policies\FoodPolicy;
+use App\Policies\HealthMetricPolicy;
 use App\Models\Exercise;
 use App\Models\Food;
 use App\Models\User;
@@ -14,6 +19,7 @@ class AuthServiceProvider extends \Illuminate\Foundation\Support\Providers\AuthS
     protected $policies = [
         User::class => UserPolicy::class,
         Food::class => FoodPolicy::class,
+        HealthMetric::class => HealthMetricPolicy::class,
         Exercise::class => ExercisePolicy::class,
     ];
 
