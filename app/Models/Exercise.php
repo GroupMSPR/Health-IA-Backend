@@ -7,22 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Food extends Model
+class Exercise extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    protected $table = 'foods';
+    protected $table = 'exercises';
 
-    public $fillable = [
+    protected $fillable = [
         'name',
-        'category',
-        'calories',
-        'protein',
-        'carbohydrates',
-        'fat',
-        'fiber',
-        'sugars',
-        'sodium',
-        'cholesterol',
+        'type',
+        'difficulty_level',
+        'target_muscle',
+        'secondary_muscle',
+        'equipment',
+        'instructions',
     ];
 }

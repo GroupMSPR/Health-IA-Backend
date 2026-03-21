@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Food;
+use App\Models\HealthMetric;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
-class FoodPolicy
+class HealthMetricPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +19,7 @@ class FoodPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, Food $food): bool
+    public function view(?User $user, HealthMetric $healthMetric): bool
     {
         return true;
     }
@@ -34,7 +35,7 @@ class FoodPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(?User $user, Food $food): bool
+    public function update(?User $user, HealthMetric $healthMetric): bool
     {
         return true;
     }
@@ -42,7 +43,7 @@ class FoodPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(?User $user, Food $food): bool
+    public function delete(?User $user, HealthMetric $healthMetric): bool
     {
         return true;
     }
@@ -50,7 +51,7 @@ class FoodPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(?User $user, Food $food): bool
+    public function restore(?User $user, HealthMetric $healthMetric): bool
     {
         return true;
     }
@@ -58,7 +59,7 @@ class FoodPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(?User $user, Food $food): bool
+    public function forceDelete(?User $user, HealthMetric $healthMetric): bool
     {
         return true;
     }

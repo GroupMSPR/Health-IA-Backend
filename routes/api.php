@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
+use App\Models\User;
+use App\Rest\Controllers\ExercisesController;
+use App\Rest\Controllers\FoodsController;
 use App\Rest\Controllers\UsersController;
+use App\Rest\Controllers\HealthMetricsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
@@ -15,9 +19,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::get('user', function (Request $request) {
-        return \App\Models\User::all();
+        return User::all();
     });
     Rest::resource('foods', \App\Rest\Controllers\FoodsController::class);
+    Rest::resource('health-metrics', HealthMetricsController::class);
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();
+    Rest::resource('foods', FoodsController::class)->withSoftDeletes();
+    Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
 });
