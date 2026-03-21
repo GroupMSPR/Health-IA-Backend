@@ -3,7 +3,7 @@
 namespace App\Rest\Resources;
 
 use App\Models\HealthMetric;
-use App\Rest\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\RestRequest;
 
 class HealthMetricResource extends Resource
@@ -11,7 +11,7 @@ class HealthMetricResource extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     * @var class-string<Model>
      */
     public static $model = HealthMetric::class;
 
@@ -89,7 +89,11 @@ class HealthMetricResource extends Resource
         return [];
     }
 
-    public function rules(RestRequest $request)
+    /**
+     * @param RestRequest $request
+     * @return array[]
+     */
+    public function rules(RestRequest $request): array
     {
         return [
             'date' => ['date'],
@@ -106,7 +110,11 @@ class HealthMetricResource extends Resource
         ];
     }
 
-    public function createRules(RestRequest $request)
+    /**
+     * @param RestRequest $request
+     * @return array[]
+     */
+    public function createRules(RestRequest $request): array
     {
         return [
             'date' => ['required'],

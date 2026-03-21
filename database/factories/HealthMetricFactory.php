@@ -27,14 +27,14 @@ class HealthMetricFactory extends Factory
         $steps = $this->faker->numberBetween(0, 25000);
 
         return [
-            'date' => $this->faker->dateTimeBetween('-30 days', 'now'),
+            'date' => $this->faker->dateTimeBetween('-30 days'),
             'start_weight' => $startWeight,
             'current_weight' => $currentWeight,
             'resting_bpm' => $restingBpm,
             'avg_bpm' => $avgBpm,
             'max_bpm' => $maxBpm,
             'steps_count' => $steps,
-            'sleep_time' => $this->faker->time('H:i:s'),
+            'sleep_time' => $this->faker->time(),
             'calories_burned' => round(($steps / 1000) * $this->faker->numberBetween(30, 60), 1),
             'active_minute' => $this->faker->numberBetween(0, 180),
             'workout_type' => $this->faker->randomElement(['none', 'walk', 'run', 'cycling', 'hiit', 'strength', 'swim', 'yoga']),

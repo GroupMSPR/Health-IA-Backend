@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('calories_burned')->default(0);
             $table->unsignedSmallInteger('active_minute')->default(0);
             $table->string('workout_type')->default('none');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
