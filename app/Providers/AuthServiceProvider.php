@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use App\Policies\UserPolicy;
-use App\Models\Food;
-use App\Policies\FoodPolicy;
 use App\Models\Exercise;
-use App\Policies\ExercisePolicy;
+use App\Models\Food;
 use App\Models\HealthMetric;
+use App\Models\User;
+use App\Policies\ExercisePolicy;
+use App\Policies\FoodPolicy;
 use App\Policies\HealthMetricPolicy;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends \Illuminate\Foundation\Support\Providers\AuthServiceProvider
 {

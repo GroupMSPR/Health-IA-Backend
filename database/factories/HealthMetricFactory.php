@@ -15,8 +15,8 @@ class HealthMetricFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected $model = HealthMetric::class;
+
     public function definition(): array
     {
         $startWeight = $this->faker->randomFloat(1, 45, 130);

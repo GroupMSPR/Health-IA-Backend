@@ -76,7 +76,6 @@ class ExerciseResource extends Resource
     }
 
     /**
-     * @param RestRequest $request
      * @return array[]
      */
     public function rules(RestRequest $request): array
@@ -93,7 +92,6 @@ class ExerciseResource extends Resource
     }
 
     /**
-     * @param RestRequest $request
      * @return array[]
      */
     public function createRules(RestRequest $request): array
