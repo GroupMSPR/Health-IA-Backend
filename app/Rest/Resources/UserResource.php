@@ -12,14 +12,14 @@ class UserResource extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     * @var class-string<Model>
      */
     public static $model = User::class;
 
     /**
      * The exposed fields that could be provided
      */
-    public function fields(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function fields(RestRequest $request): array
     {
         return [
             'email',
@@ -41,7 +41,7 @@ class UserResource extends Resource
     /**
      * The exposed relations that could be provided
      */
-    public function relations(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function relations(RestRequest $request): array
     {
         return [];
     }
@@ -49,7 +49,7 @@ class UserResource extends Resource
     /**
      * The exposed scopes that could be provided
      */
-    public function scopes(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function scopes(RestRequest $request): array
     {
         return [];
     }
@@ -57,7 +57,7 @@ class UserResource extends Resource
     /**
      * The exposed limits that could be provided
      */
-    public function limits(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function limits(RestRequest $request): array
     {
         return [
             10,
@@ -69,7 +69,7 @@ class UserResource extends Resource
     /**
      * The actions that should be linked
      */
-    public function actions(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function actions(RestRequest $request): array
     {
         return [];
     }
@@ -77,7 +77,7 @@ class UserResource extends Resource
     /**
      * The instructions that should be linked
      */
-    public function instructions(\Lomkit\Rest\Http\Requests\RestRequest $request): array
+    public function instructions(RestRequest $request): array
     {
         return [];
     }
