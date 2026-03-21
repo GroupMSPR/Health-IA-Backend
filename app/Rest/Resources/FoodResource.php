@@ -77,4 +77,44 @@ class FoodResource extends Resource
     {
         return [];
     }
+
+    /**
+     * @param RestRequest $request
+     * @return array[]
+     */
+    public function rules(RestRequest $request): array
+    {
+        return [
+            'name' => ['string'],
+            'category' => ['string'],
+            'calories' => ['decimal:8'],
+            'protein' => ['decimal:8'],
+            'carbohydrates' => ['decimal:8'],
+            'fat' => ['decimal:8'],
+            'fiber' => ['decimal:8'],
+            'sugars' => ['decimal:8'],
+            'sodium' => ['integer'],
+            'cholesterol' => ['integer'],
+        ];
+    }
+
+    /**
+     * @param RestRequest $request
+     * @return array
+     */
+    public function createRules(RestRequest $request): array
+    {
+        return [
+            'name' => ['required'],
+            'category' => ['required'],
+            'calories' => ['required'],
+            'protein' => ['required'],
+            'carbohydrates' => ['required'],
+            'fat' => ['required'],
+            'fiber' => ['required'],
+            'sugars' => ['required'],
+            'sodium' => ['required'],
+            'cholesterol' => ['required'],
+        ];
+    }
 }

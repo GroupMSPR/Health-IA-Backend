@@ -32,7 +32,7 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'age' => $this->faker->numberBetween(1, 130),
+            'age' => $this->faker->numberBetween(25, 35),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
             'weight' => $weight,
             'height' => $height,
@@ -43,7 +43,7 @@ class UserFactory extends Factory
             'physical_activity_level' => $this->faker->randomElement(['Sedentary', 'Moderate', 'Active']),
             'daily_caloric_intake' => $this->faker->numberBetween(1200, 5000),
             'goal' => $this->faker->randomElement(['weight_loss', 'muscle_gain', 'maintenance']),
-            'subscription' => $this->faker->randomElement(['free', 'premium', 'ultra']),
+            'subscription' => $this->faker->randomElement(['Freemium', 'Premium', 'Premium+']),
         ];
     }
 }

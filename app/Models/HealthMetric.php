@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HealthMetric extends Model
 {
-    use HasUuids, HasFactory;
+    use HasUuids, HasFactory, SoftDeletes;
 
     protected $table = 'health_metrics';
     protected $fillable = [
@@ -24,9 +25,4 @@ class HealthMetric extends Model
         'active_minute',
         'workout_type'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
