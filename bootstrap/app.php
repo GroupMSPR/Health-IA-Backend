@@ -15,8 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         AuthServiceProvider::class,
     ])
-    ->withMiddleware(function (Middleware $middleware): void {
-    })
+    ->withMiddleware(function (Middleware $middleware): void {})
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

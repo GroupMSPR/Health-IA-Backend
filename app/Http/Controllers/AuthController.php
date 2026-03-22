@@ -20,7 +20,7 @@ use OpenApi\Attributes as OA;
                 required: ['email', 'password'],
                 properties: [
                     new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john@example.com'),
-                    new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password123')
+                    new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password123'),
                 ],
                 type: 'object'
             )
@@ -29,7 +29,7 @@ use OpenApi\Attributes as OA;
     tags: ['Auth'],
     responses: [
         new OA\Response(response: 200, description: 'Authentification réussie, token retourné'),
-        new OA\Response(response: 401, description: 'Identifiants invalides')
+        new OA\Response(response: 401, description: 'Identifiants invalides'),
     ]
 )]
 #[OA\Post(
@@ -39,7 +39,7 @@ use OpenApi\Attributes as OA;
     tags: ['Auth'], // Protégé par Sanctum
     responses: [
         new OA\Response(response: 200, description: 'Déconnexion réussie'),
-        new OA\Response(response: 401, description: 'Non authentifié')
+        new OA\Response(response: 401, description: 'Non authentifié'),
     ]
 )]
 class AuthController extends Controller

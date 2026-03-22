@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/exercises/search',
     summary: 'Rechercher et filtrer des exercises',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         content: new OA\MediaType(
@@ -20,7 +20,7 @@ use OpenApi\Attributes as OA;
         )
     ),
     tags: [
-        'Exercises'
+        'Exercises',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -29,7 +29,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/exercises/mutate',
     summary: 'Créer ou mettre à jour un/des exercises',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -49,7 +49,7 @@ use OpenApi\Attributes as OA;
         )
     ),
     tags: [
-        'Exercises'
+        'Exercises',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -58,7 +58,7 @@ use OpenApi\Attributes as OA;
 #[OA\Delete(path: '/exercises/destroy',
     summary: 'Supprimer un/des exercises',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -72,14 +72,14 @@ use OpenApi\Attributes as OA;
                         items: new OA\Items(
                             type: 'integer'
                         )
-                    )
+                    ),
                 ],
                 type: 'object'
             )
         )
     ),
     tags: [
-        'Exercises'
+        'Exercises',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -88,7 +88,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/exercises/restore',
     summary: 'Restaurer un/des exercices supprimés',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -102,14 +102,14 @@ use OpenApi\Attributes as OA;
                         items: new OA\Items(
                             type: 'integer'
                         )
-                    )
+                    ),
                 ],
                 type: 'object'
             )
         )
     ),
     tags: [
-        'Exercises'
+        'Exercises',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),

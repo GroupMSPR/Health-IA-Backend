@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\HealthMetric;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +29,7 @@ class HealthMetricFactory extends Factory
 
         return [
             'date' => $this->faker->dateTimeBetween('-30 days'),
+            'user_id' => User::factory()->create()->pluck('id')[0],
             'start_weight' => $startWeight,
             'current_weight' => $currentWeight,
             'resting_bpm' => $restingBpm,

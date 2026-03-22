@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/foods/search',
     summary: 'Rechercher et filtrer des aliments',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         content: new OA\MediaType(
@@ -20,7 +20,7 @@ use OpenApi\Attributes as OA;
         )
     ),
     tags: [
-        'Foods'
+        'Foods',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -29,7 +29,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/foods/mutate',
     summary: 'Créer ou mettre à jour un/des aliments',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -49,7 +49,7 @@ use OpenApi\Attributes as OA;
         )
     ),
     tags: [
-        'Foods'
+        'Foods',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -58,7 +58,7 @@ use OpenApi\Attributes as OA;
 #[OA\Delete(path: '/foods/destroy',
     summary: 'Supprimer un/des aliments',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -72,14 +72,14 @@ use OpenApi\Attributes as OA;
                         items: new OA\Items(
                             type: 'integer'
                         )
-                    )
+                    ),
                 ],
                 type: 'object'
             )
         )
     ),
     tags: [
-        'Foods'
+        'Foods',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -88,7 +88,7 @@ use OpenApi\Attributes as OA;
 #[OA\Post(path: '/foods/restore',
     summary: 'Restaurer un/des aliments supprimés',
     security: [
-        ['sanctum' => []]
+        ['sanctum' => []],
     ],
     requestBody: new OA\RequestBody(
         required: true,
@@ -102,14 +102,14 @@ use OpenApi\Attributes as OA;
                         items: new OA\Items(
                             type: 'integer'
                         )
-                    )
+                    ),
                 ],
                 type: 'object'
             )
         )
     ),
     tags: [
-        'Foods'
+        'Foods',
     ],
     responses: [
         new OA\Response(response: 200, description: 'Succès'),
@@ -120,7 +120,7 @@ class FoodsController extends Controller
     /**
      * The resource the controller corresponds to.
      *
-     * @var class-string<Resource>
+     * @var class-string<resource>
      */
     public static $resource = FoodResource::class;
 }

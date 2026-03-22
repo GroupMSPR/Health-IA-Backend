@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('last_name');
+            $table->string('first_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('age');
+            $table->date('birthdate');
             $table->string('gender');
             $table->decimal('weight');
             $table->integer('height');
@@ -27,6 +29,7 @@ return new class extends Migration
             $table->integer('daily_caloric_intake');
             $table->text('goal');
             $table->string('subscription');
+            $table->dateTime('date_subscription');
             $table->timestamps();
             $table->softDeletes();
         });

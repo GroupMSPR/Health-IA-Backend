@@ -18,7 +18,7 @@ use OpenApi\Attributes as OA;
                 required: [
                     'email', 'password', 'password_confirmation', 'age', 'gender',
                     'weight', 'height', 'body_fat_pct', 'disease_type', 'severity',
-                    'physical_activity_level', 'daily_caloric_intake', 'goal'
+                    'physical_activity_level', 'daily_caloric_intake', 'goal',
                 ],
                 properties: [
                     new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john.doe@example.com'),
@@ -33,7 +33,7 @@ use OpenApi\Attributes as OA;
                     new OA\Property(property: 'severity', type: 'string', example: 'Modérée'),
                     new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
                     new OA\Property(property: 'daily_caloric_intake', description: 'Apport calorique journalier ciblé', type: 'integer', example: 2200),
-                    new OA\Property(property: 'goal', type: 'string', maxLength: 500, example: 'Perdre du poids tout en stabilisant la glycémie.')
+                    new OA\Property(property: 'goal', type: 'string', maxLength: 500, example: 'Perdre du poids tout en stabilisant la glycémie.'),
                 ],
                 type: 'object'
             )
@@ -42,7 +42,7 @@ use OpenApi\Attributes as OA;
     tags: ['Register'],
     responses: [
         new OA\Response(response: 201, description: 'Utilisateur créé avec succès'),
-        new OA\Response(response: 422, description: 'Erreur de validation (ex: email déjà pris, mot de passe trop court, etc.)')
+        new OA\Response(response: 422, description: 'Erreur de validation (ex: email déjà pris, mot de passe trop court, etc.)'),
     ]
 )]
 class RegisterController extends Controller

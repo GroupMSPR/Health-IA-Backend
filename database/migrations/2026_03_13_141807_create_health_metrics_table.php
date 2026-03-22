@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('health_metrics', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->timestamp('date');
             $table->decimal('start_weight')->default(0);
             $table->decimal('current_weight')->default(0);
