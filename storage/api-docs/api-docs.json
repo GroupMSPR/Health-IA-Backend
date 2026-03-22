@@ -1,0 +1,784 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HealthAI Coach API",
+        "description": "Documentation de l'API HealthAI Coach, gérée avec Lomkit REST API.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:80/api",
+            "description": "Serveur de développement local"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Se connecter et récupérer un token Sanctum",
+                "operationId": "f72526a176d358410e0862d5c20c6641",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authentification réussie, token retourné"
+                    },
+                    "401": {
+                        "description": "Identifiants invalides"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Se déconnecter (Révocation du token actuel)",
+                "operationId": "3599bb21fa2c90996e7f13e2dfbbaabf",
+                "responses": {
+                    "200": {
+                        "description": "Déconnexion réussie"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "Créer un nouveau compte utilisateur avec profil de santé",
+                "operationId": "68dd04b00240636c7fc26e9c49ca8cd1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "age",
+                                    "gender",
+                                    "weight",
+                                    "height",
+                                    "body_fat_pct",
+                                    "disease_type",
+                                    "severity",
+                                    "physical_activity_level",
+                                    "daily_caloric_intake",
+                                    "goal"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "description": "Minimum 6 caractères",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "age": {
+                                        "description": "Entre 1 et 130",
+                                        "type": "integer",
+                                        "example": 35
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female",
+                                            "other"
+                                        ],
+                                        "example": "male"
+                                    },
+                                    "weight": {
+                                        "description": "Poids en kg (entre 1 et 500)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 75.5
+                                    },
+                                    "height": {
+                                        "description": "Taille en cm (entre 1 et 300)",
+                                        "type": "integer",
+                                        "example": 180
+                                    },
+                                    "body_fat_pct": {
+                                        "description": "Pourcentage de masse grasse (entre 1 et 100)",
+                                        "type": "integer",
+                                        "example": 18
+                                    },
+                                    "disease_type": {
+                                        "type": "string",
+                                        "example": "Diabète de type 2"
+                                    },
+                                    "severity": {
+                                        "type": "string",
+                                        "example": "Modérée"
+                                    },
+                                    "physical_activity_level": {
+                                        "type": "string",
+                                        "example": "Actif"
+                                    },
+                                    "daily_caloric_intake": {
+                                        "description": "Apport calorique journalier ciblé",
+                                        "type": "integer",
+                                        "example": 2200
+                                    },
+                                    "goal": {
+                                        "type": "string",
+                                        "maxLength": 500,
+                                        "example": "Perdre du poids tout en stabilisant la glycémie."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé avec succès"
+                    },
+                    "422": {
+                        "description": "Erreur de validation (ex: email déjà pris, mot de passe trop court, etc.)"
+                    }
+                }
+            }
+        },
+        "/exercises/search": {
+            "post": {
+                "tags": [
+                    "Exercises"
+                ],
+                "summary": "Rechercher et filtrer des exercises",
+                "operationId": "4c34914b8e15c867009f674f5bbbade7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/exercises/mutate": {
+            "post": {
+                "tags": [
+                    "Exercises"
+                ],
+                "summary": "Créer ou mettre à jour un/des exercises",
+                "operationId": "c8864571b405af2786d84b32031fe121",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mutate": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/exercises/destroy": {
+            "delete": {
+                "tags": [
+                    "Exercises"
+                ],
+                "summary": "Supprimer un/des exercises",
+                "operationId": "17a3b7d3649606d8012249ea87aa9045",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/exercises/restore": {
+            "post": {
+                "tags": [
+                    "Exercises"
+                ],
+                "summary": "Restaurer un/des exercices supprimés",
+                "operationId": "2d99e40ab3b24d702b12c5b9d4104478",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/foods/search": {
+            "post": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Rechercher et filtrer des aliments",
+                "operationId": "826443feb332b916538e57b6cb109266",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/foods/mutate": {
+            "post": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Créer ou mettre à jour un/des aliments",
+                "operationId": "b6ac0509f151528051c8977b910503e0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mutate": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/foods/destroy": {
+            "delete": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Supprimer un/des aliments",
+                "operationId": "774de2e13d8584981fc99145579b3f84",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/foods/restore": {
+            "post": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Restaurer un/des aliments supprimés",
+                "operationId": "0fb5838cd50ec94e40d30a4f64b66178",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/health-metrics/search": {
+            "post": {
+                "tags": [
+                    "Health Metrics"
+                ],
+                "summary": "Rechercher et filtrer des métriques de santé",
+                "operationId": "3530f042bf1aa40a918cdf8b5940fa75",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/health-metrics/mutate": {
+            "post": {
+                "tags": [
+                    "Health Metrics"
+                ],
+                "summary": "Créer ou mettre à jour une/des métriques de santé",
+                "operationId": "bfd4f48f564399781f8c93ad4f67a16b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mutate": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/health-metrics/destroy": {
+            "delete": {
+                "tags": [
+                    "Health Metrics"
+                ],
+                "summary": "Supprimer une/des métriques de santé",
+                "operationId": "06a60e1a43b571bcb9ef97469d57166f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/health-metrics/restore": {
+            "post": {
+                "tags": [
+                    "Health Metrics"
+                ],
+                "summary": "Restaurer une/des métriques de santé supprimées",
+                "operationId": "002aaa53874c9337358d251104009bfe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/users/search": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Rechercher et filtrer des utilisateurs",
+                "operationId": "8150f61b3494506d102f807dbe12033a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/users/mutate": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer ou mettre à jour un/des utilisateurs",
+                "operationId": "4028bf38fe6e02bf314c10451faf77d6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mutate": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/users/destroy": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Supprimer un/des utilisateurs",
+                "operationId": "8b20bb27e315355d4d06e001bfd552d6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/users/restore": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Restaurer un/des utilisateurs supprimés",
+                "operationId": "4d581fcc5ffdbf9082740024c4844f9f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Entrez votre token Sanctum ici",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Register",
+            "description": "Register"
+        },
+        {
+            "name": "Exercises",
+            "description": "Exercises"
+        },
+        {
+            "name": "Foods",
+            "description": "Foods"
+        },
+        {
+            "name": "Health Metrics",
+            "description": "Health Metrics"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}

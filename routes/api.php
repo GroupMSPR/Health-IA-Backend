@@ -21,10 +21,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user', function (Request $request) {
         return User::all();
     });
-    Rest::resource('foods', FoodsController::class);
-    Rest::resource('health-metrics', HealthMetricsController::class);
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
     Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
+    Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
 });
