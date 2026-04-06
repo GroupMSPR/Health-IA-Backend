@@ -29,7 +29,8 @@ return new class extends Migration
             $table->integer('daily_caloric_intake');
             $table->text('goal');
             $table->string('subscription');
-            $table->dateTime('date_subscription');
+            $table->dateTime('date_subscription')->nullable();
+            $table->text('constraints')->default('Non renseigné');
             $table->timestamps();
             $table->softDeletes();
         });

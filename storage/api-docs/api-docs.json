@@ -18,7 +18,15 @@
                     "Auth"
                 ],
                 "summary": "Se connecter et récupérer un token Sanctum",
-                "operationId": "f72526a176d358410e0862d5c20c6641",
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "example": "application/json"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -61,7 +69,15 @@
                     "Auth"
                 ],
                 "summary": "Se déconnecter (Révocation du token actuel)",
-                "operationId": "3599bb21fa2c90996e7f13e2dfbbaabf",
+                "operationId": "68a6108af04af5e3bc1ea68a6c6f1299",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "example": "application/json"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Déconnexion réussie"
@@ -83,17 +99,27 @@
                     "Register"
                 ],
                 "summary": "Créer un nouveau compte utilisateur avec profil de santé",
-                "operationId": "68dd04b00240636c7fc26e9c49ca8cd1",
+                "operationId": "a6078c50c646ff1ad2ba117b5e00c632",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "example": "application/json"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
+                                    "last_name",
+                                    "first_name",
                                     "email",
                                     "password",
                                     "password_confirmation",
-                                    "age",
+                                    "birthdate",
                                     "gender",
                                     "weight",
                                     "height",
@@ -105,6 +131,14 @@
                                     "goal"
                                 ],
                                 "properties": {
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
                                     "email": {
                                         "type": "string",
                                         "format": "email",
@@ -116,15 +150,10 @@
                                         "format": "password",
                                         "example": "password123"
                                     },
-                                    "password_confirmation": {
+                                    "birthdate": {
                                         "type": "string",
-                                        "format": "password",
-                                        "example": "password123"
-                                    },
-                                    "age": {
-                                        "description": "Entre 1 et 130",
-                                        "type": "integer",
-                                        "example": 35
+                                        "format": "date",
+                                        "example": "1999-11-28"
                                     },
                                     "gender": {
                                         "type": "string",

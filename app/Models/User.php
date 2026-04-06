@@ -6,6 +6,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,9 +27,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'last_name',
+        'first_name',
         'email',
         'password',
-        'age',
+        'birthdate',
         'gender',
         'weight',
         'height',
@@ -40,6 +43,7 @@ class User extends Authenticatable
         'daily_caloric_intake',
         'goal',
         'subscription',
+        'date_subscription',
     ];
 
     /**
@@ -61,5 +65,10 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    public function healthMetrics(): HasMany
+    {
+        return $this->hasMany(HealthMetric::class);
     }
 }
