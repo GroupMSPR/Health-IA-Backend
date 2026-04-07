@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('health_metrics', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->timestamp('date');
             $table->decimal('start_weight')->default(0);
             $table->decimal('current_weight')->default(0);
@@ -20,10 +21,10 @@ return new class extends Migration
             $table->decimal('max_bpm')->default(0);
             $table->decimal('resting_bpm')->default(0);
             $table->smallInteger('steps_count')->default(0);
-            $table->time('sleep_time');
+            $table->time('sleep_time')->default('00:00:00');
             $table->decimal('calories_burned')->default(0);
             $table->unsignedSmallInteger('active_minute')->default(0);
-            $table->string('workout_type')->default('none');
+            $table->string('workout_type')->default('Non renseigné');
             $table->softDeletes();
             $table->timestamps();
         });

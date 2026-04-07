@@ -97,6 +97,9 @@ class FoodResource extends Resource
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function createRules(RestRequest $request): array
     {
         return [

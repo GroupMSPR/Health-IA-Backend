@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\HealthMetric;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class HealthMetricSeeder extends Seeder
@@ -12,6 +13,12 @@ class HealthMetricSeeder extends Seeder
      */
     public function run(): void
     {
-        HealthMetric::factory()->count(30)->create();
+        $users = User::all();
+
+        foreach ($users as $user) {
+            HealthMetric::factory()->count(5)->create([
+                'user_id' => $user->id,
+            ]);
+        }
     }
 }

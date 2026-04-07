@@ -24,14 +24,13 @@ class RegisterRequest extends FormRequest
     {
         return [
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
             'age' => 'required|integer|between:1,130',
             'gender' => 'required|string|in:male,female,other',
             'weight' => 'required|numeric|between:1,500',
             'height' => 'required|integer|between:1,300',
             'body_fat_pct' => 'required|integer|between:1,100',
-            'disease_type' => 'required|string',
-            'severity' => 'required|string',
+            'constraints' => 'required|array',
             'physical_activity_level' => 'required|string',
             'daily_caloric_intake' => 'required|integer',
             'goal' => 'required|string|max:500',

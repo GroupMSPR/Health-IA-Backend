@@ -13,20 +13,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('last_name');
+            $table->string('first_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('age');
+            $table->date('birthdate');
             $table->string('gender');
             $table->decimal('weight');
             $table->integer('height');
             $table->decimal('bmi', 5)->default(0);
             $table->decimal('body_fat_pct');
-            $table->string('disease_type');
-            $table->string('severity');
+            $table->text('constraints')->default('Non renseigné');
             $table->string('physical_activity_level');
             $table->integer('daily_caloric_intake');
             $table->text('goal');
             $table->string('subscription');
+            $table->dateTime('date_subscription')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

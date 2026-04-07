@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\HealthMetric;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,9 @@ class HealthMetricFactory extends Factory
      */
     protected $model = HealthMetric::class;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         $startWeight = $this->faker->randomFloat(1, 45, 130);
@@ -28,6 +32,7 @@ class HealthMetricFactory extends Factory
 
         return [
             'date' => $this->faker->dateTimeBetween('-30 days'),
+            'user_id' => User::factory(),
             'start_weight' => $startWeight,
             'current_weight' => $currentWeight,
             'resting_bpm' => $restingBpm,
