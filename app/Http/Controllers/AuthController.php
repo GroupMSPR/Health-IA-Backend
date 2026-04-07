@@ -35,7 +35,7 @@ class AuthController extends Controller
                 in: 'header',
                 required: true,
                 example: 'application/json'
-            )
+            ),
         ],
         responses: [
             new OA\Response(response: 200, description: 'Authentification réussie, token retourné'),
@@ -70,7 +70,7 @@ class AuthController extends Controller
                 in: 'header',
                 required: true,
                 example: 'application/json'
-            )
+            ),
         ], // Protégé par Sanctum
         responses: [
             new OA\Response(response: 200, description: 'Déconnexion réussie'),

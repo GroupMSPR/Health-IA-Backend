@@ -124,8 +124,7 @@
                                     "weight",
                                     "height",
                                     "body_fat_pct",
-                                    "disease_type",
-                                    "severity",
+                                    "constraints",
                                     "physical_activity_level",
                                     "daily_caloric_intake",
                                     "goal"
@@ -180,13 +179,15 @@
                                         "type": "integer",
                                         "example": 18
                                     },
-                                    "disease_type": {
-                                        "type": "string",
-                                        "example": "Diabète de type 2"
-                                    },
-                                    "severity": {
-                                        "type": "string",
-                                        "example": "Modérée"
+                                    "constraints": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": [
+                                                "Diabète de type 2 - Moderate",
+                                                "Obesity - Severate"
+                                            ]
+                                        }
                                     },
                                     "physical_activity_level": {
                                         "type": "string",
@@ -226,9 +227,25 @@
                 "summary": "Rechercher et filtrer des exercises",
                 "operationId": "4c34914b8e15c867009f674f5bbbade7",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "properties": {
+                                    "search": {
+                                        "properties": {
+                                            "page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "limit": {
+                                                "type": "integer",
+                                                "example": 10
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -236,7 +253,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Succès"
+                        "description": "Exercices trouvés !"
                     }
                 },
                 "security": [
@@ -262,6 +279,53 @@
                                     "mutate": {
                                         "type": "array",
                                         "items": {
+                                            "properties": {
+                                                "operation": {
+                                                    "type": "string",
+                                                    "example": "create or update"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Abdos"
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "example": "Poids de Corps"
+                                                        },
+                                                        "difficulty_level": {
+                                                            "type": "string",
+                                                            "example": "Moyen"
+                                                        },
+                                                        "target_muscle": {
+                                                            "type": "string",
+                                                            "example": "Abdos"
+                                                        },
+                                                        "secondary_muscle": {
+                                                            "type": "string",
+                                                            "example": "..."
+                                                        },
+                                                        "equipment": {
+                                                            "type": "string",
+                                                            "example": "Tapis"
+                                                        },
+                                                        "instructions": {
+                                                            "type": "string",
+                                                            "example": "3 Series de 8"
+                                                        },
+                                                        "constraints": {
+                                                            "type": "string",
+                                                            "example": "Allergie au gluten"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relations": {
+                                                    "type": "object",
+                                                    "example": {}
+                                                }
+                                            },
                                             "type": "object"
                                         }
                                     }
@@ -273,7 +337,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Succès"
+                        "description": "Exercise crée avec succès !"
                     }
                 },
                 "security": [
@@ -283,13 +347,13 @@
                 ]
             }
         },
-        "/exercises/destroy": {
+        "/exercises": {
             "delete": {
                 "tags": [
                     "Exercises"
                 ],
                 "summary": "Supprimer un/des exercises",
-                "operationId": "17a3b7d3649606d8012249ea87aa9045",
+                "operationId": "e8a4fb517b180dfee69fe3f2c5155745",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -299,7 +363,8 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -336,7 +401,46 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/exercises/force": {
+            "delete": {
+                "tags": [
+                    "Exercises"
+                ],
+                "summary": "Supprimer de façon permanente un/des exercises",
+                "operationId": "0371840e53f1d3dc255fc3c5c11f08af",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -368,6 +472,21 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "properties": {
+                                    "search": {
+                                        "properties": {
+                                            "page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "limit": {
+                                                "type": "integer",
+                                                "example": 10
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -401,6 +520,67 @@
                                     "mutate": {
                                         "type": "array",
                                         "items": {
+                                            "properties": {
+                                                "operation": {
+                                                    "type": "string",
+                                                    "example": "create or update"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Poulet grillé"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Viandes"
+                                                        },
+                                                        "calories": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 165
+                                                        },
+                                                        "protein": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 31
+                                                        },
+                                                        "carbohydrates": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        },
+                                                        "fat": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 3.6
+                                                        },
+                                                        "fiber": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        },
+                                                        "sugars": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        },
+                                                        "sodium": {
+                                                            "type": "integer",
+                                                            "example": 74
+                                                        },
+                                                        "cholesterol": {
+                                                            "type": "integer",
+                                                            "example": 85
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relations": {
+                                                    "type": "object",
+                                                    "example": {}
+                                                }
+                                            },
                                             "type": "object"
                                         }
                                     }
@@ -422,13 +602,13 @@
                 ]
             }
         },
-        "/foods/destroy": {
+        "/foods": {
             "delete": {
                 "tags": [
                     "Foods"
                 ],
                 "summary": "Supprimer un/des aliments",
-                "operationId": "774de2e13d8584981fc99145579b3f84",
+                "operationId": "9ee60f3162a04a78fcdae343b07ff5ba",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -438,7 +618,8 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -475,7 +656,46 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/foods/force": {
+            "delete": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Supprimer de façon permanente un/des aliments",
+                "operationId": "1037897ba3bfad5365137876cb86a64d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -507,6 +727,21 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "properties": {
+                                    "search": {
+                                        "properties": {
+                                            "page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "limit": {
+                                                "type": "integer",
+                                                "example": 10
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -540,6 +775,78 @@
                                     "mutate": {
                                         "type": "array",
                                         "items": {
+                                            "properties": {
+                                                "operation": {
+                                                    "type": "string",
+                                                    "example": "create or update"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "user_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                                        },
+                                                        "date": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2026-04-07T08:00:00Z"
+                                                        },
+                                                        "start_weight": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 80
+                                                        },
+                                                        "current_weight": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 78.5
+                                                        },
+                                                        "avg_bpm": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 72.5
+                                                        },
+                                                        "max_bpm": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 145
+                                                        },
+                                                        "resting_bpm": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 60
+                                                        },
+                                                        "steps_count": {
+                                                            "type": "integer",
+                                                            "example": 10500
+                                                        },
+                                                        "sleep_time": {
+                                                            "type": "string",
+                                                            "format": "time",
+                                                            "example": "07:30:00"
+                                                        },
+                                                        "calories_burned": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 450.5
+                                                        },
+                                                        "active_minute": {
+                                                            "type": "integer",
+                                                            "example": 45
+                                                        },
+                                                        "workout_type": {
+                                                            "type": "string",
+                                                            "example": "Course à pied"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relations": {
+                                                    "type": "object",
+                                                    "example": {}
+                                                }
+                                            },
                                             "type": "object"
                                         }
                                     }
@@ -561,13 +868,13 @@
                 ]
             }
         },
-        "/health-metrics/destroy": {
+        "/health-metrics": {
             "delete": {
                 "tags": [
                     "Health Metrics"
                 ],
                 "summary": "Supprimer une/des métriques de santé",
-                "operationId": "06a60e1a43b571bcb9ef97469d57166f",
+                "operationId": "164330575e5baf7813774eaf2861148a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -577,7 +884,8 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -614,7 +922,46 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/health-metrics/force": {
+            "delete": {
+                "tags": [
+                    "Health Metrics"
+                ],
+                "summary": "Supprimer de façon permanente une/des métriques de santé",
+                "operationId": "cad99b810c7da21c43bda9d537f7b14a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -646,6 +993,21 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "properties": {
+                                    "search": {
+                                        "properties": {
+                                            "page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "limit": {
+                                                "type": "integer",
+                                                "example": 10
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -679,6 +1041,98 @@
                                     "mutate": {
                                         "type": "array",
                                         "items": {
+                                            "properties": {
+                                                "operation": {
+                                                    "type": "string",
+                                                    "example": "create or update"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "last_name": {
+                                                            "type": "string",
+                                                            "example": "Doe"
+                                                        },
+                                                        "first_name": {
+                                                            "type": "string",
+                                                            "example": "John"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "john.doe@example.com"
+                                                        },
+                                                        "password": {
+                                                            "type": "string",
+                                                            "example": "password123"
+                                                        },
+                                                        "birthdate": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "1990-05-15"
+                                                        },
+                                                        "gender": {
+                                                            "type": "string",
+                                                            "example": "male"
+                                                        },
+                                                        "weight": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 75.5
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "example": 180
+                                                        },
+                                                        "bmi": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 23.3
+                                                        },
+                                                        "body_fat_pct": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 15.2
+                                                        },
+                                                        "disease_type": {
+                                                            "type": "string",
+                                                            "example": "Diabète de type 2"
+                                                        },
+                                                        "severity": {
+                                                            "type": "string",
+                                                            "example": "Modérée"
+                                                        },
+                                                        "physical_activity_level": {
+                                                            "type": "string",
+                                                            "example": "Actif"
+                                                        },
+                                                        "daily_caloric_intake": {
+                                                            "type": "integer",
+                                                            "example": 2500
+                                                        },
+                                                        "goal": {
+                                                            "type": "string",
+                                                            "example": "Perte de poids"
+                                                        },
+                                                        "subscription": {
+                                                            "type": "string",
+                                                            "example": "Premium"
+                                                        },
+                                                        "date_subscription": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2026-04-01T10:00:00Z"
+                                                        },
+                                                        "constraints": {
+                                                            "type": "string",
+                                                            "example": "Allergie au gluten"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relations": {
+                                                    "type": "object",
+                                                    "example": {}
+                                                }
+                                            },
                                             "type": "object"
                                         }
                                     }
@@ -700,13 +1154,13 @@
                 ]
             }
         },
-        "/users/destroy": {
+        "/users": {
             "delete": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Supprimer un/des utilisateurs",
-                "operationId": "8b20bb27e315355d4d06e001bfd552d6",
+                "operationId": "10656299ebab07610cd633f326496d01",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -716,7 +1170,8 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },
@@ -753,7 +1208,46 @@
                                     "resources": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/users/force": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Supprimer de façon permanente un/des utilisateurs",
+                "operationId": "7bba798f6fc59b4074c71ad0b4829f61",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "uuid",
+                                            "example": "123e4567-e89b-12d3-a456-426614174000"
                                         }
                                     }
                                 },

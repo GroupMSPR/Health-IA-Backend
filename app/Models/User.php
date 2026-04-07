@@ -37,8 +37,7 @@ class User extends Authenticatable
         'height',
         'bmi',
         'body_fat_pct',
-        'disease_type',
-        'severity',
+        'constraints',
         'physical_activity_level',
         'daily_caloric_intake',
         'goal',
@@ -64,6 +63,7 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'constraints' => 'array',
         ];
     }
 

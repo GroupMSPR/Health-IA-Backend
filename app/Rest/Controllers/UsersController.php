@@ -15,6 +15,16 @@ use OpenApi\Attributes as OA;
         content: new OA\MediaType(
             mediaType: 'application/json',
             schema: new OA\Schema(
+                properties: [
+                    new OA\Property(
+                        property: 'search',
+                        properties: [
+                            new OA\Property(property: 'page', type: 'integer', example: 1),
+                            new OA\Property(property: 'limit', type: 'integer', example: 10),
+                        ],
+                        type: 'object'
+                    ),
+                ],
                 type: 'object'
             )
         )
@@ -41,6 +51,34 @@ use OpenApi\Attributes as OA;
                         property: 'mutate',
                         type: 'array',
                         items: new OA\Items(
+                            properties: [
+                                new OA\Property(property: 'operation', type: 'string', example: 'create or update'),
+                                new OA\Property(
+                                    property: 'attributes',
+                                    properties: [
+                                        new OA\Property(property: 'last_name', type: 'string', example: 'Doe'),
+                                        new OA\Property(property: 'first_name', type: 'string', example: 'John'),
+                                        new OA\Property(property: 'email', type: 'string', example: 'john.doe@example.com'),
+                                        new OA\Property(property: 'password', type: 'string', example: 'password123'),
+                                        new OA\Property(property: 'birthdate', type: 'string', format: 'date', example: '1990-05-15'),
+                                        new OA\Property(property: 'gender', type: 'string', example: 'male'),
+                                        new OA\Property(property: 'weight', type: 'number', format: 'float', example: 75.5),
+                                        new OA\Property(property: 'height', type: 'integer', example: 180),
+                                        new OA\Property(property: 'bmi', type: 'number', format: 'float', example: 23.3),
+                                        new OA\Property(property: 'body_fat_pct', type: 'number', format: 'float', example: 15.2),
+                                        new OA\Property(property: 'disease_type', type: 'string', example: 'Diabète de type 2'),
+                                        new OA\Property(property: 'severity', type: 'string', example: 'Modérée'),
+                                        new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
+                                        new OA\Property(property: 'daily_caloric_intake', type: 'integer', example: 2500),
+                                        new OA\Property(property: 'goal', type: 'string', example: 'Perte de poids'),
+                                        new OA\Property(property: 'subscription', type: 'string', example: 'Premium'),
+                                        new OA\Property(property: 'date_subscription', type: 'string', format: 'date-time', example: '2026-04-01T10:00:00Z'),
+                                        new OA\Property(property: 'constraints', type: 'string', example: 'Allergie au gluten'),
+                                    ],
+                                    type: 'object'
+                                ),
+                                new OA\Property(property: 'relations', type: 'object', example: new \stdClass),
+                            ],
                             type: 'object'
                         )
                     )],
@@ -55,7 +93,7 @@ use OpenApi\Attributes as OA;
         new OA\Response(response: 200, description: 'Succès'),
     ]
 )]
-#[OA\Delete(path: '/users/destroy',
+#[OA\Delete(path: '/users',
     summary: 'Supprimer un/des utilisateurs',
     security: [
         ['sanctum' => []],
@@ -70,7 +108,8 @@ use OpenApi\Attributes as OA;
                         property: 'resources',
                         type: 'array',
                         items: new OA\Items(
-                            type: 'integer'
+                            type: 'uuid',
+                            example: '123e4567-e89b-12d3-a456-426614174000'
                         )
                     ),
                 ],
@@ -100,7 +139,39 @@ use OpenApi\Attributes as OA;
                         property: 'resources',
                         type: 'array',
                         items: new OA\Items(
-                            type: 'integer'
+                            type: 'uuid',
+                            example: '123e4567-e89b-12d3-a456-426614174000'
+                        )
+                    ),
+                ],
+                type: 'object'
+            )
+        )
+    ),
+    tags: [
+        'Users',
+    ],
+    responses: [
+        new OA\Response(response: 200, description: 'Succès'),
+    ]
+)]
+#[OA\Delete(path: '/users/force',
+    summary: 'Supprimer de façon permanente un/des utilisateurs',
+    security: [
+        ['sanctum' => []],
+    ],
+    requestBody: new OA\RequestBody(
+        required: true,
+        content: new OA\MediaType(
+            mediaType: 'application/json',
+            schema: new OA\Schema(
+                properties: [
+                    new OA\Property(
+                        property: 'resources',
+                        type: 'array',
+                        items: new OA\Items(
+                            type: 'uuid',
+                            example: '123e4567-e89b-12d3-a456-426614174000'
                         )
                     ),
                 ],

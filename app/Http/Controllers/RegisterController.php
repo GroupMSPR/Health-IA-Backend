@@ -19,8 +19,8 @@ class RegisterController extends Controller
                 schema: new OA\Schema(
                     required: [
                         'last_name', 'first_name', 'email', 'password', 'password_confirmation',
-                        'birthdate', 'gender', 'weight', 'height', 'body_fat_pct', 'disease_type',
-                        'severity', 'physical_activity_level', 'daily_caloric_intake', 'goal',
+                        'birthdate', 'gender', 'weight', 'height', 'body_fat_pct', 'constraints',
+                        'physical_activity_level', 'daily_caloric_intake', 'goal',
                     ],
                     properties: [
                         new OA\Property(property: 'last_name', type: 'string', example: 'Doe'),
@@ -32,8 +32,7 @@ class RegisterController extends Controller
                         new OA\Property(property: 'weight', description: 'Poids en kg (entre 1 et 500)', type: 'number', format: 'float', example: 75.5),
                         new OA\Property(property: 'height', description: 'Taille en cm (entre 1 et 300)', type: 'integer', example: 180),
                         new OA\Property(property: 'body_fat_pct', description: 'Pourcentage de masse grasse (entre 1 et 100)', type: 'integer', example: 18),
-                        new OA\Property(property: 'disease_type', type: 'string', example: 'Diabète de type 2'),
-                        new OA\Property(property: 'severity', type: 'string', example: 'Modérée'),
+                        new OA\Property(property: 'constraints', type: 'array', items: new OA\Items(type: 'string', example: ['Diabète de type 2 - Moderate', 'Obesity - Severate'])),
                         new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
                         new OA\Property(property: 'daily_caloric_intake', description: 'Apport calorique journalier ciblé', type: 'integer', example: 2200),
                         new OA\Property(property: 'goal', type: 'string', maxLength: 500, example: 'Perdre du poids tout en stabilisant la glycémie.'),
@@ -49,7 +48,7 @@ class RegisterController extends Controller
                 in: 'header',
                 required: true,
                 example: 'application/json'
-            )
+            ),
         ],
         responses: [
             new OA\Response(response: 201, description: 'Utilisateur créé avec succès'),
@@ -76,13 +75,12 @@ class RegisterController extends Controller
             'height' => $request->height,
             'bmi' => $bmi,
             'body_fat_pct' => $request->body_fat_pct,
-            'disease_type' => $request->disease_type,
-            'severity' => $request->severity,
+            'constraints' => $request->constraints,
             'physical_activity_level' => $request->physical_activity_level,
             'daily_caloric_intake' => $request->daily_caloric_intake,
             'goal' => $request->goal,
             'subscription' => 'free',
-            'date_subscription' => now(),
+            'date_subscription' => now() ?? null,
         ]);
 
         return response()->json([

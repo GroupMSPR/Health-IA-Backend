@@ -23,14 +23,12 @@ return new class extends Migration
             $table->integer('height');
             $table->decimal('bmi', 5)->default(0);
             $table->decimal('body_fat_pct');
-            $table->string('disease_type');
-            $table->string('severity');
+            $table->text('constraints')->default('Non renseigné');
             $table->string('physical_activity_level');
             $table->integer('daily_caloric_intake');
             $table->text('goal');
             $table->string('subscription');
             $table->dateTime('date_subscription')->nullable();
-            $table->text('constraints')->default('Non renseigné');
             $table->timestamps();
             $table->softDeletes();
         });
