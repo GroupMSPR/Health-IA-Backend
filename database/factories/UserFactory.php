@@ -31,19 +31,24 @@ class UserFactory extends Factory
 
         return [
             'email' => $this->faker->unique()->safeEmail(),
+            'last_name' => $this->faker->lastName(),
+            'first_name' => $this->faker->firstName(),
             'password' => static::$password ??= Hash::make('password'),
-            'age' => $this->faker->numberBetween(25, 35),
+            'birthdate' => $this->faker->dateTimeBetween('-35 years', '-25 years'),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
             'weight' => $weight,
             'height' => $height,
             'bmi' => $bmi,
             'body_fat_pct' => $this->faker->numberBetween(1, 100),
-            'disease_type' => $this->faker->randomElement(['Diabetes', 'Hypertension', 'Obesity', 'None']),
-            'severity' => $this->faker->randomElement(['Mild', 'Moderate', 'Severe']),
+            'constraints' => [
+                $this->faker->randomElement(['Diabetes', 'Hypertension', 'Obesity', 'None']).''.' - '.''.$this->faker->randomElement(['Mild', 'Moderate', 'Severe']),
+                ''.$this->faker->randomElement(['Diabetes', 'Hypertension', 'Obesity', 'None']).''.' - '.''.$this->faker->randomElement(['Mild', 'Moderate', 'Severe']),
+            ],
             'physical_activity_level' => $this->faker->randomElement(['Sedentary', 'Moderate', 'Active']),
             'daily_caloric_intake' => $this->faker->numberBetween(1200, 5000),
             'goal' => $this->faker->randomElement(['weight_loss', 'muscle_gain', 'maintenance']),
             'subscription' => $this->faker->randomElement(['Freemium', 'Premium', 'Premium+']),
+            'date_subscription' => $this->faker->dateTimeBetween('-5 years', '-30 days'),
         ];
     }
 }

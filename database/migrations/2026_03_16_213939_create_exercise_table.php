@@ -15,11 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('type');
-            $table->string('difficulty_level');
             $table->text('target_muscle');
             $table->text('secondary_muscle');
             $table->text('equipment');
+            $table->string('difficulty_level');
             $table->text('instructions');
+            $table->text('constraints')->default('Non renseigné');
             $table->softDeletes();
             $table->timestamps();
         });
