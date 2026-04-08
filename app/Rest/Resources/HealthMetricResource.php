@@ -3,8 +3,10 @@
 namespace App\Rest\Resources;
 
 use App\Models\HealthMetric;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\RestRequest;
+use Lomkit\Rest\Relations\BelongsTo;
 
 class HealthMetricResource extends Resource
 {
@@ -40,7 +42,9 @@ class HealthMetricResource extends Resource
      */
     public function relations(RestRequest $request): array
     {
-        return [];
+        return [
+            BelongsTo::make('user', UserResource::class)
+        ];
     }
 
     /**
