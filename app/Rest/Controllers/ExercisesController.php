@@ -64,7 +64,7 @@ use OpenApi\Attributes as OA;
                                         new OA\Property(property: 'secondary_muscle', type: 'string', example: '...'),
                                         new OA\Property(property: 'equipment', type: 'string', example: 'Tapis'),
                                         new OA\Property(property: 'instructions', type: 'string', example: '3 Series de 8'),
-                                        new OA\Property(property: 'constraints', type: 'string', example: 'Allergie au gluten'),
+                                        new OA\Property(property: 'constraints', type: 'array', items: new OA\Items(type: 'string'), example: ['Allergie au gluten', '...'])
                                     ],
                                     type: 'object'
                                 ),

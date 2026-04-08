@@ -11,11 +11,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Lomkit\Access\Controls\HasControl;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, HasUuids, Notifiable, SoftDeletes;
+    use HasApiTokens, HasControl, HasFactory, HasRoles, HasUuids, Notifiable, SoftDeletes;
+
+    protected string $guard_name = 'api';
 
     public $incrementing = false;
 

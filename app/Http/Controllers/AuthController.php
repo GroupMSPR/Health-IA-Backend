@@ -21,7 +21,7 @@ class AuthController extends Controller
                 schema: new OA\Schema(
                     required: ['email', 'password'],
                     properties: [
-                        new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john@example.com'),
+                        new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john.doe@example.com'),
                         new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password123'),
                     ],
                     type: 'object'
