@@ -3,4 +3,4 @@ builder = "nixpacks"
 buildCommand = "rm -rf node_modules package-lock.json && npm install --include=optional && npm run build"
 
 [deploy]
-releaseCommand = "php artisan migrate --force"
+releaseCommand = "php artisan migrate --force && php artisan optimize:clear"
