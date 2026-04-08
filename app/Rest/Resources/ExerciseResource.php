@@ -5,6 +5,7 @@ namespace App\Rest\Resources;
 use App\Models\Exercise;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\RestRequest;
+use Lomkit\Rest\Relations\BelongsToMany;
 
 class ExerciseResource extends Resource
 {
@@ -37,7 +38,9 @@ class ExerciseResource extends Resource
      */
     public function relations(RestRequest $request): array
     {
-        return [];
+        return [
+            BelongsToMany::make('users', UserResource::class),
+        ];
     }
 
     /**
