@@ -4,7 +4,6 @@ namespace App\Rest\Resources;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;
 use Lomkit\Rest\Relations\BelongsToMany;
@@ -24,18 +23,22 @@ class UserResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'last_name',
+            'first_name',
             'email',
             'password',
-            'age',
+            'birthdate',
             'gender',
             'weight',
             'height',
+            'bmi',
             'body_fat_pct',
             'constraints',
             'physical_activity_level',
             'daily_caloric_intake',
             'goal',
             'subscription',
+            'date_subscription',
         ];
     }
 
@@ -93,9 +96,11 @@ class UserResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
+            'last_name' => ['required', 'string'],
+            'first_name' => ['required', 'string'],
             'email' => ['string', 'email', 'max:255'],
             'password' => ['string', 'min:6'],
-            'age' => ['integer', 'between:1,130'],
+            'birthdate' => ['required', 'date'],
             'gender' => ['string', 'in:male,female,other'],
             'weight' => ['numeric', 'between:1,500'],
             'height' => ['integer', 'between:1,300'],
@@ -105,6 +110,7 @@ class UserResource extends Resource
             'daily_caloric_intake' => ['integer'],
             'goal' => ['string', 'max:500'],
             'subscription' => ['string', 'max:50'],
+            'date_subscription' => ['nullable'],
         ];
     }
 
@@ -114,9 +120,11 @@ class UserResource extends Resource
     public function createRules(RestRequest $request): array
     {
         return [
+            'last_name' => ['required'],
+            'first_name' => ['required'],
             'email' => ['required'],
             'password' => ['required'],
-            'age' => ['required'],
+            'birthdate' => ['required'],
             'gender' => ['required'],
             'weight' => ['required'],
             'height' => ['required'],
@@ -126,6 +134,7 @@ class UserResource extends Resource
             'daily_caloric_intake' => ['required'],
             'goal' => ['required'],
             'subscription' => ['required'],
+            'date_subscription' => ['nullable'],
         ];
     }
 

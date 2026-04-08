@@ -3,10 +3,9 @@
 namespace App\Policies;
 
 use App\Access\Controls\HealthMetricControl;
-use App\Models\HealthMetric;
+use Lomkit\Access\Policies\ControlledPolicy;
 
-
-class HealthMetricPolicy
+class HealthMetricPolicy extends ControlledPolicy
 {
     protected string $control = HealthMetricControl::class;
 }

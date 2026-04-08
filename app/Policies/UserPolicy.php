@@ -3,9 +3,9 @@
 namespace App\Policies;
 
 use App\Access\Controls\UserControl;
-use App\Models\User;
+use Lomkit\Access\Policies\ControlledPolicy;
 
-class UserPolicy
+class UserPolicy extends ControlledPolicy
 {
     protected string $control = UserControl::class;
 }

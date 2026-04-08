@@ -23,14 +23,14 @@ class Exercise extends Model
         'secondary_muscle',
         'equipment',
         'instructions',
-        'constraints'
+        'constraints',
     ];
 
     protected $casts = [
-        'constraints' => 'array'
+        'constraints' => 'array',
     ];
 
-    public function users() :BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'practice');
     }

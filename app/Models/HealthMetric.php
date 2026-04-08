@@ -16,8 +16,6 @@ class HealthMetric extends Model
     protected $table = 'health_metrics';
 
     protected $fillable = [
-        'user_id',
-        'date',
         'start_weight',
         'current_weight',
         'avg_bpm',

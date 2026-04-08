@@ -3,18 +3,9 @@
 namespace App\Policies;
 
 use App\Access\Controls\FoodControl;
-use App\Models\Food;
+use Lomkit\Access\Policies\ControlledPolicy;
 
-class FoodPolicy
+class FoodPolicy extends ControlledPolicy
 {
     protected string $control = FoodControl::class;
-
-    public function before($user, $ability)
-    {
-        dd([
-            'alerte' => 'ON EST DANS LA POLICY !',
-            'action_demandee' => $ability,
-            'utilisateur' => $user->email
-        ]);
-    }
 }

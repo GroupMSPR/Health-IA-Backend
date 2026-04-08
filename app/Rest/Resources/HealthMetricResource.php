@@ -5,6 +5,7 @@ namespace App\Rest\Resources;
 use App\Models\HealthMetric;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;
 use Lomkit\Rest\Relations\BelongsTo;
 
@@ -43,7 +44,7 @@ class HealthMetricResource extends Resource
     public function relations(RestRequest $request): array
     {
         return [
-            BelongsTo::make('user', UserResource::class)
+            BelongsTo::make('user', User::class),
         ];
     }
 
@@ -89,7 +90,6 @@ class HealthMetricResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
-            'date' => ['date'],
             'start_weight' => ['numeric', 'min:0'],
             'current_weight' => ['numeric', 'min:0'],
             'resting_bpm' => ['integer', 'min:0', 'max:250'],
@@ -109,7 +109,6 @@ class HealthMetricResource extends Resource
     public function createRules(RestRequest $request): array
     {
         return [
-            'date' => ['required'],
             'start_weight' => ['required'],
             'current_weight' => ['required'],
             'avg_bpm' => ['required'],
@@ -121,5 +120,15 @@ class HealthMetricResource extends Resource
             'active_minute' => ['required'],
             'workout_type' => ['required'],
         ];
+    }
+
+    public function mutating(MutateRequest $request, array $requestBody, Model $model): void
+    {
+        $user = auth()->user();
+
+        if ($requestBody['operation'] === 'create') {
+            $model->user_id = $user->id;
+            $model->date = now();
+        }
     }
 }

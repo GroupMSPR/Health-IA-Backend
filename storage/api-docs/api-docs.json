@@ -891,16 +891,6 @@
                                                 },
                                                 "attributes": {
                                                     "properties": {
-                                                        "user_id": {
-                                                            "type": "string",
-                                                            "format": "uuid",
-                                                            "example": "123e4567-e89b-12d3-a456-426614174000"
-                                                        },
-                                                        "date": {
-                                                            "type": "string",
-                                                            "format": "date-time",
-                                                            "example": "2026-04-07T08:00:00Z"
-                                                        },
                                                         "start_weight": {
                                                             "type": "number",
                                                             "format": "float",

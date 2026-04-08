@@ -3,9 +3,9 @@
 namespace App\Policies;
 
 use App\Access\Controls\ExerciseControl;
-use App\Models\Exercise;
+use Lomkit\Access\Policies\ControlledPolicy;
 
-class ExercisePolicy
+class ExercisePolicy extends ControlledPolicy
 {
     protected string $control = ExerciseControl::class;
 }

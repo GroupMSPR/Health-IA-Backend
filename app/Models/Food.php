@@ -28,7 +28,7 @@ class Food extends Model
         'cholesterol',
     ];
 
-    public function users() : BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'consume');
     }

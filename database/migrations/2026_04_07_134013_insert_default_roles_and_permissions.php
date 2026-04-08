@@ -32,7 +32,7 @@ return new class extends Migration
         $userRole->givePermissionTo([
             'view-exercises',
             'view-foods',
-            'view-health-metrics', 'create-health-metrics', 'update-health-metrics', 'delete-health-metrics'
+            'view-health-metrics', 'create-health-metrics', 'update-health-metrics', 'delete-health-metrics',
         ]);
 
         $coachRole = Role::firstOrCreate(['name' => 'coach', 'guard_name' => 'api']);
@@ -40,7 +40,7 @@ return new class extends Migration
             'view-users',
             'view-exercises', 'create-exercises', 'update-exercises', 'delete-exercises',
             'view-foods', 'create-foods', 'update-foods', 'delete-foods',
-            'view-health-metrics'
+            'view-health-metrics',
         ]);
     }
 

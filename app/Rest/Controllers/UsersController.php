@@ -71,7 +71,7 @@ use OpenApi\Attributes as OA;
                                         new OA\Property(property: 'daily_caloric_intake', type: 'integer', example: 2500),
                                         new OA\Property(property: 'goal', type: 'string', example: 'Perte de poids'),
                                         new OA\Property(property: 'subscription', type: 'string', example: 'Premium'),
-                                        new OA\Property(property: 'date_subscription', type: 'string', format: 'date-time', example: '2026-04-01T10:00:00Z')
+                                        new OA\Property(property: 'date_subscription', type: 'string', format: 'date-time', example: '2026-04-01T10:00:00Z'),
                                     ],
                                     type: 'object'
                                 ),
