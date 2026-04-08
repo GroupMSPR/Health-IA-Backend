@@ -1,5 +1,7 @@
 [build]
 builder = "nixpacks"
 
+buildCommand = "echo 'API only - skipping frontend build'"
+
 [deploy]
 releaseCommand = "php artisan migrate --force"
