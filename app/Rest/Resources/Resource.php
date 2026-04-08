@@ -10,51 +10,41 @@ abstract class Resource extends RestResource
 {
     /**
      * Build a "search" query for fetching resource.
-     *
-     * @return Builder
      */
-    public function searchQuery(RestRequest $request, Builder $query)
+    public function searchQuery(RestRequest $request, Builder $query): Builder
     {
-        return $query;
+        return parent::searchQuery($request, $query)->controlled();
     }
 
     /**
      * Build a query for mutating resource.
-     *
-     * @return Builder
      */
-    public function mutateQuery(RestRequest $request, Builder $query)
+    public function mutateQuery(RestRequest $request, Builder $query): Builder
     {
-        return $query;
+        return parent::mutateQuery($request, $query)->controlled();
     }
 
     /**
      * Build a "destroy" query for the given resource.
-     *
-     * @return Builder
      */
-    public function destroyQuery(RestRequest $request, Builder $query)
+    public function destroyQuery(RestRequest $request, Builder $query): Builder
     {
-        return $query;
+        return parent::destroyQuery($request, $query)->controlled();
     }
 
     /**
      * Build a "restore" query for the given resource.
-     *
-     * @return Builder
      */
-    public function restoreQuery(RestRequest $request, Builder $query)
+    public function restoreQuery(RestRequest $request, Builder $query): Builder
     {
-        return $query;
+        return parent::restoreQuery($request, $query)->controlled();
     }
 
     /**
      * Build a "forceDelete" query for the given resource.
-     *
-     * @return Builder
      */
-    public function forceDeleteQuery(RestRequest $request, Builder $query)
+    public function forceDeleteQuery(RestRequest $request, Builder $query): Builder
     {
-        return $query;
+        return parent::forceDeleteQuery($request, $query)->controlled();
     }
 }

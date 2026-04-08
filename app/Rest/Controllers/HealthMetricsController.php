@@ -56,8 +56,6 @@ use OpenApi\Attributes as OA;
                                 new OA\Property(
                                     property: 'attributes',
                                     properties: [
-                                        new OA\Property(property: 'user_id', type: 'string', format: 'uuid', example: '123e4567-e89b-12d3-a456-426614174000'),
-                                        new OA\Property(property: 'date', type: 'string', format: 'date-time', example: '2026-04-07T08:00:00Z'),
                                         new OA\Property(property: 'start_weight', type: 'number', format: 'float', example: 80.0),
                                         new OA\Property(property: 'current_weight', type: 'number', format: 'float', example: 78.5),
                                         new OA\Property(property: 'avg_bpm', type: 'number', format: 'float', example: 72.5),

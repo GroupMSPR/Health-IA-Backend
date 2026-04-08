@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Health AI Coach'),
+    'name' => env('APP_NAME', 'Health-AI_Coach'),
 
     /*
     |--------------------------------------------------------------------------

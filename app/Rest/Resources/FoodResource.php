@@ -89,14 +89,14 @@ class FoodResource extends Resource
         return [
             'name' => ['string'],
             'category' => ['string'],
-            'calories' => ['decimal:8'],
-            'protein' => ['decimal:8'],
-            'carbohydrates' => ['decimal:8'],
-            'fat' => ['decimal:8'],
-            'fiber' => ['decimal:8'],
-            'sugars' => ['decimal:8'],
-            'sodium' => ['integer'],
-            'cholesterol' => ['integer'],
+            'calories' => ['numeric'],
+            'protein' => ['numeric'],
+            'carbohydrates' => ['numeric'],
+            'fat' => ['numeric'],
+            'fiber' => ['numeric'],
+            'sugars' => ['numeric'],
+            'sodium' => ['numeric'],
+            'cholesterol' => ['numeric'],
         ];
     }
 
