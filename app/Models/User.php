@@ -28,6 +28,8 @@ class User extends Authenticatable implements FilamentUser
 
     protected $keyType = 'string';
 
+    protected $appends = ['name'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -102,5 +104,10 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(\Filament\Panel $panel): bool
     {
         return true;
+    }
+
+    public function getNameAttribute(): string
+    {
+        return trim($this->first_name . ' ' . $this->last_name);
     }
 }
