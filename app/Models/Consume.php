@@ -14,13 +14,12 @@ class Consume extends Pivot
 
     protected $primaryKey = 'consume_id';
 
-
-    public function food() :BelongsTo
+    public function food(): BelongsTo
     {
         return $this->belongsTo(Food::class);
     }
 
-    public function user() :BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -7,16 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Lomkit\Access\Controls\HasControl;
 
 class HealthMetric extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $table = 'health_metrics';
 
     protected $fillable = [
-        'user_id',
-        'date',
         'start_weight',
         'current_weight',
         'avg_bpm',

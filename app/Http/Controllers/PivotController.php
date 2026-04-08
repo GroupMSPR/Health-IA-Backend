@@ -55,7 +55,7 @@ class PivotController extends Controller
         $user->foods()->attach($validated['food_id']);
 
         return response()->json([
-            'message' => 'Aliment ajouté'
+            'message' => 'Aliment ajouté',
         ], 201);
     }
 
@@ -106,7 +106,7 @@ class PivotController extends Controller
         $user->exercises()->attach($validated['exercise_id']);
 
         return response()->json([
-            'message' => 'Exercice ajouté'
+            'message' => 'Exercice ajouté',
         ], 201);
     }
 }

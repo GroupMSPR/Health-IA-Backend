@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
     Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
     Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
+
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);
 });

@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'last_name' => $this->faker->lastName(),
             'first_name' => $this->faker->firstName(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('password123'),
             'birthdate' => $this->faker->dateTimeBetween('-35 years', '-25 years'),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
             'weight' => $weight,

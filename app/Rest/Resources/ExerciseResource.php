@@ -29,7 +29,7 @@ class ExerciseResource extends Resource
             'secondary_muscle',
             'equipment',
             'instructions',
-            'constraints'
+            'constraints',
         ];
     }
 

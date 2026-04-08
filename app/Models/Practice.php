@@ -11,12 +11,12 @@ class Practice extends Pivot
 
     protected $primaryKey = 'practice_id';
 
-    public function exercise() :BelongsTo
+    public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);
     }
 
-    public function user() :BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
