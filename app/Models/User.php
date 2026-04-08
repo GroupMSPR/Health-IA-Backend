@@ -14,8 +14,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Lomkit\Access\Controls\HasControl;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasControl, HasFactory, HasRoles, HasUuids, Notifiable, SoftDeletes;
@@ -85,5 +87,10 @@ class User extends Authenticatable
     public function exercises(): BelongsToMany
     {
         return $this->belongsToMany(Exercise::class, 'practice');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return str_ends_with($this->email, '@healthai-coach.mspr');
     }
 }
