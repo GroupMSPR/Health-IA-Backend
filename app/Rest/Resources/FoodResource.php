@@ -5,6 +5,7 @@ namespace App\Rest\Resources;
 use App\Models\Food;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\RestRequest;
+use Lomkit\Rest\Relations\BelongsToMany;
 
 class FoodResource extends Resource
 {
@@ -39,7 +40,9 @@ class FoodResource extends Resource
      */
     public function relations(RestRequest $request): array
     {
-        return [];
+        return [
+            BelongsToMany::make('users', UserResource::class),
+        ];
     }
 
     /**
