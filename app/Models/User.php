@@ -89,8 +89,18 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Exercise::class, 'practice');
     }
 
-    public function canAccessPanel(Panel $panel): bool
+//    public function canAccessPanel(Panel $panel): bool
+//    {
+//        return str_ends_with($this->email, '@healthai-coach.mspr');
+//    }
+
+    public function getFilamentName(): string
     {
-        return str_ends_with($this->email, '@healthai-coach.mspr');
+        return (string) $this->email;
+    }
+
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return true;
     }
 }
