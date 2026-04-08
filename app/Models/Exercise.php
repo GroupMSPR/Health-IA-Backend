@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Lomkit\Access\Controls\HasControl;
 
 class Exercise extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $table = 'exercises';
 
@@ -22,6 +23,11 @@ class Exercise extends Model
         'secondary_muscle',
         'equipment',
         'instructions',
+        'constraints'
+    ];
+
+    protected $casts = [
+        'constraints' => 'array'
     ];
 
     public function users() :BelongsToMany

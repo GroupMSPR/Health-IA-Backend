@@ -40,7 +40,7 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "john@example.com"
+                                        "example": "john.doe@example.com"
                                     },
                                     "password": {
                                         "type": "string",
@@ -289,10 +289,7 @@
                                         "type": "array",
                                         "items": {
                                             "type": "string",
-                                            "example": [
-                                                "Diabète de type 2 - Moderate",
-                                                "Obesity - Severate"
-                                            ]
+                                            "example": "Diabète de type 2 - Moderate, Obesity - Severate"
                                         }
                                     },
                                     "physical_activity_level": {
@@ -421,8 +418,14 @@
                                                             "example": "3 Series de 8"
                                                         },
                                                         "constraints": {
-                                                            "type": "string",
-                                                            "example": "Allergie au gluten"
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "example": [
+                                                                "Allergie au gluten",
+                                                                "..."
+                                                            ]
                                                         }
                                                     },
                                                     "type": "object"
@@ -1198,13 +1201,15 @@
                                                             "format": "float",
                                                             "example": 15.2
                                                         },
-                                                        "disease_type": {
-                                                            "type": "string",
-                                                            "example": "Diabète de type 2"
-                                                        },
-                                                        "severity": {
-                                                            "type": "string",
-                                                            "example": "Modérée"
+                                                        "constraints": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "example": [
+                                                                "Allergie au gluten",
+                                                                "..."
+                                                            ]
                                                         },
                                                         "physical_activity_level": {
                                                             "type": "string",
@@ -1226,10 +1231,6 @@
                                                             "type": "string",
                                                             "format": "date-time",
                                                             "example": "2026-04-01T10:00:00Z"
-                                                        },
-                                                        "constraints": {
-                                                            "type": "string",
-                                                            "example": "Allergie au gluten"
                                                         }
                                                     },
                                                     "type": "object"
