@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
 use App\Models\User;
 use App\Rest\Controllers\ExercisesController;
@@ -26,4 +27,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
     Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
     Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
+    Route::post('consume', [PivotController::class, 'consumeFood']);
+    Route::post('practice', [PivotController::class, 'practiceExercise']);
 });
