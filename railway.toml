@@ -1,6 +1,8 @@
+[environments]
+NIXPACKS_NODE_VERSION = "20"
+
 [build]
 builder = "nixpacks"
-
 buildCommand = "rm -rf node_modules package-lock.json && npm install --include=optional && npm run build"
 
 [deploy]
