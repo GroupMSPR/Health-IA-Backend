@@ -93,6 +93,112 @@
                 ]
             }
         },
+        "/consume": {
+            "post": {
+                "tags": [
+                    "Pivot"
+                ],
+                "summary": "Associer un aliment à l'utilisateur connecté",
+                "operationId": "853b8d988330b38163ccb1e36ba26d88",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "example": "application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "food_id"
+                                ],
+                                "properties": {
+                                    "food_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "019d6d18-4173-722d-bcf0-d1c0ce8dcb35"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Aliment associé avec succès"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    },
+                    "422": {
+                        "description": "Données invalides"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/practice": {
+            "post": {
+                "tags": [
+                    "Pivot"
+                ],
+                "summary": "Associer un exercice à l'utilisateur connecté",
+                "operationId": "15ef6c9e3deb4183456cf2e57df18674",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "example": "application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "exercise_id"
+                                ],
+                                "properties": {
+                                    "exercise_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "019d6d18-41a8-73e6-a32c-0e1cc18e83cf"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exercice associé avec succès"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    },
+                    "422": {
+                        "description": "Données invalides"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/register": {
             "post": {
                 "tags": [
@@ -1282,6 +1388,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Pivot",
+            "description": "Pivot"
         },
         {
             "name": "Register",
