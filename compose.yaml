@@ -28,7 +28,7 @@ services:
     pgsql:
         image: 'postgres:18-alpine'
         ports:
-            - '${FORWARD_DB_PORT:-55432}:55432'
+            - '${FORWARD_DB_PORT:-55432}:5432'
         environment:
             PGPASSWORD: '${DB_PASSWORD:-secret}'
             POSTGRES_DB: '${DB_DATABASE}'
