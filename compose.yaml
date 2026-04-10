@@ -24,7 +24,15 @@ services:
         networks:
             - sail
         depends_on:
-            - pgsql
+            pgsql:
+                condition: service_healthy
+        restart: unless-stopped
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost/up']
+            interval: 15s
+            timeout: 5s
+            retries: 3
+            start_period: 30s
     pgsql:
         image: 'postgres:18-alpine'
         ports:
@@ -39,6 +47,7 @@ services:
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
             - sail
+        restart: unless-stopped
         healthcheck:
             test:
                 - CMD

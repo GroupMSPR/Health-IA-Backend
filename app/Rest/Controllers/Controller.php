@@ -11,12 +11,16 @@ use OpenApi\Attributes as OA;
     title: 'HealthAI Coach API'
 )]
 #[OA\Server(
+    url: '/api',
+    description: 'Serveur local'
+)]
+#[OA\Server(
     url: 'https://api-production-1262.up.railway.app:8080/api',
-    description: 'Serveur de développement production'
+    description: 'Serveur de production'
 )]
 #[OA\SecurityScheme(
     securityScheme: 'sanctum',
-    type: 'https',
+    type: 'http',
     description: 'Entrez votre token Sanctum ici',
     scheme: 'bearer'
 )]
