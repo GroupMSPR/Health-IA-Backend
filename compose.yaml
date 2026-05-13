@@ -1,5 +1,7 @@
+version: '3.8'
+
 services:
-    laravel.test:
+    laravel:
         build:
             context: './vendor/laravel/sail/runtimes/8.5'
             dockerfile: Dockerfile
@@ -22,11 +24,19 @@ services:
         networks:
             - sail
         depends_on:
-            - pgsql
+            pgsql:
+                condition: service_healthy
+        restart: unless-stopped
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost/up']
+            interval: 15s
+            timeout: 5s
+            retries: 3
+            start_period: 30s
     pgsql:
         image: 'postgres:18-alpine'
         ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
+            - '${FORWARD_DB_PORT:-55432}:5432'
         environment:
             PGPASSWORD: '${DB_PASSWORD:-secret}'
             POSTGRES_DB: '${DB_DATABASE}'
@@ -37,6 +47,7 @@ services:
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
             - sail
+        restart: unless-stopped
         healthcheck:
             test:
                 - CMD

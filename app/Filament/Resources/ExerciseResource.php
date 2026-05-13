@@ -49,6 +49,7 @@ class ExerciseResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultPaginationPageOption(10)
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID'),
