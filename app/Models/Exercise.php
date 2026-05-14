@@ -24,6 +24,7 @@ class Exercise extends Model
         'equipment',
         'instructions',
         'constraints',
+        'type',
     ];
 
     protected $casts = [
@@ -33,5 +34,20 @@ class Exercise extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'practice');
+    }
+
+    public function equipment(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'exercise_equipment');
+    }
+
+    public function constraints(): BelongsToMany
+    {
+        return $this->belongsToMany(Constraint::class, 'exercise_constraint');
+    }
+
+    public function goals(): BelongsToMany
+    {
+        return $this->belongsToMany(Goal::class, 'exercise_goal');
     }
 }
