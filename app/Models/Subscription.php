@@ -12,10 +12,6 @@ class Subscription extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    protected $fillable = [
-        'subscription_type'
-    ];
-
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_subscription')

@@ -1,8 +1,13 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\AuthServiceProvider;
+use App\Providers\Filament\AdminPanelProvider;
+use L5Swagger\L5SwaggerServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\AuthServiceProvider::class,
-    App\Providers\Filament\AdminPanelProvider::class,
-    L5Swagger\L5SwaggerServiceProvider::class,
+    AppServiceProvider::class,
+    AuthServiceProvider::class,
+    AdminPanelProvider::class,
+    L5SwaggerServiceProvider::class,
 ];
