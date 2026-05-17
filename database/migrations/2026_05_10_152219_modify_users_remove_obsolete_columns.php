@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('goal');
-            $table->dropColumn('subscription');
-            $table->dropColumn('date_subscription');
             $table->dropColumn('constraints');
+            $table->dropColumn('date_subscription');
         });
     }
 
@@ -26,7 +25,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->text('goal')->nullable();
-            $table->string('subscription')->nullable();
             $table->dateTime('date_subscription')->nullable();
             $table->text('constraints')->default('Non renseigné');
         });

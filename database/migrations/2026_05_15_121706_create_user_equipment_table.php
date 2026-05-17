@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goals', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('goal')->unique();
+        Schema::create('user_equipment', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
+            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('equipment_id')->constrained('equipments');
             $table->timestamps();
-            $table->softDeletes();
+            $table->unique(['user_id', 'equipment_id']);
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('user_equipment');
     }
 };

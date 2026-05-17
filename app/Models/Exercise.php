@@ -17,18 +17,11 @@ class Exercise extends Model
 
     protected $fillable = [
         'name',
+        'image',
         'type',
         'difficulty_level',
-        'target_muscle',
-        'secondary_muscle',
-        'equipment',
         'instructions',
-        'constraints',
         'type',
-    ];
-
-    protected $casts = [
-        'constraints' => 'array',
     ];
 
     public function users(): BelongsToMany
@@ -36,7 +29,7 @@ class Exercise extends Model
         return $this->belongsToMany(User::class, 'practice');
     }
 
-    public function equipment(): BelongsToMany
+    public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'exercise_equipment');
     }

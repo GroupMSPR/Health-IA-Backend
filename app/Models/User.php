@@ -40,18 +40,16 @@ class User extends Authenticatable implements FilamentUser
         'first_name',
         'email',
         'password',
+        'profile_picture',
         'birthdate',
         'gender',
         'weight',
         'height',
         'bmi',
         'body_fat_pct',
-        'constraints',
         'physical_activity_level',
         'daily_caloric_intake',
-        'goal',
         'subscription',
-        'date_subscription',
     ];
 
     /**
@@ -96,7 +94,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Constraint::class, 'user_constraint');
     }
 
-    public function subscription(): BelongsToMany
+    public function subscriptions(): BelongsToMany
     {
         return $this->belongsToMany(Subscription::class, 'user_subscription');
     }
@@ -104,6 +102,11 @@ class User extends Authenticatable implements FilamentUser
     public function goals(): BelongsToMany
     {
         return $this->belongsToMany(Goal::class, 'user_goal');
+    }
+
+    public function equipments(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'user_equipment');
     }
 
     public function canAccessPanel(Panel $panel): bool
