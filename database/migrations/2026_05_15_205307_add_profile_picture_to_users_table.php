@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goals', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('goal')->unique();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('profile_picture')->nullable()->after('email');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goals');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('profile_picture');
+        });
     }
 };
