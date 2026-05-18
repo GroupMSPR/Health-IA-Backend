@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;
 use Lomkit\Rest\Relations\BelongsToMany;
+use Lomkit\Rest\Relations\HasMany;
 
 class UserResource extends Resource
 {
@@ -48,7 +49,7 @@ class UserResource extends Resource
     public function relations(RestRequest $request): array
     {
         return [
-            \Lomkit\Rest\Relations\HasMany::make('healthMetrics', HealthMetricResource::class),
+            HasMany::make('healthMetrics', HealthMetricResource::class),
             BelongsToMany::make('foods', FoodResource::class),
             BelongsToMany::make('exercises', ExerciseResource::class),
         ];
