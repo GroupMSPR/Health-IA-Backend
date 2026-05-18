@@ -43,4 +43,14 @@ class Exercise extends Model
     {
         return $this->belongsToMany(Goal::class, 'exercise_goal');
     }
+
+    public function primaryMuscles(): BelongsToMany
+    {
+        return $this->belongsToMany(PrimaryMuscle::class, 'primary_muscle');
+    }
+
+    public function secondaryMuscles(): BelongsToMany
+    {
+        return $this->belongsToMany(SecondaryMuscle::class, 'secondary_muscle');
+    }
 }
