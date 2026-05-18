@@ -12,7 +12,7 @@ class Goal extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['goal'];
 
     public function users(): BelongsToMany
     {
