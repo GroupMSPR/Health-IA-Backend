@@ -17,21 +17,40 @@ class Exercise extends Model
 
     protected $fillable = [
         'name',
+        'image',
         'type',
         'difficulty_level',
-        'target_muscle',
-        'secondary_muscle',
-        'equipment',
         'instructions',
-        'constraints',
-    ];
-
-    protected $casts = [
-        'constraints' => 'array',
+        'type',
     ];
 
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'practice');
+    }
+
+    public function equipments(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'exercise_equipment');
+    }
+
+    public function constraints(): BelongsToMany
+    {
+        return $this->belongsToMany(Constraint::class, 'exercise_constraint');
+    }
+
+    public function goals(): BelongsToMany
+    {
+        return $this->belongsToMany(Goal::class, 'exercise_goal');
+    }
+
+    public function primaryMuscles(): BelongsToMany
+    {
+        return $this->belongsToMany(PrimaryMuscle::class, 'primary_muscle');
+    }
+
+    public function secondaryMuscles(): BelongsToMany
+    {
+        return $this->belongsToMany(SecondaryMuscle::class, 'secondary_muscle');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,8 +16,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Lomkit\Access\Controls\HasControl;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -40,18 +40,16 @@ class User extends Authenticatable implements FilamentUser
         'first_name',
         'email',
         'password',
+        'profile_picture',
         'birthdate',
         'gender',
         'weight',
         'height',
         'bmi',
         'body_fat_pct',
-        'constraints',
         'physical_activity_level',
         'daily_caloric_intake',
-        'goal',
         'subscription',
-        'date_subscription',
     ];
 
     /**
@@ -91,6 +89,26 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Exercise::class, 'practice');
     }
 
+    public function constraints(): BelongsToMany
+    {
+        return $this->belongsToMany(Constraint::class, 'user_constraint');
+    }
+
+    public function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(Subscription::class, 'user_subscription');
+    }
+
+    public function goals(): BelongsToMany
+    {
+        return $this->belongsToMany(Goal::class, 'user_goal');
+    }
+
+    public function equipments(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'user_equipment');
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@healthai-coach.mspr');
@@ -108,6 +126,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function getNameAttribute(): string
     {
-        return trim($this->first_name . ' ' . $this->last_name);
+        return trim($this->first_name.' '.$this->last_name);
     }
 }
