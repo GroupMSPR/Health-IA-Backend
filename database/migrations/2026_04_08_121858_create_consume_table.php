@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('consume', function (Blueprint $table) {
-            $table->uuid('consume_id')->primary()->default(DB::raw('gen_random_uuid()'));
+            $table->uuid('consume_id')->primary();
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('food_id')->references('id')->on('foods');
             $table->softDeletes();
