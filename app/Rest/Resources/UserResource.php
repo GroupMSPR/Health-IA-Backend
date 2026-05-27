@@ -28,18 +28,16 @@ class UserResource extends Resource
             'first_name',
             'email',
             'password',
+            'profile_picture',
             'birthdate',
             'gender',
             'weight',
             'height',
             'bmi',
             'body_fat_pct',
-            'constraints',
             'physical_activity_level',
             'daily_caloric_intake',
-            'goal',
             'subscription',
-            'date_subscription',
         ];
     }
 
@@ -52,6 +50,10 @@ class UserResource extends Resource
             HasMany::make('healthMetrics', HealthMetricResource::class),
             BelongsToMany::make('foods', FoodResource::class),
             BelongsToMany::make('exercises', ExerciseResource::class),
+            BelongsToMany::make('goals', GoalResource::class),
+            BelongsToMany::make('constraints', ConstraintResource::class),
+            BelongsToMany::make('subscriptions', SubscriptionResource::class),
+            BelongsToMany::make('equipments', EquipmentResource::class),
         ];
     }
 
@@ -101,6 +103,7 @@ class UserResource extends Resource
             'first_name' => ['required', 'string'],
             'email' => ['string', 'email', 'max:255'],
             'password' => ['string', 'min:6'],
+            'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
             'birthdate' => ['required', 'date'],
             'gender' => ['string', 'in:male,female,other'],
             'weight' => ['numeric', 'between:1,500'],
@@ -111,7 +114,7 @@ class UserResource extends Resource
             'daily_caloric_intake' => ['integer'],
             'goal' => ['string', 'max:500'],
             'subscription' => ['string', 'max:50'],
-            'date_subscription' => ['nullable'],
+            'date_subscription' => ['required', 'date'],
         ];
     }
 
@@ -125,6 +128,7 @@ class UserResource extends Resource
             'first_name' => ['required'],
             'email' => ['required'],
             'password' => ['required'],
+            'profile_picture' => ['nullable'],
             'birthdate' => ['required'],
             'gender' => ['required'],
             'weight' => ['required'],
@@ -135,7 +139,6 @@ class UserResource extends Resource
             'daily_caloric_intake' => ['required'],
             'goal' => ['required'],
             'subscription' => ['required'],
-            'date_subscription' => ['nullable'],
         ];
     }
 
@@ -145,7 +148,7 @@ class UserResource extends Resource
 
         $attributes = $requestBody['attributes'] ?? [];
 
-        if (! empty($attributes['weight']) && ! empty($attributes['height'])) {
+        if (!empty($attributes['weight']) && !empty($attributes['height'])) {
             $heightInMeters = $attributes['height'] / 100;
             if ($heightInMeters > 0) {
                 $bmi = $attributes['weight'] / ($heightInMeters * $heightInMeters);

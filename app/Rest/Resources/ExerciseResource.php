@@ -23,13 +23,10 @@ class ExerciseResource extends Resource
     {
         return [
             'name',
+            'image',
             'type',
             'difficulty_level',
-            'target_muscle',
-            'secondary_muscle',
-            'equipment',
             'instructions',
-            'constraints',
         ];
     }
 
@@ -40,6 +37,11 @@ class ExerciseResource extends Resource
     {
         return [
             BelongsToMany::make('users', UserResource::class),
+            BelongsToMany::make('goals', GoalResource::class),
+            BelongsToMany::make('constraints', ConstraintResource::class),
+            BelongsToMany::make('equipments', EquipmentResource::class),
+            BelongsToMany::make('primaryMuscles', MuscleResource::class),
+            BelongsToMany::make('secondaryMuscles', MuscleResource::class),
         ];
     }
 
@@ -102,11 +104,7 @@ class ExerciseResource extends Resource
     {
         return [
             'name' => ['required'],
-            'type' => ['required'],
             'difficulty_level' => ['required'],
-            'target_muscle' => ['required'],
-            'secondary_muscle' => ['required'],
-            'equipment' => ['required'],
             'instructions' => ['required'],
         ];
     }
