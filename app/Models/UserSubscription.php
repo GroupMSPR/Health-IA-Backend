@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class UserSubscription extends Pivot
 {
-    protected $table = 'user_subscription';
+    use HasUuids;
 
-    protected $primaryKey = 'id';
+    protected $table = 'user_subscription';
 
     protected $fillable = ['started_at', 'ended_at'];
 

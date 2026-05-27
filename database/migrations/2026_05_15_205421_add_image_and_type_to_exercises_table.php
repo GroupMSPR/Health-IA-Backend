@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('exercises', function (Blueprint $table) {
             $table->string('image')->nullable()->after('name');
-            $table->string('type')->nullable()->after('difficulty_level');
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('exercises', function (Blueprint $table) {
-            $table->dropColumn(['image', 'type']);
+            $table->dropColumn(['image']);
         });
     }
 };

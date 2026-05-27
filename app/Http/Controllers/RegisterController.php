@@ -59,7 +59,7 @@ class RegisterController extends Controller
     {
         $bmi = null;
 
-        if (! empty($request->weight) && ! empty($request->height)) {
+        if (!empty($request->weight) && !empty($request->height)) {
             $heightInMeters = $request->height / 100;
             if ($heightInMeters > 0) {
                 $bmi = $request->weight / ($heightInMeters * $heightInMeters);
@@ -77,12 +77,9 @@ class RegisterController extends Controller
             'height' => $request->height,
             'bmi' => $bmi,
             'body_fat_pct' => $request->body_fat_pct,
-            'constraints' => $request->constraints,
             'physical_activity_level' => $request->physical_activity_level,
             'daily_caloric_intake' => $request->daily_caloric_intake,
-            'goal' => $request->goal,
             'subscription' => 'free',
-            'date_subscription' => now() ?? null,
         ]);
 
         $user->assignRole('user');

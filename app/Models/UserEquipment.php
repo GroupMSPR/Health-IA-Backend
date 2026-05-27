@@ -12,7 +12,6 @@ class UserEquipment extends Pivot
 
     protected $table = 'user_equipment';
 
-    protected $primaryKey = 'id';
 
     public function user(): BelongsTo
     {

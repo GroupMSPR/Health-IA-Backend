@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('exercise_equipment', function (Blueprint $table) {
-            $table->uuid('id')->primary();
             $table->foreignUuid('exercise_id')->constrained('exercises');
             $table->foreignUuid('equipment_id')->constrained('equipments');
             $table->timestamps();
