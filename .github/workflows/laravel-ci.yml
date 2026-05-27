@@ -1,0 +1,45 @@
+name: CI Laravel (Pint, PHPStan, PHPUnit)
+
+on:
+  push:
+    branches: [ "master", "develop" ]
+  pull_request:
+    branches: [ "master", "develop" ]
+
+jobs:
+  laravel-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Checkout du code
+        uses: actions/checkout@v4
+
+      - name: 🐘 Configuration de PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite3, pdo_sqlite, bcmath, intl, gd
+          coverage: none
+
+      - name: 📦 Installation de Composer
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      - name: ⚙️ Préparation de l'environnement (.env)
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: 🧹 Run Laravel Pint (Indentation, Conventions..)
+        run: ./vendor/bin/pint --test
+
+      - name: 🕵️‍♂️ Run PHPStan (Typage, Erreurs..)
+        run: ./vendor/bin/phpstan analyse
+
+      - name: 🧪 Run PHPUnit (Tests)
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: |
+          touch database/database.sqlite
+          php artisan migrate --force
+          php artisan test
