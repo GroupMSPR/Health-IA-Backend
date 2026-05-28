@@ -130,7 +130,7 @@ PostgreSQL Database
 
 ### Prérequis
 
-- Docker Desktop (recommandé)
+- Docker Desktop (recommandé pour l'environnement isolé)
 - PHP 8.3+ (pour développement local)
 - Composer
 - PostgreSQL 15+ (si pas de Docker)
