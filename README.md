@@ -77,11 +77,18 @@ Health-IA-Backend/
 
 ```mermaid
 graph TD
-    Client[Client Frontend Mobile] -->|HTTP Request| Router[Laravel Router api.php]
-    Router --> Middleware[Middleware Auth et CORS]
-    Middleware --> Controller[Controller]
-    Controller --> Model[Model Eloquent ORM]
-    Model --> DB[(PostgreSQL Database)]
+    Client("📱 Client Frontend / Mobile")
+    Router("🔀 Laravel Router : routes/api.php")
+    Middleware("🛡️ Middleware : Auth, CORS, etc.")
+    Controller("⚙️ Controller")
+    Model("📦 Model Eloquent ORM")
+    DB[("🗄️ PostgreSQL Database")]
+
+    Client -- "HTTP Request" --> Router
+    Router --> Middleware
+    Middleware --> Controller
+    Controller --> Model
+    Model --> DB
 ```
 
 ---
