@@ -6,7 +6,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Type](https://img.shields.io/badge/Type-API-REST-purple)
+![Type](https://img.shields.io/badge/Type-API_REST-purple)
 
 ---
 
