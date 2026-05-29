@@ -6,6 +6,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
 ![Filament 3](https://img.shields.io/badge/Filament-3-F59E0B?logo=filament)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
 ![Type](https://img.shields.io/badge/Type-API_REST-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
