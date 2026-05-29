@@ -5,8 +5,8 @@
 ![PHP](https://img.shields.io/badge/PHP-8.3+-blue?logo=php)
 ![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
-![API](https://img.shields.io/badge/API-REST-green)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Type](https://img.shields.io/badge/Type-API-REST-purple)
 
 ---
 
