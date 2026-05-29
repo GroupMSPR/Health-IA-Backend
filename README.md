@@ -2,11 +2,12 @@
 
 **Backend API REST** de la plateforme HealthAI Coach, construite avec **Laravel 12** et **PostgreSQL**. Cette API gère les utilisateurs, les données nutritionnelles, les exercices et les métriques de santé.
 
-![PHP](https://img.shields.io/badge/PHP-8.3+-blue?logo=php)
+![PHP](https://img.shields.io/badge/PHP-8.4+-blue?logo=php)
 ![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 ![Type](https://img.shields.io/badge/Type-API_REST-purple)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
