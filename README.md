@@ -1,4 +1,4 @@
-# 🏥 Health-IA-Backend - API REST HealthAI Coach
+# 🏗️ Health-IA-Backend - API REST HealthAI Coach
 
 **Backend API REST** de la plateforme HealthAI Coach, construite avec **Laravel 12** et **PostgreSQL**. Cette API gère les utilisateurs, les données nutritionnelles, les exercices et les métriques de santé.
 
