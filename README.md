@@ -4,7 +4,7 @@
 
 ![PHP](https://img.shields.io/badge/PHP-8.4+-blue?logo=php)
 ![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
-![Filament](https://img.shields.io/badge/Filament-F59E0B?logo=filament&logoColor=white)
+![Filament 3](https://img.shields.io/badge/Filament-3-F59E0B?logo=filament)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
 
 ![Type](https://img.shields.io/badge/Type-API_REST-purple)
