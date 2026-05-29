@@ -75,12 +75,14 @@ Health-IA-Backend/
 
 ### Diagramme de flux
 
+```mermaid
 graph TD
     Client[Client Frontend Mobile] -->|HTTP Request| Router[Laravel Router api.php]
     Router --> Middleware[Middleware Auth et CORS]
     Middleware --> Controller[Controller]
     Controller --> Model[Model Eloquent ORM]
     Model --> DB[(PostgreSQL Database)]
+```
 
 ---
 
