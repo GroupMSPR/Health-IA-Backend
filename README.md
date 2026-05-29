@@ -75,14 +75,12 @@ Health-IA-Backend/
 
 ### Diagramme de flux
 
-```
 graph TD
     Client([📱 Client Frontend / Mobile]) -->|HTTP Request| Router[🔀 Laravel Router routes/api.php]
     Router --> Middleware[🛡️ Middleware Auth, CORS, etc.]
     Middleware --> Controller[⚙️ Controller]
     Controller --> Model[📦 Model Eloquent ORM]
     Model <-->|Requêtes SQL| DB[(🗄️ PostgreSQL Database)]
-```
 
 ---
 
