@@ -13,7 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_subscription', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('subscription_id')->constrained('subscriptions');
             $table->dateTime('started_at')->nullable();

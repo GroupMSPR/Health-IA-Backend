@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -19,6 +20,11 @@ return new class extends Migration
             'view-exercises', 'create-exercises', 'update-exercises', 'delete-exercises',
             'view-foods', 'create-foods', 'update-foods', 'delete-foods',
             'view-health-metrics', 'create-health-metrics', 'update-health-metrics', 'delete-health-metrics',
+            'view-goals', 'create-goals', 'update-goals', 'delete-goals',
+            'view-constraints', 'create-constraints', 'update-constraints', 'delete-constraints',
+            'view-equipments', 'create-equipments', 'update-equipments', 'delete-equipments',
+            'view-muscles', 'create-muscles', 'update-muscles', 'delete-muscles',
+            'view-subscriptions', 'create-subscriptions', 'update-subscriptions', 'delete-subscriptions',
         ];
 
         foreach ($permissions as $permission) {
@@ -33,7 +39,12 @@ return new class extends Migration
             'view-exercises',
             'view-foods',
             'view-health-metrics', 'create-health-metrics', 'update-health-metrics', 'delete-health-metrics',
-        ]);
+            'view-goals',
+            'view-constraints',
+            'view-equipments',
+            'view-muscles',
+            'view-subscriptions',
+            ]);
 
         $coachRole = Role::firstOrCreate(['name' => 'coach', 'guard_name' => 'api']);
         $coachRole->givePermissionTo([
@@ -41,6 +52,11 @@ return new class extends Migration
             'view-exercises', 'create-exercises', 'update-exercises', 'delete-exercises',
             'view-foods', 'create-foods', 'update-foods', 'delete-foods',
             'view-health-metrics',
+            'view-goals', 'create-goals', 'update-goals',
+            'view-constraints', 'create-constraints', 'update-constraints',
+            'view-equipments', 'create-equipments', 'update-equipments',
+            'view-muscles', 'create-muscles', 'update-muscles',
+            'view-subscriptions',
         ]);
     }
 
@@ -52,7 +68,17 @@ return new class extends Migration
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         Role::whereIn('name', ['admin', 'user', 'coach'])->delete();
-        Permission::whereLike('name', '%-users')->orWhereLike('name', '%-exercises')
-            ->orWhereLike('name', '%-foods')->orWhereLike('name', '%-health-metrics')->delete();
+
+        Permission::where(function ($query) {
+            $query->whereLike('name', '%-users')
+                ->orWhereLike('name', '%-exercises')
+                ->orWhereLike('name', '%-foods')
+                ->orWhereLike('name', '%-health-metrics')
+                ->orWhereLike('name', '%-goals')
+                ->orWhereLike('name', '%-constraints')
+                ->orWhereLike('name', '%-equipments')
+                ->orWhereLike('name', '%-muscles')
+                ->orWhereLike('name', '%-subscriptions');
+        })->delete();
     }
 };

@@ -15,7 +15,6 @@ class PrimaryMuscle extends Model
         'muscle_id',
     ];
 
-    protected $primaryKey = 'id';
 
     public function exercise(): BelongsTo
     {

@@ -15,8 +15,6 @@ class SecondaryMuscle extends Model
         'muscle_id',
     ];
 
-    protected $primaryKey = 'id';
-
     public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);

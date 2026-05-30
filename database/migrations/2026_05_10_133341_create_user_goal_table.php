@@ -13,7 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_goal', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('goal_id')->constrained('goals');
             $table->timestamps();
