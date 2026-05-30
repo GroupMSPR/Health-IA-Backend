@@ -18,7 +18,7 @@ class SubscriptionFactory extends Factory
      */
     public function definition(): array
     {
-        $types = ['freemium', 'premium', 'premium_plus', 'b2b'];
+        $types = ['freemium', 'premium', 'premium_plus'];
 
         return [
             'subscription_type' => $this->faker->randomElement($types),
