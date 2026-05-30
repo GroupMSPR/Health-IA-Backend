@@ -18,6 +18,7 @@ class ConstraintFactory extends Factory
     public function definition(): array
     {
         $constraints = [
+            //liée au exercices
             ['name' => 'Blessure genou', 'description' => 'Douleur ou blessure au niveau du genou', 'severity' => 'high'],
             ['name' => 'Blessure dos', 'description' => 'Douleur lombaire ou dorsale', 'severity' => 'high'],
             ['name' => 'Blessure épaule', 'description' => 'Douleur ou blessure à l\'épaule', 'severity' => 'medium'],
@@ -28,6 +29,13 @@ class ConstraintFactory extends Factory
             ['name' => 'Tendinite', 'description' => 'Inflammation des tendons', 'severity' => 'medium'],
             ['name' => 'Asthme', 'description' => 'Troubles respiratoires à l\'effort', 'severity' => 'medium'],
             ['name' => 'Arthrite', 'description' => 'Inflammation des articulations', 'severity' => 'high'],
+            //liée au foods
+            ['name' => 'Allergie gluten', 'description' => 'Intolérance ou allergie au gluten', 'severity' => 'high'],
+            ['name' => 'Allergie lactose', 'description' => 'Intolérance au lactose', 'severity' => 'medium'],
+            ['name' => 'Allergie noix', 'description' => 'Allergie aux fruits à coque', 'severity' => 'high'],
+            ['name' => 'Végétarien', 'description' => 'Régime alimentaire sans viande', 'severity' => 'low'],
+            ['name' => 'Végan', 'description' => 'Régime sans aucun produit animal', 'severity' => 'low'],
+            ['name' => 'Diabète type 2', 'description' => 'Régime alimentaire adapté au diabète', 'severity' => 'high'],
         ];
 
         $constraint = $this->faker->unique()->randomElement($constraints);
