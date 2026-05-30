@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ExerciseGoal extends Pivot
 {
-    protected $table = 'exercise_goals';
+    use HasUuids;
 
-    protected $primaryKey = 'id';
+    protected $table = 'exercise_goals';
 
     public function exercise(): BelongsTo
     {

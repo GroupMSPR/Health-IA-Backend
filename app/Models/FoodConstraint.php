@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ExerciseConstraint extends Pivot
+class FoodConstraint extends Pivot
 {
     use HasUuids;
 
-    protected $table = 'exercise_constraints';
+    protected $table = 'food_constraint';
 
-
-    public function exercise(): BelongsTo
+    public function food(): BelongsTo
     {
-        return $this->belongsTo(Exercise::class);
+        return $this->belongsTo(Food::class);
     }
 
     public function constraint(): BelongsTo

@@ -21,7 +21,6 @@ class Exercise extends Model
         'type',
         'difficulty_level',
         'instructions',
-        'type',
     ];
 
     public function users(): BelongsToMany
@@ -46,11 +45,17 @@ class Exercise extends Model
 
     public function primaryMuscles(): BelongsToMany
     {
-        return $this->belongsToMany(PrimaryMuscle::class, 'primary_muscle');
+        return $this->belongsToMany(Muscle::class, 'primary_muscle',
+            'exercise_id',
+            'muscle_id')
+            ->withTimestamps();
     }
 
     public function secondaryMuscles(): BelongsToMany
     {
-        return $this->belongsToMany(SecondaryMuscle::class, 'secondary_muscle');
+        return $this->belongsToMany(Muscle::class, 'secondary_muscle',
+            'exercise_id',
+            'muscle_id')
+            ->withTimestamps();
     }
 }

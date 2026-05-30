@@ -32,4 +32,9 @@ class Food extends Model
     {
         return $this->belongsToMany(User::class, 'consume');
     }
+
+    public function constraints(): BelongsToMany
+    {
+        return $this->belongsToMany(Constraint::class, 'food_constraint');
+    }
 }
