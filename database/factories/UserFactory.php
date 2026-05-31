@@ -30,19 +30,18 @@ class UserFactory extends Factory
         $bmi = round($weight / ($heightInMeters * $heightInMeters), 2);
 
         return [
-            'email' => $this->faker->unique()->safeEmail(),
             'last_name' => $this->faker->lastName(),
             'first_name' => $this->faker->firstName(),
+            'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password123'),
             'birthdate' => $this->faker->dateTimeBetween('-35 years', '-25 years'),
-            'gender' => $this->faker->randomElement(['male', 'female', 'other']),
+            'gender' => $this->faker->randomElement(['Homme', 'Femme', 'Autres']),
             'weight' => $weight,
             'height' => $height,
             'bmi' => $bmi,
             'body_fat_pct' => $this->faker->numberBetween(1, 100),
-            'physical_activity_level' => $this->faker->randomElement(['Sedentary', 'Moderate', 'Active']),
+            'physical_activity_level' => $this->faker->randomElement(['Sedentaire', 'Moyennement Actif(ve)', 'Actif(ve)']),
             'daily_caloric_intake' => $this->faker->numberBetween(1200, 5000),
-            'subscription' => $this->faker->randomElement(['Freemium', 'Premium', 'Premium+']),
         ];
     }
 }

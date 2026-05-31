@@ -19,14 +19,12 @@ class RegisterTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123',
             'birthdate' => '1990-01-01',
-            'gender' => 'female',
+            'gender' => 'Femme',
             'weight' => 70,
             'height' => 175,
             'body_fat_pct' => 20,
-            'constraints' => ['no_constraints'],
-            'physical_activity_level' => 'moderate',
+            'physical_activity_level' => 'moyennement actif(ve)',
             'daily_caloric_intake' => 2000,
-            'goal' => 'lose_weight',
         ], $overrides);
     }
 
@@ -51,16 +49,6 @@ class RegisterTest extends TestCase
         $this->assertEquals(round($expectedBmi, 2), round($user->bmi, 2));
     }
 
-    public function test_register_sets_subscription_to_free(): void
-    {
-        $this->postJson('/api/register', $this->validPayload());
-
-        $this->assertDatabaseHas('users', [
-            'email' => 'jane.doe@example.com',
-            'subscription' => 'free',
-        ]);
-    }
-
     public function test_register_with_missing_required_fields_returns_422(): void
     {
         $response = $this->postJson('/api/register', []);
@@ -68,8 +56,8 @@ class RegisterTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors([
                 'first_name', 'last_name', 'email', 'password',
-                'birthdate', 'gender', 'weight', 'height', 'body_fat_pct', 'goal',
-                'constraints', 'physical_activity_level', 'daily_caloric_intake',
+                'birthdate', 'gender', 'weight', 'height', 'body_fat_pct',
+                'physical_activity_level', 'daily_caloric_intake',
             ]);
     }
 

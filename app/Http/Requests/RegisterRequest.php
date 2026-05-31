@@ -23,19 +23,17 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'last_name' => 'required|string',
-            'first_name' => 'required|string',
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'birthdate' => 'required|date',
-            'gender' => 'required|string|in:male,female,other',
+            'gender' => 'required|string|in:Homme,Femme,Autres',
             'weight' => 'required|numeric|between:1,500',
             'height' => 'required|integer|between:1,300',
             'body_fat_pct' => 'required|integer|between:1,100',
-            'constraints' => 'required|array',
-            'physical_activity_level' => 'required|string',
-            'daily_caloric_intake' => 'required|integer',
-            'goal' => 'required|string|max:500',
+            'physical_activity_level' => 'required|string|max:255',
+            'daily_caloric_intake' => 'required|integer|min:1000',
         ];
     }
 }
