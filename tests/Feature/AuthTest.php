@@ -90,6 +90,8 @@ class AuthTest extends TestCase
 
     public function test_logout_with_valid_token_revokes_token(): void
     {
+        $this->withoutExceptionHandling();
+
         $user = User::factory()->create();
         $token = $user->createToken('auth_token')->plainTextToken;
 
