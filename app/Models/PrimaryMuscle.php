@@ -15,7 +15,6 @@ class PrimaryMuscle extends Model
         'muscle_id',
     ];
 
-
     public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);

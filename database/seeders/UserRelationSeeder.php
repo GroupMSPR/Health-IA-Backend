@@ -24,6 +24,7 @@ class UserRelationSeeder extends Seeder
 
         if ($users->isEmpty()) {
             $this->command->info('pas de user trouvé, faut lancer le UserSeeder avant');
+
             return;
         }
 
@@ -34,7 +35,7 @@ class UserRelationSeeder extends Seeder
                 );
             }
 
-            if ($constraints->isNotEmpty() && rand (0, 1)) {
+            if ($constraints->isNotEmpty() && rand(0, 1)) {
                 $user->constraints()->syncWithoutDetaching(
                     $constraints->random(min(2, $constraints->count()))->pluck('id')->toArray()
                 );
@@ -45,7 +46,7 @@ class UserRelationSeeder extends Seeder
                     $subscriptions->random()->id => [
                         'started_at' => now()->subMonths(rand(1, 12)),
                         'ended_at' => null,
-                    ]
+                    ],
                 ]);
             }
 

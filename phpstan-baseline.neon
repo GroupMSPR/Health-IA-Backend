@@ -49,10 +49,28 @@ parameters:
 			path: app/Access/Controls/UserControl.php
 
 		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
+			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
+			identifier: class.notFound
 			count: 1
-			path: app/Http/Controllers/RegisterController.php
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\MuscleResource not found\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/Rest/Resources/ExerciseResource.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
@@ -75,6 +93,30 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\SubscriptionResource not found\.$#'
+			identifier: class.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
 

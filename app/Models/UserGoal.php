@@ -12,7 +12,6 @@ class UserGoal extends Pivot
 
     protected $table = 'user_goal';
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

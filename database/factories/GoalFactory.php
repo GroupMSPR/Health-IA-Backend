@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class GoalFactory extends Factory
 {
     protected $model = Goal::class;
+
     /**
      * Define the model's default state.
      *

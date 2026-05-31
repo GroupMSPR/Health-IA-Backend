@@ -11,7 +11,7 @@ use Lomkit\Access\Controls\HasControl;
 
 class Goal extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasControl;
+    use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = ['goal'];
 

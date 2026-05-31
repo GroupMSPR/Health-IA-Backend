@@ -12,6 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
 
+Route::get('/test-connection', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Connecté avec succès au Backend Laravel !',
+    ]);
+});
+
 Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);

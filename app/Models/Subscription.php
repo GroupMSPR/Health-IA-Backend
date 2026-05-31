@@ -11,10 +11,10 @@ use Lomkit\Access\Controls\HasControl;
 
 class Subscription extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasControl;
+    use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
-        'subscription_type'
+        'subscription_type',
     ];
 
     public function users(): BelongsToMany

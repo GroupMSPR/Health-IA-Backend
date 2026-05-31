@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ExerciseEquipment extends Pivot
 {
-
     use HasUuids;
 
     protected $table = 'exercise_equipment';

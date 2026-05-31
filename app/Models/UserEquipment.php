@@ -12,7 +12,6 @@ class UserEquipment extends Pivot
 
     protected $table = 'user_equipment';
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
