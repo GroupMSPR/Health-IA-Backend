@@ -148,7 +148,7 @@ class UserResource extends Resource
 
         $attributes = $requestBody['attributes'] ?? [];
 
-        if (!empty($attributes['weight']) && !empty($attributes['height'])) {
+        if (! empty($attributes['weight']) && ! empty($attributes['height'])) {
             $heightInMeters = $attributes['height'] / 100;
             if ($heightInMeters > 0) {
                 $bmi = $attributes['weight'] / ($heightInMeters * $heightInMeters);

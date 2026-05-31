@@ -21,6 +21,11 @@ class Exercise extends Model
         'type',
         'difficulty_level',
         'instructions',
+        'constraints',
+    ];
+
+    protected $casts = [
+        'constraints' => 'array',
     ];
 
     public function users(): BelongsToMany

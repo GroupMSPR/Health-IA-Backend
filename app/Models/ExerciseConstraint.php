@@ -12,7 +12,6 @@ class ExerciseConstraint extends Pivot
 
     protected $table = 'exercise_constraints';
 
-
     public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);

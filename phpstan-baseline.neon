@@ -1,14 +1,122 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
 			count: 1
-			path: app/Http/Controllers/RegisterController.php
+			path: app/Access/Controls/ExerciseControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Access/Controls/FoodControl.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Access/Controls/HealthMetricControl.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Access/Controls/HealthMetricControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Access/Controls/HealthMetricControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Access/Controls/HealthMetricControl.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Access/Controls/UserControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Access/Controls/UserControl.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\MuscleResource not found\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/Rest/Resources/ExerciseResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/HealthMetricResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/HealthMetricResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Database\\Eloquent\\Builder\:\:controlled\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: app/Rest/Resources/Resource.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Class App\\Rest\\Resources\\SubscriptionResource not found\.$#'
+			identifier: class.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
 

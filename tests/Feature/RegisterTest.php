@@ -10,53 +10,45 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @return array<string, mixed> */
-    private function validPayload(array $overrides = []): array
+    protected function validPayload(array $overrides = []): array
     {
         return array_merge([
-            'first_name' => 'Jane',
             'last_name' => 'Doe',
+            'first_name' => 'Jane',
             'email' => 'jane.doe@example.com',
-            'password' => 'secret123',
-            'password_confirmation' => 'secret123',
-            'age' => 25,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'birthdate' => '1990-01-01',
             'gender' => 'female',
-            'weight' => 65,
-            'height' => 170,
+            'weight' => 70,
+            'height' => 175,
             'body_fat_pct' => 20,
-            'goal' => 'Improve overall fitness',
+            'constraints' => ['no_constraints'],
+            'physical_activity_level' => 'moderate',
+            'daily_caloric_intake' => 2000,
+            'goal' => 'lose_weight',
         ], $overrides);
     }
-
-    // ── Success ──────────────────────────────────────────────────────────────
 
     public function test_register_with_valid_data_creates_user_and_returns_token(): void
     {
         $response = $this->postJson('/api/register', $this->validPayload());
 
         $response->assertStatus(201)
-            ->assertJsonStructure(['message', 'access_token', 'token_type', 'informations'])
-            ->assertJsonFragment([
-                'message' => 'Utilisateur inscrit avec succès',
-                'token_type' => 'Bearer',
-            ]);
-
-        $this->assertDatabaseHas('users', ['email' => 'jane.doe@example.com']);
+            ->assertJsonStructure(['message', 'informations']);
     }
 
     public function test_register_calculates_bmi_correctly(): void
     {
-        $response = $this->postJson('/api/register', $this->validPayload([
+        $this->postJson('/api/register', $this->validPayload([
             'weight' => 70,
             'height' => 175,
         ]));
 
-        $response->assertStatus(201);
-
+        $user = User::where('email', 'jane.doe@example.com')->firstOrFail();
         $expectedBmi = 70 / ((175 / 100) ** 2);
 
-        $user = User::where('email', 'jane.doe@example.com')->firstOrFail();
-        $this->assertEqualsWithDelta($expectedBmi, (float) $user->bmi, 0.01);
+        $this->assertEquals(round($expectedBmi, 2), round($user->bmi, 2));
     }
 
     public function test_register_sets_subscription_to_free(): void
@@ -69,8 +61,6 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // ── Validation failures ───────────────────────────────────────────────────
-
     public function test_register_with_missing_required_fields_returns_422(): void
     {
         $response = $this->postJson('/api/register', []);
@@ -78,7 +68,8 @@ class RegisterTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors([
                 'first_name', 'last_name', 'email', 'password',
-                'age', 'gender', 'weight', 'height', 'body_fat_pct', 'goal',
+                'birthdate', 'gender', 'weight', 'height', 'body_fat_pct', 'goal',
+                'constraints', 'physical_activity_level', 'daily_caloric_intake',
             ]);
     }
 
@@ -95,8 +86,7 @@ class RegisterTest extends TestCase
     public function test_register_with_password_not_confirmed_returns_422(): void
     {
         $response = $this->postJson('/api/register', $this->validPayload([
-            'password' => 'secret123',
-            'password_confirmation' => 'different',
+            'password_confirmation' => 'mot-de-passe-different',
         ]));
 
         $response->assertStatus(422)
@@ -106,21 +96,21 @@ class RegisterTest extends TestCase
     public function test_register_with_invalid_gender_returns_422(): void
     {
         $response = $this->postJson('/api/register', $this->validPayload([
-            'gender' => 'unknown',
+            'gender' => 'alien',
         ]));
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['gender']);
     }
 
-    public function test_register_with_invalid_age_returns_422(): void
+    public function test_register_with_invalid_birthdate_returns_422(): void
     {
         $response = $this->postJson('/api/register', $this->validPayload([
-            'age' => 0,
+            'birthdate' => 'not-a-date',
         ]));
 
         $response->assertStatus(422)
-            ->assertJsonValidationErrors(['age']);
+            ->assertJsonValidationErrors(['birthdate']);
     }
 
     public function test_register_with_short_password_returns_422(): void

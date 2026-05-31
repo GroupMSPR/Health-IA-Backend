@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -44,7 +43,7 @@ return new class extends Migration
             'view-equipments',
             'view-muscles',
             'view-subscriptions',
-            ]);
+        ]);
 
         $coachRole = Role::firstOrCreate(['name' => 'coach', 'guard_name' => 'api']);
         $coachRole->givePermissionTo([

@@ -20,6 +20,7 @@ class ExerciseRelationSeeder extends Seeder
 
         if ($exercises->isEmpty()) {
             $this->command->info('aucun exercice trouvé, faut passer ExerciseSeeder avant');
+
             return;
         }
 

@@ -10,7 +10,7 @@ use Lomkit\Access\Controls\HasControl;
 
 class Equipment extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasControl;
+    use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $table = 'equipments';
 

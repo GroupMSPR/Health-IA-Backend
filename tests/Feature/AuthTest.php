@@ -16,10 +16,11 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->postJson('/api/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $response = $this->withHeaders(['Accept' => 'application/json'])
+            ->postJson('/api/login', [
+                'email' => $user->email,
+                'password' => 'password123',
+            ]);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['message', 'access_token', 'token_type'])

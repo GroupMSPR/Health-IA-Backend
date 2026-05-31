@@ -59,7 +59,7 @@ class RegisterController extends Controller
     {
         $bmi = null;
 
-        if (!empty($request->weight) && !empty($request->height)) {
+        if (! empty($request->weight) && ! empty($request->height)) {
             $heightInMeters = $request->height / 100;
             if ($heightInMeters > 0) {
                 $bmi = $request->weight / ($heightInMeters * $heightInMeters);
