@@ -23,7 +23,7 @@ class AuthTest extends TestCase
             ]);
 
         $response->assertStatus(200)
-            ->assertJsonStructure(['message', 'access_token', 'token_type'])
+            ->assertJsonStructure(['message', 'user', 'access_token', 'token_type'])
             ->assertJsonFragment(['token_type' => 'Bearer']);
     }
 
@@ -74,6 +74,8 @@ class AuthTest extends TestCase
 
     public function test_logout_with_valid_token_revokes_token(): void
     {
+        $this->withoutExceptionHandling();
+
         $user = User::factory()->create();
         $token = $user->createToken('auth_token')->plainTextToken;
 

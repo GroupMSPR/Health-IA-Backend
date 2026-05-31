@@ -1,5 +1,5 @@
 services:
-    laravel:
+    healthai_laravel:
         build:
             context: './vendor/laravel/sail/runtimes/8.5'
             dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
         networks:
             - sail
         depends_on:
-            pgsql:
+            healthai_pgsql:
                 condition: service_healthy
         restart: unless-stopped
         healthcheck:
@@ -31,7 +31,14 @@ services:
             timeout: 5s
             retries: 3
             start_period: 30s
-    pgsql:
+    healthai_mailcatcher:
+        image: schickling/mailcatcher
+        ports:
+            - "1080:1080" # web
+            - "1025:1025" # SMTP (send mails)
+        networks:
+            - sail
+    healthai_pgsql:
         image: 'postgres:18-alpine'
         ports:
             - '${FORWARD_DB_PORT:-55432}:5432'

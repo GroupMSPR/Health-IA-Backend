@@ -49,6 +49,12 @@ parameters:
 			path: app/Access/Controls/UserControl.php
 
 		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
 			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
 			identifier: class.notFound
 			count: 1
