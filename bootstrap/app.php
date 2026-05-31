@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         AuthServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->statefulApi();
         $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {

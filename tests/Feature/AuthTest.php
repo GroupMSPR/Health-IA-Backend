@@ -82,7 +82,6 @@ class AuthTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Déconnexion réussie']);
 
-        // Token must have been deleted from the database
         $this->assertDatabaseCount('personal_access_tokens', 0);
     }
 

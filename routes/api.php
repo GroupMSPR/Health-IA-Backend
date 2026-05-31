@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
-use App\Models\User;
 use App\Rest\Controllers\ExercisesController;
 use App\Rest\Controllers\FoodsController;
 use App\Rest\Controllers\HealthMetricsController;
@@ -28,8 +27,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::get('user', function (Request $request) {
-        return User::all();
+    Route::get('/user', function (Request $request) {
+        return $request->user();
     });
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();

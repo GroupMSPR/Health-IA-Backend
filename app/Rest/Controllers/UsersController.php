@@ -66,12 +66,8 @@ use OpenApi\Attributes as OA;
                                         new OA\Property(property: 'height', type: 'integer', example: 180),
                                         new OA\Property(property: 'bmi', type: 'number', format: 'float', example: 23.3),
                                         new OA\Property(property: 'body_fat_pct', type: 'number', format: 'float', example: 15.2),
-                                        new OA\Property(property: 'constraints', type: 'array', items: new OA\Items(type: 'string'), example: ['Allergie au gluten', '...']),
-                                        new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
+                                        new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif(ve)'),
                                         new OA\Property(property: 'daily_caloric_intake', type: 'integer', example: 2500),
-                                        new OA\Property(property: 'goal', type: 'string', example: 'Perte de poids'),
-                                        new OA\Property(property: 'subscription', type: 'string', example: 'Premium'),
-                                        new OA\Property(property: 'date_subscription', type: 'string', format: 'date-time', example: '2026-04-01T10:00:00Z'),
                                     ],
                                     type: 'object'
                                 ),
