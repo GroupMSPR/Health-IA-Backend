@@ -358,7 +358,7 @@ Tous les endpoints sauf `/auth/register` et `/auth/login` requièrent un token B
 
 ```bash
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-     http://localhost/api/users/profile
+     http://localhost/api/user
 ```
 
 ### Réponses API
