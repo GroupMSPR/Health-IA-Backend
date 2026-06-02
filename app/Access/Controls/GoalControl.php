@@ -6,11 +6,13 @@ use App\Access\Perimeters\GlobalPerimeter;
 use App\Models\Goal;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Access\Controls\Control;
+use Lomkit\Access\Perimeters\Perimeter;
 
 class GoalControl extends Control
 {
     /**
      * The model the control refers to.
+     *
      * @var class-string<Model>
      */
     protected string $model = Goal::class;
@@ -18,7 +20,7 @@ class GoalControl extends Control
     /**
      * Retrieve the list of perimeter definitions for the current control.
      *
-     * @return array<\Lomkit\Access\Perimeters\Perimeter> An array of Perimeter objects.
+     * @return array<Perimeter> An array of Perimeter objects.
      */
     protected function perimeters(): array
     {
@@ -32,9 +34,10 @@ class GoalControl extends Control
                         'delete', 'restore', 'forceDelete' => 'delete-goals',
                         default => null,
                     };
+
                     return $ability ? $user->hasPermissionTo($ability) : false;
                 })
-                ->should(fn(Model $user, Model $model) => true)
+                ->should(fn (Model $user, Model $model) => true),
         ];
     }
 }

@@ -6,11 +6,13 @@ use App\Access\Perimeters\GlobalPerimeter;
 use App\Models\Constraint;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Access\Controls\Control;
+use Lomkit\Access\Perimeters\Perimeter;
 
 class ConstraintControl extends Control
 {
     /**
      * The model the control refers to.
+     *
      * @var class-string<Model>
      */
     protected string $model = Constraint::class;
@@ -18,7 +20,7 @@ class ConstraintControl extends Control
     /**
      * Retrieve the list of perimeter definitions for the current control.
      *
-     * @return array<\Lomkit\Access\Perimeters\Perimeter> An array of Perimeter objects.
+     * @return array<Perimeter> An array of Perimeter objects.
      */
     protected function perimeters(): array
     {
@@ -32,9 +34,10 @@ class ConstraintControl extends Control
                         'delete', 'restore', 'forceDelete' => 'delete-constraints',
                         default => null
                     };
+
                     return $ability ? $user->hasPermissionTo($ability) : false;
                 })
-                ->should(fn(Model $user, Model $method) => true)
+                ->should(fn (Model $user, Model $method) => true),
 
         ];
     }

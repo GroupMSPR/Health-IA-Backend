@@ -2,8 +2,8 @@
 
 namespace App\Rest\Controllers;
 
-use App\Rest\Controllers\Controller;
 use App\Rest\Resources\SubscriptionResource;
+use Lomkit\Rest\Http\Resource;
 
 class SubscriptionController extends Controller
 {

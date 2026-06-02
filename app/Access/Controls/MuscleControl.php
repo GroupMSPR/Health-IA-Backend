@@ -4,15 +4,15 @@ namespace App\Access\Controls;
 
 use App\Access\Perimeters\GlobalPerimeter;
 use App\Models\Muscle;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Lomkit\Access\Controls\Control;
+use Lomkit\Access\Perimeters\Perimeter;
 
 class MuscleControl extends Control
 {
     /**
      * The model the control refers to.
+     *
      * @var class-string<Model>
      */
     protected string $model = Muscle::class;
@@ -20,7 +20,7 @@ class MuscleControl extends Control
     /**
      * Retrieve the list of perimeter definitions for the current control.
      *
-     * @return array<\Lomkit\Access\Perimeters\Perimeter> An array of Perimeter objects.
+     * @return array<Perimeter> An array of Perimeter objects.
      */
     protected function perimeters(): array
     {
@@ -34,9 +34,10 @@ class MuscleControl extends Control
                         'delete', 'restore', 'forceDelete' => 'delete-muscles',
                         default => null
                     };
+
                     return $ability ? $user->hasPermissionTo($ability) : false;
                 })
-                ->should(fn(Model $user, Model $model) => true)
+                ->should(fn (Model $user, Model $model) => true),
         ];
     }
 }
