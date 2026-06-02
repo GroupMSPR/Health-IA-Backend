@@ -46,49 +46,80 @@
 
 ## Architecture
 
-### Structure du projet
+### Structure du projet (Détail complet)
 
 ```
 Health-IA-Backend/
 ├── app/
-│   ├── Models/                 # Modèles Eloquent
-│   │   ├── User.php
-│   │   ├── Food.php
+│   ├── Access/                 # Contrôles d'accès et périmètres
+│   │   ├── Controls/
+│   │   └── Perimeters/
+│   │
+│   ├── Models/                 # Models & Pivots Eloquent 
+│   │   ├── Constraint.php
+│   │   ├── Consume.php
+│   │   ├── Equipment.php
 │   │   ├── Exercise.php
-│   │   └── HealthMetric.php
-│   ├── Http/
-│   │   ├── Controllers/        # Contrôleurs API
-│   │   ├── Requests/           # Form Requests (validation)
-│   │   └── Resources/          # API Resources
+│   │   ├── Food.php
+│   │   ├── Goal.php
+│   │   ├── HealthMetric.php
+│   │   ├── Muscle.php
+│   │   ├── Practice.php
+│   │   ├── PrimaryMuscle.php
+│   │   ├── SecondaryMuscle.php
+│   │   ├── Subscription.php
+│   │   ├── User.php
+│   │   └── [autres modèles]
+│   │
 │   ├── Policies/               # Policies d'autorisation
+│   │
+│   ├── Rest/                   # Lomkit REST API
+│   │   ├── Controllers/
+│   │   └── Resources/
+│   │
+│   ├── Filament/               # Admin Panel & Dashboard
+│   │
+│   ├── Http/                   # Controllers Custom, Middleware, Requests
+│   │
 │   └── Jobs/                   # Jobs en queue
-├── database/
-│   ├── migrations/             # Migrations DB
-│   └── seeders/                # Data seeders
-├── routes/
-│   ├── api.php                 # Routes API
-│   └── web.php                 # Routes web (Admin)
-├── config/                     # Configuration
-├── storage/                    # Fichiers uploadés
-└── tests/                      # Tests unitaires & feature
+│
+├── database/                   # Migrations, seeders, factories
+│
+├── routes/                     # Fichiers de routes
+│
+├── config/                     # Fichiers de configuration
+│
+├── storage/                    # Fichiers générés, logs, cache
+│
+├── tests/                      # Tests unitaires et fonctionnels
+│
+├── bootstrap/                  # Fichiers de démarrage de l'application
+│
+├── public/                     # Point d'entrée web (index.php)
+│
+└── resources/                  # Vues, assets, filament
 ```
 
-### Diagramme de flux
+### Diagramme de flux - Requête API
 
 ```mermaid
 graph TD
     Client("📱 Client Frontend / Mobile")
     Router("🔀 Laravel Router : routes/api.php")
-    Middleware("🛡️ Middleware : Auth, CORS, etc.")
-    Controller("⚙️ Controller")
+    Middleware("🛡️ Middleware : Auth, CORS, Validate")
+    Controller("⚙️ Controller : Rest/Controllers")
     Model("📦 Model Eloquent ORM")
     DB[("🗄️ PostgreSQL Database")]
+    Response("📋 API Resource : JSON Response")
 
-    Client -- "HTTP Request" --> Router
-    Router --> Middleware
-    Middleware --> Controller
-    Controller --> Model
-    Model --> DB
+    Client -- "1. HTTP Request" --> Router
+    Router -- "2. Route Match" --> Middleware
+    Middleware -- "3. Auth Check" --> Controller
+    Controller -- "4. Business Logic" --> Model
+    Model -- "5. Query Builder" --> DB
+    DB -- "6. Result Set" --> Model
+    Model -- "7. Eloquent Map" --> Response
+    Response -- "8. JSON Response" --> Client
 ```
 
 ---
@@ -276,6 +307,51 @@ Swagger UI: http://localhost/api/documentation
 | POST | `/api/metrics` | Enregistrer une métrique |
 | GET | `/api/metrics/user/{id}` | Métriques d'un utilisateur |
 
+#### 🔧 Contraintes (Récent)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/constraints` | Lister les contraintes |
+| POST | `/api/constraints` | Créer une contrainte |
+| GET | `/api/constraints/{id}` | Détail d'une contrainte |
+| PUT | `/api/constraints/{id}` | Mettre à jour |
+| DELETE | `/api/constraints/{id}` | Supprimer |
+
+#### 🏋️ Équipements (Récent)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/equipment` | Lister les équipements |
+| POST | `/api/equipment` | Créer un équipement |
+| GET | `/api/equipment/{id}` | Détail d'un équipement |
+| PUT | `/api/equipment/{id}` | Mettre à jour |
+| DELETE | `/api/equipment/{id}` | Supprimer |
+
+#### 🎯 Objectifs (Récent)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/goals` | Lister les objectifs |
+| POST | `/api/goals` | Créer un objectif |
+| GET | `/api/goals/{id}` | Détail d'un objectif |
+| PUT | `/api/goals/{id}` | Mettre à jour |
+| DELETE | `/api/goals/{id}` | Supprimer |
+
+#### 💪 Muscles (Récent)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/muscles` | Lister les groupes musculaires |
+| POST | `/api/muscles` | Créer un groupe musculaire |
+| GET | `/api/muscles/{id}` | Détail d'un groupe |
+| PUT | `/api/muscles/{id}` | Mettre à jour |
+| DELETE | `/api/muscles/{id}` | Supprimer |
+
+#### 🔐 Abonnements (Récent)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/subscriptions` | Lister les abonnements |
+| POST | `/api/subscriptions` | Créer un abonnement |
+| GET | `/api/subscriptions/{id}` | Détail d'un abonnement |
+| PUT | `/api/subscriptions/{id}` | Mettre à jour |
+| DELETE | `/api/subscriptions/{id}` | Supprimer |
+
 ### Authentification
 
 Tous les endpoints sauf `/auth/register` et `/auth/login` requièrent un token Bearer :
@@ -363,6 +439,58 @@ curl -H "Authorization: Bearer YOUR_TOKEN" \
 - heart_rate: Fréquence cardiaque
 - blood_pressure: Tension artérielle
 - date: Date de la mesure
+- created_at: Date de création
+```
+
+#### Constraint (Nouveau)
+```
+- id: ID primaire
+- name: Nom de la contrainte
+- description: Description
+- type: Type (physique, diète, etc.)
+- severity: Sévérité (low, medium, high)
+- created_at: Date de création
+```
+
+#### Equipment (Nouveau)
+```
+- id: ID primaire
+- name: Nom de l'équipement
+- description: Description
+- category: Catégorie
+- image: URL image
+- created_at: Date de création
+```
+
+#### Goal (Nouveau)
+```
+- id: ID primaire
+- name: Nom de l'objectif
+- description: Description
+- category: Catégorie (fitness, santé, etc.)
+- duration: Durée estimée (jours)
+- target_value: Valeur cible
+- created_at: Date de création
+```
+
+#### Muscle (Nouveau)
+```
+- id: ID primaire
+- name: Nom du groupe musculaire
+- description: Description
+- image: URL image
+- latin_name: Nom scientifique
+- created_at: Date de création
+```
+
+#### Subscription (Nouveau)
+```
+- id: ID primaire
+- user_id: Référence utilisateur
+- plan: Type d'abonnement (free, premium, pro)
+- status: Statut (active, inactive, cancelled)
+- start_date: Date de début
+- end_date: Date de fin
 - created_at: Date de création
 ```
 
