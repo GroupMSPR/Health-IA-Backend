@@ -103,12 +103,6 @@ parameters:
 			path: app/Rest/Resources/UserResource.php
 
 		-
-			message: '#^Access to an undefined property Laravel\\Sanctum\\PersonalAccessToken\:\:\$plainTextToken\.$#'
-			identifier: property.notFound
-			count: 1
-			path: routes/api.php
-
-		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
 			identifier: method.alreadyNarrowedType
 			count: 1
