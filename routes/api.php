@@ -4,9 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
+use App\Models\User;
+use App\Rest\Controllers\ConstraintController;
+use App\Rest\Controllers\EquipmentController;
 use App\Rest\Controllers\ExercisesController;
 use App\Rest\Controllers\FoodsController;
+use App\Rest\Controllers\GoalController;
 use App\Rest\Controllers\HealthMetricsController;
+use App\Rest\Controllers\SubscriptionController;
 use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +44,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
     Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
     Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
+    Rest::resource('goals', GoalController::class)->withSoftDeletes();
+    Rest::resource('constraints', ConstraintController::class)->withSoftDeletes();
+    Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
+    Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
 
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);

@@ -4,6 +4,18 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Access/Controls/ConstraintControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Access/Controls/EquipmentControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Access/Controls/ExerciseControl.php
 
 		-
@@ -11,6 +23,12 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: app/Access/Controls/FoodControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Access/Controls/GoalControl.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
@@ -37,16 +55,10 @@ parameters:
 			path: app/Access/Controls/HealthMetricControl.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Access/Controls/UserControl.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
-			path: app/Access/Controls/UserControl.php
+			path: app/Access/Controls/MuscleControl.php
 
 		-
 			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
@@ -57,26 +69,22 @@ parameters:
 		-
 			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
 			identifier: class.notFound
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
 			count: 1
-			path: app/Rest/Resources/ExerciseResource.php
+			path: app/Access/Controls/SubscriptionControl.php
 
 		-
-			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Rest/Resources/ExerciseResource.php
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Access/Controls/UserControl.php
 
 		-
-			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
-			identifier: class.notFound
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+			identifier: method.notFound
 			count: 1
-			path: app/Rest/Resources/ExerciseResource.php
-
-		-
-			message: '#^Class App\\Rest\\Resources\\MuscleResource not found\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Rest/Resources/ExerciseResource.php
+			path: app/Access/Controls/UserControl.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
@@ -99,30 +107,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Rest/Resources/UserResource.php
-
-		-
-			message: '#^Class App\\Rest\\Resources\\ConstraintResource not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Rest/Resources/UserResource.php
-
-		-
-			message: '#^Class App\\Rest\\Resources\\EquipmentResource not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Rest/Resources/UserResource.php
-
-		-
-			message: '#^Class App\\Rest\\Resources\\GoalResource not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Rest/Resources/UserResource.php
-
-		-
-			message: '#^Class App\\Rest\\Resources\\SubscriptionResource not found\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
 
