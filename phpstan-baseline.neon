@@ -1,115 +1,115 @@
 parameters:
-	ignoreErrors:
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/ConstraintControl.php
+    ignoreErrors:
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/ConstraintControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/EquipmentControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/EquipmentControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/ExerciseControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/ExerciseControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/FoodControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/FoodControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/GoalControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/GoalControl.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Access/Controls/HealthMetricControl.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+            identifier: property.notFound
+            count: 2
+            path: app/Access/Controls/HealthMetricControl.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Access/Controls/HealthMetricControl.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+            identifier: property.notFound
+            count: 1
+            path: app/Access/Controls/HealthMetricControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/HealthMetricControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/HealthMetricControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: app/Access/Controls/HealthMetricControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+            identifier: method.notFound
+            count: 2
+            path: app/Access/Controls/HealthMetricControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/MuscleControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/MuscleControl.php
 
-		-
-			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
-			identifier: larastan.noEnvCallsOutsideOfConfig
-			count: 1
-			path: app/Providers/AppServiceProvider.php
+        -
+            message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            count: 1
+            path: app/Providers/AppServiceProvider.php
 
-		-
-        	message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
-        	identifier: method.notFound
-        	count: 1
-        	path: app/Access/Controls/SubscriptionControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/SubscriptionControl.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Access/Controls/UserControl.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+            identifier: property.notFound
+            count: 3
+            path: app/Access/Controls/UserControl.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Access/Controls/UserControl.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
+            identifier: method.notFound
+            count: 1
+            path: app/Access/Controls/UserControl.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Rest/Resources/HealthMetricResource.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
+            identifier: property.notFound
+            count: 1
+            path: app/Rest/Resources/HealthMetricResource.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Rest/Resources/HealthMetricResource.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+            identifier: property.notFound
+            count: 1
+            path: app/Rest/Resources/HealthMetricResource.php
 
-		-
-			message: '#^Call to an undefined method Illuminate\\Contracts\\Database\\Eloquent\\Builder\:\:controlled\(\)\.$#'
-			identifier: method.notFound
-			count: 5
-			path: app/Rest/Resources/Resource.php
+        -
+            message: '#^Call to an undefined method Illuminate\\Contracts\\Database\\Eloquent\\Builder\:\:controlled\(\)\.$#'
+            identifier: method.notFound
+            count: 5
+            path: app/Rest/Resources/Resource.php
 
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Rest/Resources/UserResource.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
+            identifier: property.notFound
+            count: 1
+            path: app/Rest/Resources/UserResource.php
 
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/ExampleTest.php
+        -
+            message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+            identifier: method.alreadyNarrowedType
+            count: 1
+            path: tests/Unit/ExampleTest.php
