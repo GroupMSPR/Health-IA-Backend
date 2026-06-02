@@ -61,7 +61,7 @@ parameters:
 			path: app/Access/Controls/MuscleControl.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+		    message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Access/Controls/SubscriptionControl.php
