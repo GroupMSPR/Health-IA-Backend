@@ -84,7 +84,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         if ($user && $request->bearerToken()) {
-            $user->currentAccessToken()->delete();
+            $request->user()->tokens()->delete();
         }
 
         Auth::guard('web')->logout();
