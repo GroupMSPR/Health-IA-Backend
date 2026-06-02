@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
-use App\Models\User;
 use App\Rest\Controllers\ConstraintController;
 use App\Rest\Controllers\EquipmentController;
 use App\Rest\Controllers\ExercisesController;
