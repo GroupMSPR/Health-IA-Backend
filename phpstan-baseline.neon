@@ -61,7 +61,7 @@ parameters:
 			path: app/Access/Controls/MuscleControl.php
 
 		-
-		    message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Access/Controls/SubscriptionControl.php
@@ -77,6 +77,12 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: app/Access/Controls/UserControl.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Providers/AppServiceProvider.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
@@ -101,6 +107,12 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Access to an undefined property Laravel\\Sanctum\\PersonalAccessToken\:\:\$plainTextToken\.$#'
+			identifier: property.notFound
+			count: 1
+			path: routes/api.php
 
 		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
