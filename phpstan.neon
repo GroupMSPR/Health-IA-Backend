@@ -6,7 +6,6 @@ parameters:
     paths:
         - app/
         - routes/
-        - packages/
     level: 7
     # reportUnmatchedIgnoredErrors: false
     excludePaths:
