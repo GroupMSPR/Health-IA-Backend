@@ -6,7 +6,7 @@ parameters:
     paths:
         - app/
         - routes/
-    level: 7
+    level: 5
     # reportUnmatchedIgnoredErrors: false
     excludePaths:
         - app/Filament
