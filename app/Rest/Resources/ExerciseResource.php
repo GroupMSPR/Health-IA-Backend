@@ -24,9 +24,24 @@ class ExerciseResource extends Resource
         return [
             'name',
             'image',
-            'type',
+            'category',
+            'sub_category',
             'difficulty_level',
             'instructions',
+            'short_description',
+            'target_muscle',
+            'secondary_muscle',
+            'short_description',
+            'equipment',
+            'rep_range_min',
+            'rep_range_max',
+            'recommended_duration_seconds',
+            'recommended_rest_minutes',
+            'estimated_calories_per_minutes',
+            'range_of_motion',
+            'injury_risk_level',
+            'next_progression_exercise',
+            'previous_progression_exercise',
         ];
     }
 

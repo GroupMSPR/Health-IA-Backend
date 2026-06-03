@@ -20,6 +20,7 @@ class FoodFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'category' => $this->faker->word(),
+            'image' => $this->faker->imageUrl(640, 480, 'food'),
             'calories' => $this->faker->randomFloat(2, 0, 1000),
             'protein' => $this->faker->randomFloat(2, 0, 100),
             'carbohydrates' => $this->faker->randomFloat(2, 0, 100),

@@ -24,6 +24,7 @@ class FoodResource extends Resource
         return [
             'name',
             'category',
+            'image',
             'calories',
             'protein',
             'carbohydrates',

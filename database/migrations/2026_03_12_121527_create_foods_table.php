@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->string('category');
+            $table->string('image')->nullable();
             $table->decimal('calories')->default(0);
             $table->decimal('protein')->default(0);
             $table->decimal('carbohydrates')->default(0);

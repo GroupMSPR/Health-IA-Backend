@@ -14,13 +14,24 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->unique();
-            $table->string('type');
+            $table->string('image')->nullable();
+            $table->text('instructions');
+            $table->string('short_description');
+            $table->string('category');
+            $table->string('sub_category');
             $table->text('target_muscle');
             $table->text('secondary_muscle');
             $table->text('equipment');
             $table->string('difficulty_level');
-            $table->text('instructions');
-            $table->text('constraints')->default('Non renseigné');
+            $table->integer('rep_range_min');
+            $table->integer('rep_range_max');
+            $table->integer('recommended_duration_seconds');
+            $table->integer('recommended_rest_minutes');
+            $table->integer('estimated_calories_per_minutes');
+            $table->string('range_of_motion');
+            $table->string('injury_risk_level');
+            $table->foreignUuid('next_progression_exercise')->nullable();
+            $table->foreignUuid('previous_progression_exercise')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
