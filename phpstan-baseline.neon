@@ -107,15 +107,3 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
-
-		-
-			message: '#^Access to an undefined property Laravel\\Sanctum\\PersonalAccessToken\:\:\$plainTextToken\.$#'
-			identifier: property.notFound
-			count: 1
-			path: routes/api.php
-
-		-
-			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: routes/web.php
