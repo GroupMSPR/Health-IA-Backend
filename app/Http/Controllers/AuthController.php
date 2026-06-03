@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OA;
 
 class AuthController extends Controller
@@ -44,16 +43,19 @@ class AuthController extends Controller
     )]
     public function login(LoginRequest $request): JsonResponse
     {
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (! Auth::guard('web')->attempt($request->validated())) {
             return response()->json(['message' => 'Identifiants invalides'], 401);
         }
+
+        $request->session()->regenerate();
+
+        $user = Auth::guard('web')->user();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Connexion réussie',
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
@@ -80,14 +82,15 @@ class AuthController extends Controller
     public function logout(Request $request): JsonResponse
     {
         $user = $request->user();
-        $token = $user?->currentAccessToken();
 
-        if ($token) {
-            $token->delete();
-        } elseif ($user) {
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+        if ($user && $request->bearerToken()) {
+            $request->user()->tokens()->delete();
         }
+
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return response()->json([
             'message' => 'Déconnexion réussie',

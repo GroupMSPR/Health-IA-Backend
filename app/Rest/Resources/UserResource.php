@@ -37,7 +37,6 @@ class UserResource extends Resource
             'body_fat_pct',
             'physical_activity_level',
             'daily_caloric_intake',
-            'subscription',
         ];
     }
 
@@ -105,16 +104,12 @@ class UserResource extends Resource
             'password' => ['string', 'min:6'],
             'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
             'birthdate' => ['required', 'date'],
-            'gender' => ['string', 'in:male,female,other'],
+            'gender' => ['string', 'in:Homme,Femme,Autres'],
             'weight' => ['numeric', 'between:1,500'],
             'height' => ['integer', 'between:1,300'],
             'body_fat_pct' => ['integer', 'between:1,100'],
-            'constraints' => ['array'],
             'physical_activity_level' => ['string'],
             'daily_caloric_intake' => ['integer'],
-            'goal' => ['string', 'max:500'],
-            'subscription' => ['string', 'max:50'],
-            'date_subscription' => ['required', 'date'],
         ];
     }
 
@@ -134,11 +129,8 @@ class UserResource extends Resource
             'weight' => ['required'],
             'height' => ['required'],
             'body_fat_pct' => ['required'],
-            'constraints' => ['required'],
             'physical_activity_level' => ['required'],
             'daily_caloric_intake' => ['required'],
-            'goal' => ['required'],
-            'subscription' => ['required'],
         ];
     }
 

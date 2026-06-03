@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
 use App\Rest\Controllers\ConstraintController;
@@ -26,6 +27,9 @@ Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
 });
+
+Route::post('forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
+Route::post('reset-password', [PasswordResetController::class, 'reset']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 

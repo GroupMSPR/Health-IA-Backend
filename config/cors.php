@@ -19,11 +19,11 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    'allowed_origins' => [env('CORS_ALLOWED_ORIGINS', 'http://localhost'), 'http://localhost:5000', 'http://localhost:5173', 'http://localhost:5174'],
+    'allowed_origins' => [env('CORS_ALLOWED_ORIGINS', 'http://localhost'), 'http://localhost:5001', 'http://localhost:5173', 'http://localhost:5174'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+    'allowed_headers' => ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With', 'X-XSRF-TOKEN'],
 
     'exposed_headers' => [],
 
