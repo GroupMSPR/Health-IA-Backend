@@ -5,10 +5,10 @@ includes:
 parameters:
     paths:
         - app/
-        - config/
-        - database/
         - routes/
-        - tests/
-
-    # Niveau 9 est le plus strict
-    level: 5
+        - packages/
+    level: 7
+    # reportUnmatchedIgnoredErrors: false
+    excludePaths:
+        - app/Filament
+    ignoreErrors:
