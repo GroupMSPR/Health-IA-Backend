@@ -36,10 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/user/me', function (Request $request) {
-        return response()->json([
-            'user' => $user = $request->user(),
-            'token' => $user->currentAccessToken(),
-        ]);
+        return $request->user();
     });
 
     Rest::resource('/users', UsersController::class)->withSoftDeletes();
