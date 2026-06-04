@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes as OA;
 
 class PasswordResetController extends Controller
@@ -50,6 +51,8 @@ class PasswordResetController extends Controller
         );
 
         if ($status === Password::PASSWORD_RESET) {
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
             return response()->json(['message' => 'Votre mot de passe a été réinitialisé avec succès.']);
         }
 
