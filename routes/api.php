@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/user/me', function (Request $request) {
         return response()->json([
-            'user' => $request->user()
+            'user' => $request->user(),
         ]);
     });
 
