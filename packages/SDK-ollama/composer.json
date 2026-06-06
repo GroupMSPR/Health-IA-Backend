@@ -1,0 +1,35 @@
+{
+    "name": "mspr2/sdk-ollama",
+    "description": "PHP SDK to interact with Ollama API (LLaVA, AI generation)",
+    "type": "library",
+    "license": "proprietary",
+
+    "autoload": {
+        "psr-4": {
+            "MSPR2\\SdkOllama\\": "src/"
+        }
+    },
+
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MSPR2\\SdkOllama\\SdkOllamaServiceProvider"
+            ]
+        }
+    },
+
+    "authors": [
+        {
+            "name": "Diana",
+            "email": "dianakolo888@gmail.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

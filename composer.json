@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.10.1",
         "lomkit/laravel-access-control": "^0.4.0",
         "lomkit/laravel-rest-api": "^2.19",
+        "mspr2/sdk-ollama": "*",
         "spatie/laravel-permission": "^7.2"
     },
     "require-dev": {
@@ -89,6 +90,12 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/SDK-ollama"
+        }
+    ],
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
