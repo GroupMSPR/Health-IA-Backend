@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
 
-Route::get('/test-connection', function () {
+Route::get('test-connection', function () {
     return response()->json([
         'status' => 'success',
         'message' => 'Connecté avec succès au Backend Laravel !',
@@ -24,32 +24,32 @@ Route::get('/test-connection', function () {
 });
 
 Route::middleware('throttle:5,1')->group(function () {
-    Route::post('/register', [RegisterController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
 });
 
-Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
-Route::post('/reset-password', [PasswordResetController::class, 'reset']);
+Route::post('forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
+Route::post('reset-password', [PasswordResetController::class, 'reset']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::get('/user/me', function (Request $request) {
+    Route::get('user/me', function (Request $request) {
         return response()->json([
             'user' => $request->user(),
         ]);
     });
 
-    Rest::resource('/users', UsersController::class)->withSoftDeletes();
-    Rest::resource('/foods', FoodsController::class)->withSoftDeletes();
-    Rest::resource('/exercises', ExercisesController::class)->withSoftDeletes();
-    Rest::resource('/health-metrics', HealthMetricsController::class)->withSoftDeletes();
-    Rest::resource('/goals', GoalController::class)->withSoftDeletes();
-    Rest::resource('/constraints', ConstraintController::class)->withSoftDeletes();
-    Rest::resource('/equipments', EquipmentController::class)->withSoftDeletes();
-    Rest::resource('/subscriptions', SubscriptionController::class)->withSoftDeletes();
+    Rest::resource('users', UsersController::class)->withSoftDeletes();
+    Rest::resource('foods', FoodsController::class)->withSoftDeletes();
+    Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
+    Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
+    Rest::resource('goals', GoalController::class)->withSoftDeletes();
+    Rest::resource('constraints', ConstraintController::class)->withSoftDeletes();
+    Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
+    Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
 
-    Route::post('/consume', [PivotController::class, 'consumeFood']);
-    Route::post('/practice', [PivotController::class, 'practiceExercise']);
+    Route::post('consume', [PivotController::class, 'consumeFood']);
+    Route::post('practice', [PivotController::class, 'practiceExercise']);
 });
