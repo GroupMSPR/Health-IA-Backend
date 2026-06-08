@@ -42,6 +42,22 @@ class ExerciseResource extends Resource
             'injury_risk_level',
             'next_progression_exercise',
             'previous_progression_exercise',
+            'created_at',
+        ];
+    }
+
+    public function searchables(RestRequest $request): array
+    {
+        return [
+            'id',
+            'name',
+            'category',
+            'difficulty_level',
+            'target_muscle',
+            'equipment',
+            'created_at',
+            'estimated_calories_per_minutes',
+            'recommended_duration_seconds'
         ];
     }
 

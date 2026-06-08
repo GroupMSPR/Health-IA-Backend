@@ -9,7 +9,7 @@ services:
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
-            - '${APP_PORT:-80}:80'
+            - '${APP_PORT:-8085}:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
             WWWUSER: '${WWWUSER}'
@@ -34,8 +34,8 @@ services:
     healthai_mailcatcher:
         image: schickling/mailcatcher
         ports:
-            - "1080:1080" # web
-            - "1025:1025" # SMTP (send mails)
+            - "1081:1080" # web (évite le conflit avec votre mailcatcher actuel)
+            - "1026:1025" # SMTP (évite le conflit avec votre mailcatcher actuel)
         networks:
             - sail
     healthai_pgsql:

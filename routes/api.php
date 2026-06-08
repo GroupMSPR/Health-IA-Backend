@@ -16,10 +16,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
 
-Route::get('test-connection', function () {
+Route::get('/', function () {
     return response()->json([
         'status' => 'success',
-        'message' => 'Connecté avec succès au Backend Laravel !',
+        'message' => 'Connecte avec succes au Backend Laravel !',
     ]);
 });
 
@@ -41,14 +41,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         ]);
     });
 
-    Rest::resource('users', UsersController::class)->withSoftDeletes();
-    Rest::resource('foods', FoodsController::class)->withSoftDeletes();
-    Rest::resource('exercises', ExercisesController::class)->withSoftDeletes();
-    Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
-    Rest::resource('goals', GoalController::class)->withSoftDeletes();
-    Rest::resource('constraints', ConstraintController::class)->withSoftDeletes();
-    Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
-    Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
+    Route::get('/exercises/count', function () {
+        return response()->json(['total' => DB::table('exercises')->count()]);
+    });
+
+    Route::get('/foods/count', function () {
+        return response()->json(['total' => DB::table('foods')->count()]);
+    });
 
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);
