@@ -22,6 +22,7 @@ class ExerciseResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'id',
             'name',
             'image',
             'category',
@@ -47,7 +48,6 @@ class ExerciseResource extends Resource
     }
 
     /**
-     * @param RestRequest $request
      * @return string[]
      */
     public function searchables(RestRequest $request): array
@@ -61,7 +61,7 @@ class ExerciseResource extends Resource
             'equipment',
             'created_at',
             'estimated_calories_per_minutes',
-            'recommended_duration_seconds'
+            'recommended_duration_seconds',
         ];
     }
 
