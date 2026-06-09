@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return response()->json($request->user());
     });
 
-    Route::get('/exercises/count', function () {return response()->json(DB::table('exercises')->count());});
-    Route::get('/foods/count', function () { return response()->json(DB::table('foods')->count());});
+    Route::get('exercises/count', function () { return response()->json(DB::table('exercises')->count()); });
+    Route::get('foods/count', function () { return response()->json(DB::table('foods')->count()); });
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
