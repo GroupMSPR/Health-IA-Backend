@@ -16,13 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
 
-Route::get('test-connection', function () {
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Connecté avec succès au Backend Laravel !',
-    ]);
-});
-
 Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
@@ -35,11 +28,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::get('user/me', function (Request $request) {
-        return response()->json([
-            'user' => $request->user(),
-        ]);
+    Route::get('current-user', function (Request $request) {
+        return response()->json($request->user());
     });
+
+    Route::get('/exercises/count', function () {return response()->json(DB::table('exercises')->count());});
+    Route::get('/foods/count', function () { return response()->json(DB::table('foods')->count());});
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();
     Rest::resource('foods', FoodsController::class)->withSoftDeletes();
