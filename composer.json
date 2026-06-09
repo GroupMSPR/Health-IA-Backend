@@ -3,7 +3,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -14,7 +17,7 @@
         "laravel/tinker": "^2.10.1",
         "lomkit/laravel-access-control": "^0.4.0",
         "lomkit/laravel-rest-api": "^2.19",
-        "mspr2/sdk-ollama": "*",
+        "mspr2/sdk-ia": "dev-SDK-analyze-image-ollama",
         "spatie/laravel-permission": "^7.2"
     },
     "require-dev": {
@@ -93,7 +96,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./packages/SDK-ollama"
+            "url": "./packages/SDK-IA"
         }
     ],
     "minimum-stability": "dev",

@@ -1,12 +1,12 @@
 {
-    "name": "mspr2/sdk-ollama",
-    "description": "PHP SDK to interact with Ollama API (LLaVA, AI generation)",
+    "name": "mspr2/sdk-ia",
+    "description": "PHP SDK to interact with Ollama and recommendation engine APIs (LLaVA, AI generation, recommendation engine)",
     "type": "library",
     "license": "proprietary",
 
     "autoload": {
         "psr-4": {
-            "MSPR2\\SdkOllama\\": "src/"
+            "MSPR2\\SdkIA\\": "src/"
         }
     },
 
@@ -18,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MSPR2\\SdkOllama\\SdkOllamaServiceProvider"
+                "MSPR2\\SdkIA\\SdkIAServiceProvider"
             ]
         }
     },

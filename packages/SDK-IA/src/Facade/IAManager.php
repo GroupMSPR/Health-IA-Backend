@@ -1,13 +1,13 @@
 <?php
 
-namespace src\Facade;
+namespace MSPR2\SdkIA\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
-class OllamaManager extends Facade
+class IAManager extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'OllamaManager';
+        return 'IAManager';
     }
 }
