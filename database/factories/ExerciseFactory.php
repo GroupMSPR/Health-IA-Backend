@@ -13,7 +13,7 @@ class ExerciseFactory extends Factory
             'name' => $this->faker->unique()->words(2, true),
             'instructions' => $this->faker->paragraph(),
             'short_description' => $this->faker->sentence(),
-            'category' => $this->faker->randomElement(['Cardio', 'Strength', 'Flexibility']),
+            'category' => $this->faker->randomElement(['Cardio', 'Strength', 'Flexibility', 'Balance']),
             'sub_category' => $this->faker->randomElement(['HIIT', 'Bodyweight', 'Machine', 'Free weights']),
             'target_muscle' => $this->faker->randomElement(['Chest', 'Back', 'Legs', 'Arms', 'Core']),
             'secondary_muscle' => $this->faker->randomElement(['Shoulders', 'Triceps', 'Biceps', 'None']),
