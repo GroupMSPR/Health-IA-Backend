@@ -32,7 +32,8 @@ class ExerciseRelationSeeder extends Seeder
         foreach ($exercises as $exercise) {
             if ($goals->isNotEmpty()) {
                 $exercise->goals()->syncWithoutDetaching(
-                    $goals->random(min(2, $goals->count()))->pluck('id')->toArray());
+                    $goals->random(min(2, $goals->count()))->pluck('id')->toArray()
+                );
             }
 
             if ($constraints->isNotEmpty() && rand(0, 1)) {
