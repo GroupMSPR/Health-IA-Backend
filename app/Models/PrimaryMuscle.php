@@ -10,9 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class PrimaryMuscle extends Pivot
 {
     use HasUuids;
-
-    public $timestamps = false;
-
+    
     protected $fillable = [
         'exercise_id',
         'muscle_id',

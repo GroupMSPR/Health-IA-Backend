@@ -44,22 +44,26 @@ class Exercise extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'practice');
+        return $this->belongsToMany(User::class, 'practice')
+            ->withTimestamps();
     }
 
     public function equipments(): BelongsToMany
     {
-        return $this->belongsToMany(Equipment::class, 'exercise_equipment');
+        return $this->belongsToMany(Equipment::class, 'exercise_equipment')
+            ->withTimestamps();
     }
 
     public function constraints(): BelongsToMany
     {
-        return $this->belongsToMany(Constraint::class, 'exercise_constraint');
+        return $this->belongsToMany(Constraint::class, 'exercise_constraint')
+            ->withTimestamps();
     }
 
     public function goals(): BelongsToMany
     {
-        return $this->belongsToMany(Goal::class, 'exercise_goal');
+        return $this->belongsToMany(Goal::class, 'exercise_goal')
+            ->withTimestamps();
     }
 
     public function primaryMuscles(): BelongsToMany
