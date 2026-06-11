@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('health-metrics', HealthMetricsController::class)->withSoftDeletes();
     Rest::resource('goals', GoalController::class)->withSoftDeletes();
     Rest::resource('constraints', ConstraintController::class)->withSoftDeletes();
+    Rest::resource('muscles', MuscleController::class)->withSoftDeletes()->only('search');
     Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
     Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
     Rest::resource('muscles', MuscleController::class)->withSoftDeletes();

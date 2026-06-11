@@ -22,6 +22,7 @@ class MuscleResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'id',
             'name',
         ];
     }
