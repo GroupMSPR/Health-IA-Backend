@@ -13,6 +13,7 @@ use App\Rest\Controllers\HealthMetricsController;
 use App\Rest\Controllers\SubscriptionController;
 use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
+use MSPR2\SdkIA\Http\IAController;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
 
@@ -46,4 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);
+
+    Route::post('ai/analyze-meal', [IAController::class, 'analyzeMeal']);
+    Route::post('ai/recommand-workout', [IAController::class, 'recommendWorkout']);
 });

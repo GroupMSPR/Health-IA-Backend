@@ -4,7 +4,7 @@ namespace MSPR2\SdkIA;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use MSPR2\SdkOllama\Facade\IAManager;
+use MSPR2\SdkIA\Facade\IAManager;
 
 class SdkIAServiceProvider extends ServiceProvider
 {
