@@ -25,6 +25,7 @@ class UserResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'id',
             'last_name',
             'first_name',
             'email',

@@ -22,6 +22,7 @@ class SubscriptionResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'id',
             'subscription_type',
         ];
     }

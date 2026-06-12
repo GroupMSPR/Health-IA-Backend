@@ -24,6 +24,8 @@ class HealthMetricResource extends Resource
     public function fields(RestRequest $request): array
     {
         return [
+            'id',
+            'user_id',
             'date',
             'weight',
             'avg_bpm',
