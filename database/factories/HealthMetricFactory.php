@@ -40,7 +40,6 @@ class HealthMetricFactory extends Factory
             'sleep_time' => $this->faker->time(),
             'calories_burned' => round(($steps / 1000) * $this->faker->numberBetween(30, 60), 1),
             'active_minute' => $this->faker->numberBetween(0, 180),
-            'workout_type' => $this->faker->randomElement(['none', 'walk', 'run', 'cycling', 'hiit', 'strength', 'swim', 'yoga']),
         ];
     }
 }

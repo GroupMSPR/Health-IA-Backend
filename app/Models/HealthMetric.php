@@ -27,7 +27,6 @@ class HealthMetric extends Model
         'sleep_time',
         'calories_burned',
         'active_minute',
-        'workout_type',
     ];
 
     public function user(): BelongsTo

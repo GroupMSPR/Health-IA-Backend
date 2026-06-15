@@ -23,7 +23,6 @@ return new class extends Migration
             $table->time('sleep_time')->default('00:00:00');
             $table->decimal('calories_burned')->default(0);
             $table->unsignedSmallInteger('active_minute')->default(0);
-            $table->string('workout_type')->default('Non renseigné');
             $table->softDeletes();
             $table->timestamps();
         });

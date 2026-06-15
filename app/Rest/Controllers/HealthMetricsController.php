@@ -64,7 +64,6 @@ use OpenApi\Attributes as OA;
                                         new OA\Property(property: 'sleep_time', type: 'string', format: 'time', example: '07:30:00'),
                                         new OA\Property(property: 'calories_burned', type: 'number', format: 'float', example: 450.5),
                                         new OA\Property(property: 'active_minute', type: 'integer', example: 45),
-                                        new OA\Property(property: 'workout_type', type: 'string', example: 'run'),
                                     ],
                                     type: 'object'
                                 ),

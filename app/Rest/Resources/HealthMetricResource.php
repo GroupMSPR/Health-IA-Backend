@@ -35,7 +35,6 @@ class HealthMetricResource extends Resource
             'sleep_time',
             'calories_burned',
             'active_minute',
-            'workout_type',
         ];
     }
 
@@ -99,7 +98,6 @@ class HealthMetricResource extends Resource
             'active_minute' => ['integer', 'min:0', 'max:1440'],
             'sleep_time' => ['date_format:H:i:s'],
             'calories_burned' => ['numeric', 'min:0'],
-            'workout_type' => ['string', 'in:none,walk,run,cycling,hiit,strength,swim,yoga'],
         ];
     }
 
@@ -117,7 +115,6 @@ class HealthMetricResource extends Resource
             'sleep_time' => ['required'],
             'calories_burned' => ['required'],
             'active_minute' => ['required'],
-            'workout_type' => ['required'],
         ];
     }
 
