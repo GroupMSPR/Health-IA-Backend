@@ -17,18 +17,12 @@ class Equipment extends Model
 
     protected $fillable = ['name'];
 
-    /**
-     * @return BelongsToMany
-     */
-    public function exercises(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function exercises(): BelongsToMany
     {
         return $this->belongsToMany(Exercise::class, 'exercise_equipment');
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_equipment')
             ->using(UserEquipment::class)

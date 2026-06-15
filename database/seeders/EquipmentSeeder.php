@@ -62,7 +62,7 @@ class EquipmentSeeder extends Seeder
             'Vélo elliptique',
             'Rameur',
             'Air Bike',
-            'Simulateur d\'escaliers (Stairmaster)'
+            'Simulateur d\'escaliers (Stairmaster)',
         ];
 
         foreach ($equipments as $equipment) {
