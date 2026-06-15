@@ -162,8 +162,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/color" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/invade" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/html-sanitizer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/mspr2/sdk-ollama" />
-      <excludeFolder url="file://$MODULE_DIR$/bootstrap/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

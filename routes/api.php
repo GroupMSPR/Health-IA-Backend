@@ -35,10 +35,26 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::get('exercises/count', function () {
-        return response()->json(DB::table('exercises')->whereNull('deleted_at')->count());
+        return response()->json(
+            DB::table('exercises')
+                ->whereNull('deleted_at')
+                ->count()
+        );
     });
     Route::get('foods/count', function () {
-        return response()->json(DB::table('foods')->whereNull('deleted_at')->count());
+        return response()->json(
+            DB::table('foods')
+                ->whereNull('deleted_at')
+                ->count()
+        );
+    });
+    Route::get('health-metrics/count', function (Request $request) {
+        return response()->json(
+            DB::table('health_metrics')
+                ->where('user_id', $request->user()->id)
+                ->whereNull('deleted_at')
+                ->count()
+        );
     });
 
     Rest::resource('users', UsersController::class)->withSoftDeletes();
