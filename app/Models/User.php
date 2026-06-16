@@ -49,6 +49,7 @@ class User extends Authenticatable implements FilamentUser
         'body_fat_pct',
         'physical_activity_level',
         'daily_caloric_intake',
+        'favorite_exercise_categorie',
     ];
 
     /**
@@ -70,6 +71,7 @@ class User extends Authenticatable implements FilamentUser
         return [
             'password' => 'hashed',
             'constraints' => 'array',
+            'birthdate' => 'date',
         ];
     }
 

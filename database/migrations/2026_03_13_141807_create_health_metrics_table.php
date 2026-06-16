@@ -15,8 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->timestamp('date');
-            $table->decimal('start_weight')->default(0);
-            $table->decimal('current_weight')->default(0);
+            $table->decimal('weight')->default(0);
             $table->decimal('avg_bpm')->default(0);
             $table->decimal('max_bpm')->default(0);
             $table->decimal('resting_bpm')->default(0);

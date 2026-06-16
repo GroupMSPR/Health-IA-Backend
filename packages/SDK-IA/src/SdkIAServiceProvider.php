@@ -5,6 +5,9 @@ namespace MSPR2\SdkIA;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use MSPR2\SdkIA\Facade\IAManager;
+use MSPR2\SdkIA\Handlers\Clients\OllamaClient;
+use MSPR2\SdkIA\Handlers\Clients\RecommandationClient;
+use MSPR2\SdkIA\Handlers\IllegalExercisesHandler;
 
 class SdkIAServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,14 @@ class SdkIAServiceProvider extends ServiceProvider
             __DIR__ . '/../config/sdk-ia.php',
             'sdk-ia'
         );
+
+        $this->app->singleton('IAManager', function () {
+            return new \MSPR2\SdkIA\Handlers\IAManager(
+                new OllamaClient(),
+                new RecommandationClient(),
+                new IllegalExercisesHandler()
+            );
+        });
     }
 
     public function boot(): void

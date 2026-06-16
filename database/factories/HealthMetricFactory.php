@@ -23,8 +23,7 @@ class HealthMetricFactory extends Factory
      */
     public function definition(): array
     {
-        $startWeight = $this->faker->randomFloat(1, 45, 130);
-        $currentWeight = max(35, $startWeight + $this->faker->randomFloat(1, -0.8, 0.8));
+        $weight = $this->faker->numberBetween(40, 300);
         $restingBpm = $this->faker->numberBetween(50, 85);
         $avgBpm = $this->faker->numberBetween(max(60, $restingBpm), 140);
         $maxBpm = $this->faker->numberBetween($avgBpm, 195);
@@ -33,8 +32,7 @@ class HealthMetricFactory extends Factory
         return [
             'date' => $this->faker->dateTimeBetween('-30 days'),
             'user_id' => User::factory(),
-            'start_weight' => $startWeight,
-            'current_weight' => $currentWeight,
+            'weight' => $weight,
             'resting_bpm' => $restingBpm,
             'avg_bpm' => $avgBpm,
             'max_bpm' => $maxBpm,

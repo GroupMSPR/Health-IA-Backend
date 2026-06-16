@@ -2,18 +2,32 @@
 
 namespace MSPR2\SdkIA\Handlers;
 
-use MSPR2\SdkIA\Clients\OllamaClient;
-use MSPR2\SdkIA\Clients\RecommandationClient;
+use App\Models\Exercise;
+use App\Models\User;
+use MSPR2\SdkIA\Handlers\Clients\OllamaClient;
+use MSPR2\SdkIA\Handlers\Clients\RecommandationClient;
+
 
 class IAManager
 {
+    public function __construct(
+        protected OllamaClient $ollamaClient,
+        protected  RecommandationClient $recommandationClient,
+        protected  IllegalExercisesHandler $legalExercises,
+    ) {}
 
-    private OllamaClient $ollamaClient;
-    private RecommendationClient $recommendationClient;
-
-    public function __construct()
+    public function analyzeMeal(string $imageBase64, string $fileName): array
     {
-        $this->ollamaClient = new OllamaClient();
-        $this->recommendationClient = new RecommandationClient();
+        return $this->ollamaClient->analyzeMeal($imageBase64, $fileName);
+    }
+
+    public function recommend(array $userProfile): array
+    {
+        return $this->recommandationClient->recommend($userProfile);
+    }
+
+    public function isLegal(Exercise $exercise, User $user): bool
+    {
+        return $this->legalExercises->isLegal($exercise, $user);
     }
 }

@@ -25,8 +25,7 @@ class HealthMetricResource extends Resource
     {
         return [
             'date',
-            'start_weight',
-            'current_weight',
+            'weight',
             'avg_bpm',
             'max_bpm',
             'resting_bpm',
@@ -90,8 +89,7 @@ class HealthMetricResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
-            'start_weight' => ['numeric', 'min:0'],
-            'current_weight' => ['numeric', 'min:0'],
+            'weight' => ['numeric', 'min:0'],
             'resting_bpm' => ['integer', 'min:0', 'max:250'],
             'avg_bpm' => ['integer', 'min:0', 'max:250'],
             'max_bpm' => ['integer', 'min:0', 'max:250'],
@@ -109,8 +107,7 @@ class HealthMetricResource extends Resource
     public function createRules(RestRequest $request): array
     {
         return [
-            'start_weight' => ['required'],
-            'current_weight' => ['required'],
+            'weight' => ['required'],
             'avg_bpm' => ['required'],
             'max_bpm' => ['required'],
             'resting_bpm' => ['required'],

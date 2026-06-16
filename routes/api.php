@@ -49,5 +49,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('practice', [PivotController::class, 'practiceExercise']);
 
     Route::post('ai/analyze-meal', [IAController::class, 'analyzeMeal']);
-    Route::post('ai/recommand-workout', [IAController::class, 'recommendWorkout']);
+    Route::post('ai/recommend', [IAController::class, 'recommend']);
 });

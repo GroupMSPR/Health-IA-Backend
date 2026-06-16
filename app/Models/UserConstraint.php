@@ -10,9 +10,9 @@ class UserConstraint extends Pivot
 {
     use HasUuids;
 
-    protected $table = 'user_constraints';
+    protected $table = 'user_constraint';
 
-    protected $primaryKey = 'id';
+    public $incrementing = false;
 
     public function user(): BelongsTo
     {
