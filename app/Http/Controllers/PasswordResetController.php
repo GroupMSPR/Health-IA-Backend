@@ -13,7 +13,10 @@ class PasswordResetController extends Controller
     #[OA\Post(
         path: '/forgot-password',
         summary: 'Envoie un lien de réinitialisation par email',
-        tags: ['Auth']
+        tags: ['Auth'],
+        responses: [
+            new OA\Response(response: 200, description: 'Succès'),
+        ]
     )]
     public function sendResetLinkEmail(Request $request): JsonResponse
     {
@@ -31,7 +34,11 @@ class PasswordResetController extends Controller
     #[OA\Post(
         path: '/reset-password',
         summary: 'Modifie le mot de passe avec le token',
-        tags: ['Auth']
+        tags: ['Auth'],
+        responses: [
+            new OA\Response(response: 200, description: 'Succès'),
+        ]
+
     )]
     public function reset(Request $request): JsonResponse
     {

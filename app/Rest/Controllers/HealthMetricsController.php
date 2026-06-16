@@ -56,8 +56,7 @@ use OpenApi\Attributes as OA;
                                 new OA\Property(
                                     property: 'attributes',
                                     properties: [
-                                        new OA\Property(property: 'start_weight', type: 'number', format: 'float', example: 80.0),
-                                        new OA\Property(property: 'current_weight', type: 'number', format: 'float', example: 78.5),
+                                        new OA\Property(property: 'weight', type: 'number', format: 'float', example: 78.5),
                                         new OA\Property(property: 'avg_bpm', type: 'number', format: 'float', example: 72.5),
                                         new OA\Property(property: 'max_bpm', type: 'number', format: 'float', example: 145.0),
                                         new OA\Property(property: 'resting_bpm', type: 'number', format: 'float', example: 60.0),
@@ -65,11 +64,10 @@ use OpenApi\Attributes as OA;
                                         new OA\Property(property: 'sleep_time', type: 'string', format: 'time', example: '07:30:00'),
                                         new OA\Property(property: 'calories_burned', type: 'number', format: 'float', example: 450.5),
                                         new OA\Property(property: 'active_minute', type: 'integer', example: 45),
-                                        new OA\Property(property: 'workout_type', type: 'string', example: 'Course à pied'),
+                                        new OA\Property(property: 'workout_type', type: 'string', example: 'run'),
                                     ],
                                     type: 'object'
                                 ),
-                                new OA\Property(property: 'relations', type: 'object', example: new \stdClass),
                             ],
                             type: 'object'
                         )

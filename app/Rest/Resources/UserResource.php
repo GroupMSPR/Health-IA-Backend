@@ -53,7 +53,8 @@ class UserResource extends Resource
             BelongsToMany::make('exercises', ExerciseResource::class),
             BelongsToMany::make('goals', GoalResource::class),
             BelongsToMany::make('constraints', ConstraintResource::class),
-            BelongsToMany::make('subscriptions', SubscriptionResource::class),
+            BelongsToMany::make('subscriptions', SubscriptionResource::class)
+                ->withPivotFields(['started_at', 'ended_at']),
             BelongsToMany::make('equipments', EquipmentResource::class),
         ];
     }

@@ -5,8 +5,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -38,7 +37,7 @@ return new class extends Migration
             'view-exercises',
             'view-foods',
             'view-health-metrics', 'create-health-metrics', 'update-health-metrics', 'delete-health-metrics',
-            'view-goals',
+            'view-goals', 'create-goals', 'update-goals', 'delete-goals',
             'view-constraints',
             'view-equipments',
             'view-muscles',

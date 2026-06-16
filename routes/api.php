@@ -10,6 +10,7 @@ use App\Rest\Controllers\ExercisesController;
 use App\Rest\Controllers\FoodsController;
 use App\Rest\Controllers\GoalController;
 use App\Rest\Controllers\HealthMetricsController;
+use App\Rest\Controllers\MuscleController;
 use App\Rest\Controllers\SubscriptionController;
 use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('constraints', ConstraintController::class)->withSoftDeletes();
     Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
     Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
+    Rest::resource('muscles', MuscleController::class)->withSoftDeletes();
 
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);

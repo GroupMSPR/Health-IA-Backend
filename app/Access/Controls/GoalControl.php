@@ -4,6 +4,7 @@ namespace App\Access\Controls;
 
 use App\Access\Perimeters\GlobalPerimeter;
 use App\Models\Goal;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Access\Controls\Control;
 use Lomkit\Access\Perimeters\Perimeter;
@@ -37,7 +38,14 @@ class GoalControl extends Control
 
                     return $ability ? $user->hasPermissionTo($ability) : false;
                 })
-                ->should(fn (Model $user, Model $model) => true),
+                ->should(function (User $user, Goal $model) {
+                    $method = request()->route()?->getActionMethod();
+
+                    if (in_array($method, ['destroy', 'restore', 'forceDelete'])) {
+                        return $model->users()->where('users.id', $user->getKey())->exists();
+                    }
+                    return true;
+                }),
         ];
     }
 }
