@@ -25,7 +25,6 @@ class ConstraintFactory extends Factory
             ['name' => 'Blessure épaule', 'description' => 'Douleur ou blessure à l\'épaule', 'severity' => 'medium'],
             ['name' => 'Blessure cheville', 'description' => 'Entorse ou douleur à la cheville', 'severity' => 'medium'],
             ['name' => 'Hypertension', 'description' => 'Pression artérielle élevée', 'severity' => 'medium'],
-            ['name' => 'Diabète type 2', 'description' => 'Diabète nécessitant un suivi médical', 'severity' => 'high'],
             ['name' => 'Hernie discale', 'description' => 'Problème de colonne vertébrale', 'severity' => 'high'],
             ['name' => 'Tendinite', 'description' => 'Inflammation des tendons', 'severity' => 'medium'],
             ['name' => 'Asthme', 'description' => 'Troubles respiratoires à l\'effort', 'severity' => 'medium'],

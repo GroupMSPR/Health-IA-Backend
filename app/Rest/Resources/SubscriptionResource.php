@@ -32,7 +32,8 @@ class SubscriptionResource extends Resource
     public function relations(RestRequest $request): array
     {
         return [
-            BelongsToMany::make('users', UserResource::class),
+            BelongsToMany::make('users', UserResource::class)
+                ->withPivotFields(['started_at', 'ended_at'])
         ];
     }
 
@@ -75,7 +76,7 @@ class SubscriptionResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
-            'subscription_type' => ['string', 'in:freemium, premium, premium_plus, b2b'],
+            'subscription_type' => ['string','in:freemium,premium,premium_plus,b2b'],
         ];
     }
 

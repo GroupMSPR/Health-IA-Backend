@@ -26,6 +26,7 @@ return new class extends Migration
             $table->decimal('body_fat_pct');
             $table->string('physical_activity_level');
             $table->integer('daily_caloric_intake');
+            $table->string('favorite_exercise_categorie');
             $table->timestamps();
             $table->softDeletes();
         });

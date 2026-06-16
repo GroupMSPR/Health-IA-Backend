@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\HealthMetricCreated;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,7 @@ class HealthMetric extends Model
     protected $fillable = [
         'user_id',
         'date',
-        'start_weight',
-        'current_weight',
+        'weight',
         'avg_bpm',
         'max_bpm',
         'resting_bpm',
@@ -34,4 +34,8 @@ class HealthMetric extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    protected $dispatchesEvents = [
+        'created' => HealthMetricCreated::class,
+    ];
 }

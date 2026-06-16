@@ -77,6 +77,7 @@ class RegisterController extends Controller
             'body_fat_pct' => $request->body_fat_pct,
             'physical_activity_level' => $request->physical_activity_level,
             'daily_caloric_intake' => $request->daily_caloric_intake,
+            'favorite_exercise_categorie' => $request->favorite_exercise_categorie,
         ]);
 
         $user->assignRole('user');

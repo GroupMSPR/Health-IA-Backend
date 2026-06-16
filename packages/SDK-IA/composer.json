@@ -1,0 +1,35 @@
+{
+    "name": "mspr2/sdk-ia",
+    "description": "PHP SDK to interact with Ollama and recommendation engine APIs (LLaVA, AI generation, recommendation engine)",
+    "type": "library",
+    "license": "proprietary",
+
+    "autoload": {
+        "psr-4": {
+            "MSPR2\\SdkIA\\": "src/"
+        }
+    },
+
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MSPR2\\SdkIA\\SdkIAServiceProvider"
+            ]
+        }
+    },
+
+    "authors": [
+        {
+            "name": "Diana",
+            "email": "dianakolo888@gmail.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

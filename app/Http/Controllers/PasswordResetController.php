@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use OpenApi\Attributes as OA;
 
@@ -12,7 +13,10 @@ class PasswordResetController extends Controller
     #[OA\Post(
         path: '/forgot-password',
         summary: 'Envoie un lien de réinitialisation par email',
-        tags: ['Auth']
+        tags: ['Auth'],
+        responses: [
+            new OA\Response(response: 200, description: 'Succès'),
+        ]
     )]
     public function sendResetLinkEmail(Request $request): JsonResponse
     {
@@ -30,7 +34,11 @@ class PasswordResetController extends Controller
     #[OA\Post(
         path: '/reset-password',
         summary: 'Modifie le mot de passe avec le token',
-        tags: ['Auth']
+        tags: ['Auth'],
+        responses: [
+            new OA\Response(response: 200, description: 'Succès'),
+        ]
+
     )]
     public function reset(Request $request): JsonResponse
     {
@@ -50,6 +58,8 @@ class PasswordResetController extends Controller
         );
 
         if ($status === Password::PASSWORD_RESET) {
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
             return response()->json(['message' => 'Votre mot de passe a été réinitialisé avec succès.']);
         }
 

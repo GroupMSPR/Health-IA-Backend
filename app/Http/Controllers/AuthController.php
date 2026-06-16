@@ -43,11 +43,11 @@ class AuthController extends Controller
     )]
     public function login(LoginRequest $request): JsonResponse
     {
-        if (! Auth::guard('web')->attempt($request->validated())) {
+        if (!Auth::guard('web')->attempt($request->validated())) {
             return response()->json(['message' => 'Identifiants invalides'], 401);
         }
 
-        $request->session()->regenerate();
+//        $request->session()->regenerate();
 
         $user = Auth::guard('web')->user();
 
