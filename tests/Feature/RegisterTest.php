@@ -25,6 +25,7 @@ class RegisterTest extends TestCase
             'body_fat_pct' => 20,
             'physical_activity_level' => 'moyennement actif(ve)',
             'daily_caloric_intake' => 2000,
+            'favorite_exercise_category' => 'Cardio',
         ], $overrides);
     }
 
@@ -57,7 +58,7 @@ class RegisterTest extends TestCase
             ->assertJsonValidationErrors([
                 'first_name', 'last_name', 'email', 'password',
                 'birthdate', 'gender', 'weight', 'height', 'body_fat_pct',
-                'physical_activity_level', 'daily_caloric_intake',
+                'physical_activity_level', 'daily_caloric_intake', 'favorite_exercise_category'
             ]);
     }
 

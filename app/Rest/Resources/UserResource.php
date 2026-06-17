@@ -39,7 +39,7 @@ class UserResource extends Resource
             'body_fat_pct',
             'physical_activity_level',
             'daily_caloric_intake',
-            'favorite_exercise_categorie'
+            'favorite_exercise_category'
         ];
     }
 
@@ -102,8 +102,8 @@ class UserResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
-            'last_name' => ['sometimes', 'string'],
-            'first_name' => ['sometimes', 'string'],
+            'last_name' => ['register', 'string'],
+            'first_name' => ['register', 'string'],
             'email' => ['string', 'email', 'max:255'],
             'password' => ['string', 'min:6'],
             'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
@@ -114,7 +114,7 @@ class UserResource extends Resource
             'body_fat_pct' => ['integer', 'between:1,100'],
             'physical_activity_level' => ['string'],
             'daily_caloric_intake' => ['integer'],
-            'favorite_exercise_categorie' => ['string'],
+            'favorite_exercise_category' => ['string'],
         ];
     }
 

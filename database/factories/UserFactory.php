@@ -42,7 +42,7 @@ class UserFactory extends Factory
             'body_fat_pct' => $this->faker->numberBetween(1, 100),
             'physical_activity_level' => $this->faker->randomElement(['Sedentaire', 'Moyennement Actif(ve)', 'Actif(ve)']),
             'daily_caloric_intake' => $this->faker->numberBetween(1200, 5000),
-            'favorite_exercise_categorie' => $this->faker->randomElement(['Cardio', 'Strength', 'Flexibility'])
+            'favorite_exercise_category' => $this->faker->randomElement(['Cardio', 'Poids du Corps', 'Musculation'])
         ];
     }
 }

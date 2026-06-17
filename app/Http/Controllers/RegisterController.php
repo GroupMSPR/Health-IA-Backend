@@ -34,6 +34,7 @@ class RegisterController extends Controller
                         new OA\Property(property: 'body_fat_pct', description: 'Pourcentage de masse grasse (entre 1 et 100)', type: 'integer', example: 18),
                         new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
                         new OA\Property(property: 'daily_caloric_intake', description: 'Apport calorique journalier ciblé', type: 'integer', example: 2200),
+                        new OA\Property(property: 'favorite_exercise_category', description: 'Votre catégorie préférée', type: 'string', example: 'Cardio'),
                     ],
                     type: 'object'
                 )
@@ -77,7 +78,7 @@ class RegisterController extends Controller
             'body_fat_pct' => $request->body_fat_pct,
             'physical_activity_level' => $request->physical_activity_level,
             'daily_caloric_intake' => $request->daily_caloric_intake,
-            'favorite_exercise_categorie' => $request->favorite_exercise_categorie,
+            'favorite_exercise_category' => $request->favorite_exercise_category,
         ]);
 
         $user->assignRole('user');

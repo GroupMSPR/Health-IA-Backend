@@ -49,7 +49,7 @@ class User extends Authenticatable implements FilamentUser
         'body_fat_pct',
         'physical_activity_level',
         'daily_caloric_intake',
-        'favorite_exercise_categorie',
+        'favorite_exercise_category',
     ];
 
     /**
