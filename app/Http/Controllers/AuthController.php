@@ -47,7 +47,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Identifiants invalides'], 401);
         }
 
-        //        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
         $user = Auth::guard('web')->user();
 

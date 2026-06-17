@@ -34,7 +34,7 @@ class RegisterRequest extends FormRequest
             'body_fat_pct' => 'required|integer|between:1,100',
             'physical_activity_level' => 'required|string|in:sedentary,moderate,active',
             'daily_caloric_intake' => 'required|integer|min:1000',
-            'favorite_exercise_categorie' => 'required|string|in:Musculation,Cardio,Poids du corps',
+            'favorite_exercise_category' => 'required|string|in:Musculation,Cardio,Poids du corps',
         ];
     }
 }
