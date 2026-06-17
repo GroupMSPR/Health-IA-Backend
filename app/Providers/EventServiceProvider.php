@@ -22,8 +22,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         HealthMetric::created([
-            UpdateUserWeightAndBmi::class,
-            'handle',
+            UpdateUserWeightAndBmi::class, 'handle',
         ]);
     }
 }

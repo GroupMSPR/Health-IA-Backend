@@ -44,10 +44,5 @@ class AppServiceProvider extends ServiceProvider
 
             return $frontendUrl."/reset-password?token={$token}&email={$notifiable->getEmailForPasswordReset()}";
         });
-
-        //        Event::listen(
-        //            HealthMetricCreated::class,
-        //            UpdateUserWeightAndBmi::class
-        //        );
     }
 }
