@@ -39,7 +39,7 @@ class UserResource extends Resource
             'body_fat_pct',
             'physical_activity_level',
             'daily_caloric_intake',
-            'favorite_exercise_category'
+            'favorite_exercise_category',
         ];
     }
 
@@ -145,7 +145,7 @@ class UserResource extends Resource
 
         $attributes = $requestBody['attributes'] ?? [];
 
-        if (!empty($attributes['weight']) && !empty($attributes['height'])) {
+        if (! empty($attributes['weight']) && ! empty($attributes['height'])) {
             $heightInMeters = $attributes['height'] / 100;
             if ($heightInMeters > 0) {
                 $bmi = $attributes['weight'] / ($heightInMeters * $heightInMeters);
@@ -157,7 +157,7 @@ class UserResource extends Resource
         }
     }
 
-    //calculer l'apport journalier pour le metabolisme de base (BMR) et l'apport calorique total (TDEE)
+    // calculer l'apport journalier pour le metabolisme de base (BMR) et l'apport calorique total (TDEE)
     public function mutated(MutateRequest $request, array $requestBody, Model $model): void
     {
         if (($requestBody['operation'] ?? null) !== 'create') {
@@ -200,7 +200,7 @@ class UserResource extends Resource
                 }
             }
 
-            if($changed) {
+            if ($changed) {
                 $model->save();
             }
         }

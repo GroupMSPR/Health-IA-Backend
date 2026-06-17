@@ -58,7 +58,7 @@ class RegisterTest extends TestCase
             ->assertJsonValidationErrors([
                 'first_name', 'last_name', 'email', 'password',
                 'birthdate', 'gender', 'weight', 'height', 'body_fat_pct',
-                'physical_activity_level', 'daily_caloric_intake', 'favorite_exercise_category'
+                'physical_activity_level', 'daily_caloric_intake', 'favorite_exercise_category',
             ]);
     }
 

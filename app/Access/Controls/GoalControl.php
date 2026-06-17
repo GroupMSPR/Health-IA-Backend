@@ -44,6 +44,7 @@ class GoalControl extends Control
                     if (in_array($method, ['destroy', 'restore', 'forceDelete'])) {
                         return $model->users()->where('users.id', $user->getKey())->exists();
                     }
+
                     return true;
                 }),
         ];

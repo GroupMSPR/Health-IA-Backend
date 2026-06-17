@@ -9,7 +9,7 @@ class IllegalExercisesHandler
 {
     public function isLegal(Exercise $exercise, User $user): bool
     {
-        //contrainte des exercices
+        // contrainte des exercices
         $userConstraintsIds = $user->constraints()->pluck('id');
 
         $exerciseConstraintsIds = $exercise->constraints()->pluck('id');
@@ -20,7 +20,7 @@ class IllegalExercisesHandler
             return false;
         }
 
-       //le goal de l'exercice doit matcher avec le goal du user
+        // le goal de l'exercice doit matcher avec le goal du user
         $userGoalIds = $user->goals()->pluck('id');
 
         $exerciseGoalsIds = $exercise->goals()->pluck('id');

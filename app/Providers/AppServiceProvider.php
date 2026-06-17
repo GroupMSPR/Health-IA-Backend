@@ -42,12 +42,12 @@ class AppServiceProvider extends ServiceProvider
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
             $frontendUrl = env('FRONTEND_URL', 'http://localhost:5001');
 
-            return $frontendUrl . "/reset-password?token={$token}&email={$notifiable->getEmailForPasswordReset()}";
+            return $frontendUrl."/reset-password?token={$token}&email={$notifiable->getEmailForPasswordReset()}";
         });
 
-//        Event::listen(
-//            HealthMetricCreated::class,
-//            UpdateUserWeightAndBmi::class
-//        );
+        //        Event::listen(
+        //            HealthMetricCreated::class,
+        //            UpdateUserWeightAndBmi::class
+        //        );
     }
 }

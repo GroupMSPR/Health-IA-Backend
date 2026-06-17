@@ -18,8 +18,7 @@ class HealthMetricCreated
      */
     public function __construct(
         public HealthMetric $healthMetric,
-    )
-    {
+    ) {
         //
     }
 

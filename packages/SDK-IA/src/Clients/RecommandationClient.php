@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 class RecommandationClient
 {
     private Client $http;
+
     private string $url;
 
     public function __construct()
@@ -22,6 +23,7 @@ class RecommandationClient
         $response = $this->http->post("{$this->url}/recommend-workout", [
             'json' => $userProfile,
         ]);
+
         return json_decode($response->getBody()->getContents(), true);
     }
 }

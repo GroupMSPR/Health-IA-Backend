@@ -150,7 +150,7 @@ use OpenApi\Attributes as OA;
                             properties: [
                                 new OA\Property(property: 'status', type: 'string', example: 'degraded'),
                                 new OA\Property(property: 'is_working', type: 'integer', example: 0),
-                                new OA\Property(property: 'predictions', type: 'array', items: new OA\Items(), example: []),
+                                new OA\Property(property: 'predictions', type: 'array', items: new OA\Items, example: []),
                                 new OA\Property(property: 'message', type: 'string', example: 'Service de recommandation indisponible'),
                             ],
                             type: 'object'
@@ -171,7 +171,7 @@ class IAController extends Controller
     public function analyzeMeal(Request $request)
     {
         $request->validate([
-            'image' => 'required|image'
+            'image' => 'required|image',
         ]);
 
         $file = $request->file('image');
@@ -202,16 +202,16 @@ class IAController extends Controller
         }
 
         $validated = $request->validate([
-            'favorite_exercise_categorie' => 'sometimes|string|in:' . implode(',', $categories),
+            'favorite_exercise_categorie' => 'sometimes|string|in:'.implode(',', $categories),
         ]);
 
         $user = $request->user();
 
         $userProfile = [
             'physical_activity_level' => $this->mapActivityLevel($user->physical_activity_level),
-            'bmi' => (float)$user->bmi,
+            'bmi' => (float) $user->bmi,
             'birthdate' => $user->birthdate,
-            'favorite_exercise_categorie' => $validated['favorite_exercise_categorie'] ?? $user->favorite_exercise_categorie ?? 'Cardio'
+            'favorite_exercise_categorie' => $validated['favorite_exercise_categorie'] ?? $user->favorite_exercise_categorie ?? 'Cardio',
         ];
 
         $result = IAManager::recommend($userProfile);
@@ -223,7 +223,7 @@ class IAController extends Controller
         $filtered = collect($result['predictions'])
             ->filter(function ($prediction) use ($user) {
                 $exercise = Exercise::where('name', $prediction['exercise'])->first();
-                if (!$exercise) {
+                if (! $exercise) {
                     return true;
                 }
                 try {
@@ -238,13 +238,14 @@ class IAController extends Controller
         return response()->json([
             'status' => 'success',
             'is_working' => $result['is_working'] ?? 1,
-            'predictions' => $filtered
+            'predictions' => $filtered,
         ]);
     }
 
     private function mapActivityLevel(string $level): string
     {
         $level = strtolower($level);
+
         return match (true) {
             str_contains($level, 'sédentaire'),
             str_contains($level, 'sedentaire'),

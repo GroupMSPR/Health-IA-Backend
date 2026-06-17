@@ -14,9 +14,9 @@ use App\Rest\Controllers\MuscleController;
 use App\Rest\Controllers\SubscriptionController;
 use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
-use MSPR2\SdkIA\Http\IAController;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
+use MSPR2\SdkIA\Http\IAController;
 
 Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);

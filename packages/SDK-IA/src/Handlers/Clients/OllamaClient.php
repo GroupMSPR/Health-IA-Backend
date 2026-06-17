@@ -8,13 +8,14 @@ use GuzzleHttp\Exception\GuzzleException;
 class OllamaClient
 {
     private Client $http;
+
     private string $url;
 
     public function __construct()
     {
         $this->url = config('sdk-ia.fastapi.url');
         $this->http = new Client([
-            'timeout' => config('sdk-ia.fastapi.timeout-ollama')
+            'timeout' => config('sdk-ia.fastapi.timeout-ollama'),
         ]);
     }
 
@@ -27,16 +28,17 @@ class OllamaClient
                         'name' => 'image',
                         'contents' => base64_decode($imageBase64),
                         'filename' => $fileName,
-                    ]
-                ]
+                    ],
+                ],
             ]);
+
             return json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
             return [
                 'status' => 'degraded',
                 'is_working' => 0,
                 'data' => null,
-                'message' => 'service Llava indisponible'
+                'message' => 'service Llava indisponible',
             ];
         }
     }

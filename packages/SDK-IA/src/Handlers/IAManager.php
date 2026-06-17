@@ -7,13 +7,12 @@ use App\Models\User;
 use MSPR2\SdkIA\Handlers\Clients\OllamaClient;
 use MSPR2\SdkIA\Handlers\Clients\RecommandationClient;
 
-
 class IAManager
 {
     public function __construct(
         protected OllamaClient $ollamaClient,
-        protected  RecommandationClient $recommandationClient,
-        protected  IllegalExercisesHandler $legalExercises,
+        protected RecommandationClient $recommandationClient,
+        protected IllegalExercisesHandler $legalExercises,
     ) {}
 
     public function analyzeMeal(string $imageBase64, string $fileName): array

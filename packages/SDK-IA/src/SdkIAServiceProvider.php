@@ -14,15 +14,15 @@ class SdkIAServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sdk-ia.php',
+            __DIR__.'/../config/sdk-ia.php',
             'sdk-ia'
         );
 
         $this->app->singleton('IAManager', function () {
-            return new \MSPR2\SdkIA\Handlers\IAManager(
-                new OllamaClient(),
-                new RecommandationClient(),
-                new IllegalExercisesHandler()
+            return new Handlers\IAManager(
+                new OllamaClient,
+                new RecommandationClient,
+                new IllegalExercisesHandler
             );
         });
     }
@@ -30,7 +30,7 @@ class SdkIAServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/sdk-ia.php' => config_path('sdk-ia.php'),
+            __DIR__.'/../config/sdk-ia.php' => config_path('sdk-ia.php'),
         ]);
 
         $loader = AliasLoader::getInstance();

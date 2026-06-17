@@ -7,7 +7,9 @@ use GuzzleHttp\Client;
 class OllamaClient
 {
     private Client $http;
+
     private string $url;
+
     private string $model;
 
     public function __construct()
@@ -25,8 +27,9 @@ class OllamaClient
                 'prompt' => $prompt,
                 'images' => [$imageBase64],
                 'stream' => false,
-            ]
+            ],
         ]);
+
         return json_decode($response->getBody()->getContents(), true);
     }
 
@@ -35,6 +38,7 @@ class OllamaClient
         $response = $this->http->post("{$this->url}/recommend-workout", [
             'json' => $userProfile,
         ]);
+
         return json_decode($response->getBody()->getContents(), true);
     }
 }

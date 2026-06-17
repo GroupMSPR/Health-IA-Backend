@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
     {
         HealthMetric::created([
             UpdateUserWeightAndBmi::class,
-            "handle"
+            'handle',
         ]);
     }
 }

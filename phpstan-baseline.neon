@@ -105,5 +105,53 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bmi\.$#'
 			identifier: property.notFound
+			count: 2
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$daily_caloric_intake\.$#'
+			identifier: property.notFound
 			count: 1
 			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: app/Rest/Resources/UserResource.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 3
+			path: packages/SDK-IA/config/sdk-ia.php
+
+		-
+			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:analyzeMeal\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: packages/SDK-IA/src/Http/IAController.php
+
+		-
+			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:isLegal\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: packages/SDK-IA/src/Http/IAController.php
+
+		-
+			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:recommend\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: packages/SDK-IA/src/Http/IAController.php
+
+		-
+			message: '#^Variable \$rawCategory on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: packages/SDK-IA/src/Http/IAController.php
