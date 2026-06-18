@@ -102,8 +102,8 @@ class UserResource extends Resource
     public function rules(RestRequest $request): array
     {
         return [
-            'last_name' => ['register', 'string'],
-            'first_name' => ['register', 'string'],
+            'last_name' => ['string'],
+            'first_name' => ['string'],
             'email' => ['string', 'email', 'max:255'],
             'password' => ['string', 'min:6'],
             'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
@@ -136,6 +136,7 @@ class UserResource extends Resource
             'body_fat_pct' => ['required'],
             'physical_activity_level' => ['required'],
             'daily_caloric_intake' => ['required'],
+            'favorite_exercise_category' => ['required'],
         ];
     }
 

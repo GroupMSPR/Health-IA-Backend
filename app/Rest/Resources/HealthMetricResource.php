@@ -44,7 +44,7 @@ class HealthMetricResource extends Resource
     public function relations(RestRequest $request): array
     {
         return [
-            BelongsTo::make('user', User::class),
+            BelongsTo::make('user', UserResource::class),
         ];
     }
 

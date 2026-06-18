@@ -168,7 +168,7 @@ class IAController extends Controller
     /**
      * analyse un repas a partir d'une image envoyé par l'utilisateur
      **/
-    public function analyzeMeal(Request $request)
+    public function analyzeMeal(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'image' => 'required|image',
@@ -190,19 +190,19 @@ class IAController extends Controller
     /**
      * donne une recommendation d'exercice a partir du profil utilisateur
      **/
-    public function recommend(Request $request)
+    public function recommend(Request $request): \Illuminate\Http\JsonResponse
     {
         $categories = ['Musculation', 'Cardio', 'Poids du corps'];
 
         $categoryMap = array_combine(array_map('strtolower', $categories), $categories);
-        $rawCategory = $request->input('favorite_exercise_categorie');
+        $rawCategory = $request->input('favorite_exercise_category');
         if ($rawCategory !== null) {
             $normalize = $categoryMap[strtolower($rawCategory ?? $rawCategory)] ?? $rawCategory;
-            $request->merge(['favorite_exercise_categorie' => $normalize]);
+            $request->merge(['favorite_exercise_category' => $normalize]);
         }
 
         $validated = $request->validate([
-            'favorite_exercise_categorie' => 'sometimes|string|in:'.implode(',', $categories),
+            'favorite_exercise_category' => 'sometimes|string|in:'.implode(',', $categories),
         ]);
 
         $user = $request->user();
@@ -211,7 +211,7 @@ class IAController extends Controller
             'physical_activity_level' => $this->mapActivityLevel($user->physical_activity_level),
             'bmi' => (float) $user->bmi,
             'birthdate' => $user->birthdate,
-            'favorite_exercise_categorie' => $validated['favorite_exercise_categorie'] ?? $user->favorite_exercise_categorie ?? 'Cardio',
+            'favorite_exercise_category' => $validated['favorite_exercise_category'] ?? $user->favorite_exercise_category ?? 'Cardio',
         ];
 
         $result = IAManager::recommend($userProfile);

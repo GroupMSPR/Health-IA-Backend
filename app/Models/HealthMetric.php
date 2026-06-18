@@ -33,8 +33,4 @@ class HealthMetric extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    protected $dispatchesEvents = [
-        'created' => HealthMetricCreated::class,
-    ];
 }
