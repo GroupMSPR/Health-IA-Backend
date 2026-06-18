@@ -28,13 +28,31 @@ class UserControl extends Control
     {
         return [
             GlobalPerimeter::new()
-                ->allowed(fn (Model $user, string $method) => $user->hasRole('admin'))
-                ->should(fn (Model $user, Model $model) => true),
+                ->allowed(function ($user, string $method) {
+                    if (!$user instanceof User) {
+                        return false;
+                    }
+                    return $user->hasRole('admin');
+                })
+                ->should(fn ($user, Model $model) => true),
 
             OwnPerimeter::new()
-                ->allowed(fn (Model $user, string $method) => in_array($method, ['view', 'update']))
-                ->should(fn (Model $user, Model $model) => $model->id === $user->id)
-                ->query(function (Builder $query, Model $user) {
+                ->allowed(function ($user, string $method) {
+                    if (!$user instanceof User) {
+                        return false;
+                    }
+                    return in_array($method, ['viewAny', 'view', 'update', 'search']);
+                })
+                ->should(function ($user, Model $model) {
+                    if (!$user instanceof User) {
+                        return false;
+                    }
+                    return $model->id === $user->id;
+                })
+                ->query(function (Builder $query, $user) {
+                    if (!$user instanceof User) {
+                        return $query->whereRaw('1 = 0');
+                    }
                     return $query->where('id', $user->id);
                 }),
         ];

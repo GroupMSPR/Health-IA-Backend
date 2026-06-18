@@ -17,6 +17,7 @@ class Food extends Model
 
     public $fillable = [
         'name',
+        'user_id',
         'category',
         'image',
         'calories',

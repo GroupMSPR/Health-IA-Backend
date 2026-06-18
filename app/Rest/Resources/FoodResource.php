@@ -4,6 +4,7 @@ namespace App\Rest\Resources;
 
 use App\Models\Food;
 use Illuminate\Database\Eloquent\Model;
+use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;
 use Lomkit\Rest\Relations\BelongsToMany;
 
@@ -23,6 +24,7 @@ class FoodResource extends Resource
     {
         return [
             'id',
+            'user_id',
             'name',
             'category',
             'image',
@@ -119,5 +121,14 @@ class FoodResource extends Resource
             'sodium' => ['required'],
             'cholesterol' => ['required'],
         ];
+    }
+
+    public function mutating(MutateRequest $request, array $requestBody, Model $model): void
+    {
+        $user = auth()->user();
+
+        if ($requestBody['operation'] === 'create') {
+            $model->user_id = $user->id;
+        }
     }
 }

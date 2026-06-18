@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Food;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,8 @@ class FoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->text(),
+            'user_id' => User::all()->random()->getKey(),
             'category' => $this->faker->word(),
             'image' => $this->faker->imageUrl(640, 480, 'food'),
             'calories' => $this->faker->randomFloat(2, 0, 1000),

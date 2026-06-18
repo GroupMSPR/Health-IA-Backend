@@ -27,6 +27,9 @@ class ConstraintControl extends Control
         return [
             GlobalPerimeter::new()
                 ->allowed(function (Model $user, string $method) {
+                    if ($user && in_array($method, ['viewAny', 'view', 'search'])) {
+                        return true;
+                    }
                     $ability = match ($method) {
                         'viewAny', 'view' => 'view-constraints',
                         'create' => 'create-constraints',
