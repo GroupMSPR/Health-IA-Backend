@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->string('name')->unique();
             $table->string('category');
             $table->string('image')->nullable();
