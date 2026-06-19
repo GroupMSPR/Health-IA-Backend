@@ -15,10 +15,12 @@ class UserSeeder extends Seeder
         User::factory(10)->create();
 
         User::factory()->create([
+            'id' => '019edc60-6a3f-73ec-afde-13d362eea794',
             'email' => 'john.doe@example.com',
         ])->assignRole('user');
 
         User::factory()->create([
+            'id' => '019edc60-6a47-72ea-aabb-075e2caf2985',
             'email' => 'admin@healthai-coach.mspr',
         ])->assignRole('admin');
     }

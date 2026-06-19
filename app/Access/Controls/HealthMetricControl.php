@@ -46,7 +46,10 @@ class HealthMetricControl extends Control
                 })
                 ->should(fn (?User $user, Model $model) => $user && ($model->user_id === $user->id || $model->user_id === null))
                 ->query(function (Builder $query, ?User $user) {
-                    if (!$user) return $query->whereRaw('1 = 0');
+                    if (! $user) {
+                        return $query->whereRaw('1 = 0');
+                    }
+
                     return $query->where('user_id', $user->id);
                 }),
         ];

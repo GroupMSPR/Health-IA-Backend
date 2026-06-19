@@ -3,7 +3,6 @@
 namespace App\Rest\Resources;
 
 use App\Models\HealthMetric;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;

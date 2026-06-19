@@ -4,6 +4,7 @@ namespace MSPR2\SdkIA\Http;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use MSPR2\SdkIA\Facade\IAManager;
 use OpenApi\Attributes as OA;
@@ -168,7 +169,7 @@ class IAController extends Controller
     /**
      * analyse un repas a partir d'une image envoyé par l'utilisateur
      **/
-    public function analyzeMeal(Request $request): \Illuminate\Http\JsonResponse
+    public function analyzeMeal(Request $request): JsonResponse
     {
         $request->validate([
             'image' => 'required|image',
@@ -190,7 +191,7 @@ class IAController extends Controller
     /**
      * donne une recommendation d'exercice a partir du profil utilisateur
      **/
-    public function recommend(Request $request): \Illuminate\Http\JsonResponse
+    public function recommend(Request $request): JsonResponse
     {
         $categories = ['Musculation', 'Cardio', 'Poids du corps'];
 

@@ -107,7 +107,7 @@ class UserResource extends Resource
             'email' => ['string', 'email', 'max:255'],
             'password' => ['string', 'min:6'],
             'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
-            'birthdate' => ['required', 'date'],
+            'birthdate' => ['date'],
             'gender' => ['string', 'in:Homme,Femme,Autres'],
             'weight' => ['numeric', 'between:1,500'],
             'height' => ['integer', 'between:1,300'],
