@@ -67,6 +67,7 @@ services:
 networks:
     sail:
         driver: bridge
+        name: healthai_backend_sail
 volumes:
     sail-pgsql:
         driver: local
