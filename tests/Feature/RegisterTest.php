@@ -31,6 +31,8 @@ class RegisterTest extends TestCase
 
     public function test_register_with_valid_data_creates_user_and_returns_token(): void
     {
+        $this->withoutExceptionHandling();
+
         $response = $this->postJson('/api/register', $this->validPayload());
 
         $response->assertStatus(201)

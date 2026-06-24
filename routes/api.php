@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\RegisterController;
@@ -73,4 +74,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('ai/analyze-meal', [IAController::class, 'analyzeMeal']);
     Route::post('ai/recommend', [IAController::class, 'recommend']);
+
+    Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
 });

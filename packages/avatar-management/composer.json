@@ -1,0 +1,25 @@
+{
+    "name": "mspr3/avatar-management",
+    "description": "Generate default avatars automatically for new users",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "MSPR3\\AvatarManagement\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MSPR3\\AvatarManagement\\AvatarManagementServiceProvider"
+            ]
+        }
+    },
+
+    "authors": [
+        {
+            "name": "Ilan",
+            "email": "i.arfipro@outlook.fr"
+        }
+    ]
+}

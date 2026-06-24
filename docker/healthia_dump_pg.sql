@@ -1,15 +1,6 @@
 BEGIN;
 
--- ============================================================
--- Health-IA-Workspace – Full database seed (except users)
--- Generated automatically. Run on a DB that already has the
--- 2 user rows with IDs below.
--- USER1: 019edc60-6a3f-73ec-afde-13d362eea794
--- USER2: 019edc60-6a47-72ea-aabb-075e2caf2985
--- ============================================================
-
 SET session_replication_role = 'replica';
--- PostgreSQL uses UTF8 by default
 
 TRUNCATE TABLE exercise_goal CASCADE;
 TRUNCATE TABLE exercise_constraint CASCADE;
