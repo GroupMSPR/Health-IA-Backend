@@ -16,7 +16,6 @@ class AvatarManager
      */
     public function createAvatar(User $user): void
     {
-        dd();
         $initials = strtoupper(substr($user->first_name, 0, 1))
             .strtoupper(substr($user->last_name, 0, 1));
         $svg = $this->createSvgAvatar($initials);
