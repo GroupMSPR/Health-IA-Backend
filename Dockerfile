@@ -1,8 +1,9 @@
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache \
         libpq-dev \
         libzip-dev \
+        icu-dev \
         zip \
         unzip \
         curl \
@@ -12,7 +13,8 @@ RUN apk add --no-cache \
         pgsql \
         zip \
         pcntl \
-        bcmath
+        bcmath \
+        intl
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
