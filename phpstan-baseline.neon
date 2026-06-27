@@ -7,6 +7,12 @@ parameters:
 			path: app/Access/Controls/ConstraintControl.php
 
 		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Access/Controls/ConstraintControl.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -31,15 +37,15 @@ parameters:
 			path: app/Access/Controls/GoalControl.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Access/Controls/HealthMetricControl.php
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Access/Controls/GoalControl.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
 			identifier: property.notFound
-			count: 1
+			count: 2
 			path: app/Access/Controls/HealthMetricControl.php
 
 		-
@@ -69,12 +75,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 3
-			path: app/Access/Controls/UserControl.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasRole\(\)\.$#'
-			identifier: method.notFound
 			count: 1
 			path: app/Access/Controls/UserControl.php
 
@@ -83,6 +83,12 @@ parameters:
 			identifier: larastan.noEnvCallsOutsideOfConfig
 			count: 1
 			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/FoodResource.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date\.$#'
@@ -131,24 +137,6 @@ parameters:
 			identifier: larastan.noEnvCallsOutsideOfConfig
 			count: 3
 			path: packages/SDK-IA/config/sdk-ia.php
-
-		-
-			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:analyzeMeal\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: packages/SDK-IA/src/Http/IAController.php
-
-		-
-			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:isLegal\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: packages/SDK-IA/src/Http/IAController.php
-
-		-
-			message: '#^Call to an undefined static method MSPR2\\SdkIA\\Facade\\IAManager\:\:recommend\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: packages/SDK-IA/src/Http/IAController.php
 
 		-
 			message: '#^Variable \$rawCategory on left side of \?\? always exists and is not nullable\.$#'

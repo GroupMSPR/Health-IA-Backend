@@ -23,7 +23,7 @@ class RegisterTest extends TestCase
             'weight' => 70,
             'height' => 175,
             'body_fat_pct' => 20,
-            'physical_activity_level' => 'moyennement actif(ve)',
+            'physical_activity_level' => 'moderate',
             'daily_caloric_intake' => 2000,
             'favorite_exercise_category' => 'Cardio',
         ], $overrides);
