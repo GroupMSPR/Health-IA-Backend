@@ -1,7 +1,7 @@
 # ============================================================================
 #  CD — Health-IA-Backend (API Laravel 12)
 # ============================================================================
-name: CD - Backend (Laravel)
+name: CD Laravel (Build, Tag, Push GHCR)
 
 on:
   push:
