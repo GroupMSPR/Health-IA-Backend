@@ -143,3 +143,27 @@ parameters:
 			identifier: nullCoalesce.variable
 			count: 1
 			path: packages/SDK-IA/src/Http/IAController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:constraints\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: packages/SDK-IA/tests/Feature/Handlers/IllegalExercisesHandlerTest.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:goals\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: packages/SDK-IA/tests/Feature/Handlers/IllegalExercisesHandlerTest.php
+
+		-
+			message: '#^Parameter \#1 \$exercise of method MSPR2\\SdkIA\\Handlers\\IllegalExercisesHandler\:\:isLegal\(\) expects App\\Models\\Exercise, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 5
+			path: packages/SDK-IA/tests/Feature/Handlers/IllegalExercisesHandlerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: packages/SDK-IA/tests/Unit/Http/IAControllerTest.php

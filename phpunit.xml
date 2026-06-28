@@ -5,6 +5,10 @@
          colors="true"
 >
     <testsuites>
+        <testsuite name="Package">
+            <directory>packages/SDK-IA/tests</directory>
+            <directory>packages/avatar-management/tests</directory>
+        </testsuite>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
@@ -15,7 +19,17 @@
     <source>
         <include>
             <directory>app</directory>
+            <directory>packages</directory>
         </include>
+        <exclude>
+            <directory>app/Access</directory>
+            <directory>app/Filament</directory>
+            <directory>app/Policies</directory>
+            <directory>app/Providers</directory>
+            <directory>app/Rest</directory>
+            <directory>packages/avatar-management/src/Facades</directory>
+            <directory>packages/SDK-IA/src/Facade</directory>
+        </exclude>
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Http;
 
 use App\Models\User;
 use Illuminate\Contracts\Http\Kernel;
@@ -8,11 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Session\Middleware\StartSession;
 use Tests\TestCase;
 
-class AuthTest extends TestCase
+class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    // ── Configuration Initiale ───────────────────────────────────────────────
 
     protected function setUp(): void
     {

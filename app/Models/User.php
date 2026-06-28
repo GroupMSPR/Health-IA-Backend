@@ -82,12 +82,14 @@ class User extends Authenticatable implements FilamentUser
 
     public function foods(): BelongsToMany
     {
-        return $this->belongsToMany(Food::class, 'consume');
+        return $this->belongsToMany(Food::class, 'consume', 'user_id', 'food_id')
+            ->using(Consume::class);
     }
 
     public function exercises(): BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class, 'practice');
+        return $this->belongsToMany(Exercise::class, 'practice', 'user_id', 'exercise_id')
+            ->using(Practice::class);
     }
 
     public function constraints(): BelongsToMany
