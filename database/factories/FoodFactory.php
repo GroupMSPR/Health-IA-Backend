@@ -20,7 +20,7 @@ class FoodFactory extends Factory
     {
         return [
             'name' => $this->faker->text(),
-            'user_id' => User::all()->random()->getKey(),
+            'user_id' => User::factory(),
             'category' => $this->faker->word(),
             'image' => $this->faker->imageUrl(640, 480, 'food'),
             'calories' => $this->faker->randomFloat(2, 0, 1000),

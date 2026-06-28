@@ -3,68 +3,57 @@
 namespace Tests\Feature\Handlers;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use MSPR3\AvatarManagement\Facades\AvatarManager;
 use Tests\TestCase;
 
 class AvatarManagerTest extends TestCase
 {
-    public function test_update_avatar_with_valid_image(): void
+    use RefreshDatabase;
+
+    public function test_it_creates_an_svg_avatar_and_updates_the_user_profile_picture(): void
     {
         Storage::fake('public');
 
-        $user = User::factory()->create();
-
-        $image = UploadedFile::fake()->image('avatar.jpg', 100, 100);
-        $response = $this->actingAs($user, 'sanctum')
-            ->postJson('/api/update-avatar', [
-                'image' => $image,
-            ]);
-
-        $response->assertStatus(200)
-            ->assertJsonStructure([
-                'message',
-                'image',
-            ]);
-
-        \Storage::disk('public')->assertExists('avatars/'.$image->getClientOriginalName());
-
-        $this->assertDatabaseHas('users', [
-            'id' => $user->getKey(),
-            'profile_picture' => 'avatars/'.$image->getClientOriginalName(),
-        ]);
-    }
-
-    public function test_update_avatar_unauthenticated(): void
-    {
-        Storage::fake('public');
-
-        $image = UploadedFile::fake()->image('avatar.jpg');
-
-        $response = $this->postJson('/api/update-avatar', [
-            'image' => $image,
+        $user = User::factory()->create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'profile_picture' => null,
         ]);
 
-        $response->assertStatus(401);
+        AvatarManager::createAvatar($user);
+
+        $fileName = "avatars/{$user->id}.svg";
+
+        Storage::disk('public')->assertExists($fileName);
+
+        $user->refresh();
+
+        $this->assertEquals($fileName, $user->profile_picture);
+
+        $svg = Storage::disk('public')->get($fileName);
+
+        $this->assertStringContainsString('JD', $svg);
+        $this->assertStringContainsString('<svg', $svg);
+        $this->assertStringContainsString('#00BFFF', $svg);
+        $this->assertStringContainsString('#FFFFFF', $svg);
     }
 
-    public function test_old_avatar_is_deleted_when_updating(): void
+    public function test_it_uses_the_first_letter_of_first_and_last_name(): void
     {
         Storage::fake('public');
 
-        $user = User::factory()->create(['profile_picture' => 'avatars/ancien_avatar.jpg']);
+        $user = User::factory()->create([
+            'first_name' => 'alice',
+            'last_name' => 'smith',
+        ]);
 
-        Storage::disk('public')->put('avatars/ancien_avatar.jpg', 'contenu');
+        AvatarManager::createAvatar($user);
 
-        $newImage = UploadedFile::fake()->image('nouveau_avatar.jpg');
+        $svg = Storage::disk('public')->get("avatars/{$user->id}.svg");
 
-        $this->actingAs($user, 'sanctum')
-            ->postJson('/api/update-avatar', [
-                'image' => $newImage,
-            ]);
-
-        Storage::disk('public')->assertMissing('avatars/ancien_avatar.jpg');
-
-        Storage::disk('public')->assertExists('avatars/nouveau_avatar.jpg');
+        $this->assertStringContainsString('AS', $svg);
     }
 }
