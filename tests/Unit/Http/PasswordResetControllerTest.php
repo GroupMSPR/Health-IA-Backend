@@ -20,12 +20,12 @@ class PasswordResetControllerTest extends TestCase
         $user = User::factory()->create(['email' => 'diana@test.com']);
 
         $response = $this->postJson('/api/forgot-password', [
-            'email' => 'diana@test.com'
+            'email' => 'diana@test.com',
         ]);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Nous vous avons envoyé un lien de réinitialisation par email.'
+                'message' => 'Nous vous avons envoyé un lien de réinitialisation par email.',
             ]);
 
         Notification::assertSentTo($user, ResetPassword::class);
@@ -34,7 +34,7 @@ class PasswordResetControllerTest extends TestCase
     public function test_send_reset_link_with_invalid_email_format(): void
     {
         $response = $this->postJson('/api/forgot-password', [
-            'email' => 'not email'
+            'email' => 'not email',
         ]);
 
         $response->assertStatus(422)
@@ -44,12 +44,12 @@ class PasswordResetControllerTest extends TestCase
     public function test_send_reset_link_with_nonexistent_email(): void
     {
         $response = $this->postJson('/api/forgot-password', [
-            'email' => 'inexistant@test.com'
+            'email' => 'inexistant@test.com',
         ]);
 
         $response->assertStatus(400)
             ->assertJson([
-                'message' => "Impossible d'envoyer le lien à cette adresse."
+                'message' => "Impossible d'envoyer le lien à cette adresse.",
             ]);
     }
 
@@ -65,7 +65,7 @@ class PasswordResetControllerTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'diana@test.com',
-            'password' => bcrypt('oldpassword')
+            'password' => bcrypt('oldpassword'),
         ]);
 
         $token = app('auth.password.broker')->createToken($user);
@@ -74,12 +74,12 @@ class PasswordResetControllerTest extends TestCase
             'token' => $token,
             'email' => 'diana@test.com',
             'password' => 'nouveau_password',
-            'password_confirmation' => 'nouveau_password'
+            'password_confirmation' => 'nouveau_password',
         ]);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Votre mot de passe a été réinitialisé avec succès.'
+                'message' => 'Votre mot de passe a été réinitialisé avec succès.',
             ]);
 
         $user->refresh();
@@ -94,7 +94,7 @@ class PasswordResetControllerTest extends TestCase
     public function test_reset_password_with_invalid_token(): void
     {
         User::factory()->create([
-            'email' => 'diana@test.com'
+            'email' => 'diana@test.com',
         ]);
 
         $response = $this->postJson('/api/reset-password', [
@@ -106,7 +106,7 @@ class PasswordResetControllerTest extends TestCase
 
         $response->assertStatus(400)
             ->assertJson([
-                'message' => 'Le token est invalide ou a expiré.'
+                'message' => 'Le token est invalide ou a expiré.',
             ]);
     }
 

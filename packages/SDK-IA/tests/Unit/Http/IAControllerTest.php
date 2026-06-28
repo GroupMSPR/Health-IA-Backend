@@ -160,5 +160,4 @@ class IAControllerTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['favorite_exercise_category']);
     }
-
 }

@@ -22,10 +22,10 @@ class UpdateUserWeightAndBmiTest extends TestCase
 
         $this->actingAs($user, 'sanctum');
 
-        $metric = new HealthMetric();
+        $metric = new HealthMetric;
         $metric->weight = 63;
 
-        $listener = new UpdateUserWeightAndBmi();
+        $listener = new UpdateUserWeightAndBmi;
         $listener->handle($metric);
 
         $user->refresh();
@@ -40,15 +40,15 @@ class UpdateUserWeightAndBmiTest extends TestCase
     {
         $user = User::factory()->create([
             'weight' => 50,
-            'bmi'    => 20,
+            'bmi' => 20,
         ]);
 
         $this->actingAs($user, 'sanctum');
 
-        $metric = new HealthMetric();
+        $metric = new HealthMetric;
         $metric->weight = null;
 
-        $listener = new UpdateUserWeightAndBmi();
+        $listener = new UpdateUserWeightAndBmi;
         $listener->handle($metric);
 
         $user->refresh();
@@ -67,10 +67,10 @@ class UpdateUserWeightAndBmiTest extends TestCase
 
         $this->actingAs($user, 'sanctum');
 
-        $metric = new HealthMetric();
+        $metric = new HealthMetric;
         $metric->weight = 70;
 
-        $listener = new UpdateUserWeightAndBmi();
+        $listener = new UpdateUserWeightAndBmi;
         $listener->handle($metric);
 
         $user->refresh();
@@ -81,10 +81,10 @@ class UpdateUserWeightAndBmiTest extends TestCase
 
     public function test_nothing_happens_when_no_authenticated_user(): void
     {
-        $metric = new HealthMetric();
+        $metric = new HealthMetric;
         $metric->weight = 70;
 
-        $listener = new UpdateUserWeightAndBmi();
+        $listener = new UpdateUserWeightAndBmi;
 
         $listener->handle($metric);
 

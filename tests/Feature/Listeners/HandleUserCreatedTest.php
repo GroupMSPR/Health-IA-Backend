@@ -24,7 +24,7 @@ class HandleUserCreatedTest extends TestCase
 
         $user = User::factory()->create();
 
-        $listener = new HandleUserCreated();
+        $listener = new HandleUserCreated;
         $listener->handle($user);
     }
 
@@ -39,7 +39,7 @@ class HandleUserCreatedTest extends TestCase
 
         $user = User::factory()->create();
 
-        $listener = new HandleUserCreated();
+        $listener = new HandleUserCreated;
         $listener->handle($user);
     }
 }

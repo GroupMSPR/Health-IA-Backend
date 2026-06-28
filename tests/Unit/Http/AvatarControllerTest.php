@@ -27,14 +27,14 @@ class AvatarControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'message',
-                'image'
+                'image',
             ]);
 
-        Storage::disk('public')->assertExists('avatars/' . $image->getClientOriginalName());
+        Storage::disk('public')->assertExists('avatars/'.$image->getClientOriginalName());
 
         $this->assertDatabaseHas('users', [
             'id' => $user->getKey(),
-            'profile_picture' => 'avatars/' . $image->getClientOriginalName()
+            'profile_picture' => 'avatars/'.$image->getClientOriginalName(),
         ]);
     }
 

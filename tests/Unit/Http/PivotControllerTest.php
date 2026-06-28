@@ -38,9 +38,9 @@ class PivotControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/consume', [
-            'food_id' => '00000000-0000-0000-0000-000000000000',
-        ]);
+            ->postJson('/api/consume', [
+                'food_id' => '00000000-0000-0000-0000-000000000000',
+            ]);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['food_id']);
@@ -51,7 +51,7 @@ class PivotControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/consume', []);
+            ->postJson('/api/consume', []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['food_id']);
@@ -62,9 +62,9 @@ class PivotControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/consume', [
-            'food_id' => 'pas-un-uuid',
-        ]);
+            ->postJson('/api/consume', [
+                'food_id' => 'pas-un-uuid',
+            ]);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['food_id']);
@@ -87,15 +87,15 @@ class PivotControllerTest extends TestCase
         $exercise = Exercise::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/practice', [
-            'exercise_id' => $exercise->getKey(),
-        ]);
+            ->postJson('/api/practice', [
+                'exercise_id' => $exercise->getKey(),
+            ]);
 
         $response->assertStatus(201)
             ->assertJson(['message' => 'Exercice ajouté']);
 
         $this->assertDatabaseHas('practice', [
-            'user_id'     => $user->getKey(),
+            'user_id' => $user->getKey(),
             'exercise_id' => $exercise->getKey(),
         ]);
     }
@@ -105,9 +105,9 @@ class PivotControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/practice', [
-            'exercise_id' => '00000000-0000-0000-0000-000000000000',
-        ]);
+            ->postJson('/api/practice', [
+                'exercise_id' => '00000000-0000-0000-0000-000000000000',
+            ]);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['exercise_id']);
@@ -118,7 +118,7 @@ class PivotControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
-        ->postJson('/api/practice', []);
+            ->postJson('/api/practice', []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['exercise_id']);

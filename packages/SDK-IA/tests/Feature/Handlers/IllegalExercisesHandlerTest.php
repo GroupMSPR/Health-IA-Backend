@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Feature\Handlers;
 
 use App\Models\Constraint;
@@ -17,10 +16,10 @@ class IllegalExercisesHandlerTest extends TestCase
 
     private IllegalExercisesHandler $handler;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->handler = new IllegalExercisesHandler();
+        $this->handler = new IllegalExercisesHandler;
     }
 
     public function test_exercise_is_illegal_when_shares_constraint_with_user(): void
@@ -54,8 +53,8 @@ class IllegalExercisesHandlerTest extends TestCase
         $user = User::factory()->create();
         $exercise = Exercise::factory()->create();
 
-        $userGoal = Goal::factory()->create(['goal' => 'Goal user ' . uniqid()]);
-        $exerciseGoal = Goal::factory()->create(['goal' => 'Goal exercise ' . uniqid()]);
+        $userGoal = Goal::factory()->create(['goal' => 'Goal user '.uniqid()]);
+        $exerciseGoal = Goal::factory()->create(['goal' => 'Goal exercise '.uniqid()]);
 
         $user->goals()->attach($userGoal->getKey());
         $exercise->goals()->attach($exerciseGoal->getKey());
@@ -68,7 +67,7 @@ class IllegalExercisesHandlerTest extends TestCase
         $user = User::factory()->create();
         $exercise = Exercise::factory()->create();
 
-        $goal = Goal::factory()->create(['goal' => 'Goal ' . uniqid()]);
+        $goal = Goal::factory()->create(['goal' => 'Goal '.uniqid()]);
         $exercise->goals()->attach($goal->getKey());
 
         $this->assertTrue($this->handler->isLegal($exercise, $user));
@@ -79,7 +78,7 @@ class IllegalExercisesHandlerTest extends TestCase
         $user = User::factory()->create();
         $exercise = Exercise::factory()->create();
 
-        $commonGoal = Goal::factory()->create(['goal' => 'Goal commun ' . uniqid()]);
+        $commonGoal = Goal::factory()->create(['goal' => 'Goal commun '.uniqid()]);
 
         $user->goals()->attach($commonGoal->getKey());
         $exercise->goals()->attach($commonGoal->getKey());
