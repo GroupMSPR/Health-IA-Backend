@@ -91,12 +91,6 @@ parameters:
 			path: app/Access/Controls/UserControl.php
 
 		-
-			message: '#^Parameter \#1 \$path of method Illuminate\\Filesystem\\FilesystemAdapter\:\:url\(\) expects string, bool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Http/Controllers/PostMediaController.php
-
-		-
 			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
 			identifier: larastan.noEnvCallsOutsideOfConfig
 			count: 1

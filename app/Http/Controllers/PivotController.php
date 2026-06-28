@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use OpenApi\Attributes as OA;
 
 class PivotController extends Controller
@@ -128,7 +129,7 @@ class PivotController extends Controller
         }
 
         $user->likedPosts()->attach($validated['post_id'], [
-            'id' => \Illuminate\Support\Str::uuid()
+            'id' => Str::uuid(),
         ]);
 
         Post::where('id', $validated['post_id'])->increment('like_count');

@@ -30,6 +30,7 @@ class PostControl extends Control
                     if ($model->exists) {
                         return $model->user_id === $user->getKey();
                     }
+
                     return true;
                 }),
         ];

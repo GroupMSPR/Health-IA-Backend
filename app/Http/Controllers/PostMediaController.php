@@ -12,13 +12,13 @@ class PostMediaController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,jpg,png|max:5120',
-            'text' => 'nullable|string'
+            'text' => 'nullable|string',
         ]);
 
         $user = $request->user();
 
         $file = $request->file('image');
-        $path = \Storage::disk('public')->putFile('posts/' . $user->getKey(), $file);
+        $path = \Storage::disk('public')->putFile('posts/'.$user->getKey(), $file);
 
         $post = Post::create([
             'user_id' => $user->getKey(),
