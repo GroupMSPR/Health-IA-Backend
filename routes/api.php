@@ -81,6 +81,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('ai/recommend', [IAController::class, 'recommend']);
 
     Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
-    Route::post('posts/upload-image', [PostMediaController::class, 'upload']);
+    Route::post('posts/upload', [PostMediaController::class, 'upload']);
+    Route::post('posts/{id}/update', [PostMediaController::class, 'update']);
+    Route::delete('posts/{id}/delete', [PostMediaController::class, 'destroy']);
+
+
     Route::post('like', [PivotController::class, 'likePost']);
 });

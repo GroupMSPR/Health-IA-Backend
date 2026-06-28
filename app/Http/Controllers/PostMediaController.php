@@ -18,7 +18,7 @@ class PostMediaController extends Controller
         $user = $request->user();
 
         $file = $request->file('image');
-        $path = \Storage::disk('public')->putFile('posts/'.$user->getKey(), $file);
+        $path = \Storage::disk('public')->putFile('posts/' . $user->getKey(), $file);
 
         $post = Post::create([
             'user_id' => $user->getKey(),
@@ -34,5 +34,57 @@ class PostMediaController extends Controller
             'url' => \Storage::disk('public')->url($path),
             'post' => $post,
         ], 201);
+    }
+
+    public function update(Request $request, string $id): JsonResponse
+    {
+        $post = Post::findOrFail($id);
+
+        if ($post->user_id !== $request->user()->getKey()) {
+            return response()->json(['message' => 'Action pas autorisé'], 403);
+        }
+
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'text' => 'nullable|string',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                \Storage::disk('public')->delete($post->image);
+            }
+
+            $path = \Storage::disk('public')->putFile('posts/' . $post->getKey(), $request->file('image'));
+
+            $post->image = $path;
+        }
+
+        if ($request->has('text')) {
+            $post->text = $request->input('text');
+        }
+
+        $post->save();
+
+        return response()->json([
+            'message' => 'Post mis à jour',
+            'post' => $post,
+        ]);
+    }
+
+    public function destroy(Request $request, string $id): JsonResponse
+    {
+        $post = Post::findOrFail($id);
+
+        if ($post->user_id !== $request->user()->getKey()) {
+            return response()->json(['message' => 'Acion pas autorisé'], 403);
+        }
+
+        if ($post->image) {
+            \Storage::disk('public')->delete($post->image);
+        }
+
+        $post->delete();
+
+        return response()->json(['message' => 'Post supprimé']);
     }
 }
