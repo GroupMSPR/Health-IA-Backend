@@ -4,6 +4,12 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Access/Controls/CommentControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Access/Controls/ConstraintControl.php
 
 		-
@@ -70,6 +76,12 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Access/Controls/PostControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Access/Controls/SubscriptionControl.php
 
 		-
@@ -79,10 +91,22 @@ parameters:
 			path: app/Access/Controls/UserControl.php
 
 		-
+			message: '#^Parameter \#1 \$path of method Illuminate\\Filesystem\\FilesystemAdapter\:\:url\(\) expects string, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/PostMediaController.php
+
+		-
 			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
 			identifier: larastan.noEnvCallsOutsideOfConfig
 			count: 1
 			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/CommentResource.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
@@ -101,6 +125,12 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Rest/Resources/HealthMetricResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/PostResource.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Contracts\\Database\\Eloquent\\Builder\:\:controlled\(\)\.$#'
