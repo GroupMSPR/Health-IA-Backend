@@ -16,16 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            //            FoodSeeder::class,
-            //            ExerciseSeeder::class,
-            //            HealthMetricSeeder::class,
-            //            SubscriptionSeeder::class,
-            //            GoalSeeder::class,
-            //            ConstraintSeeder::class,
-            //            MuscleSeeder::class,
-            //            EquipmentSeeder::class,
-            //            ExerciseRelationSeeder::class,
-            //            UserRelationSeeder::class,
+            FoodSeeder::class,
+            ExerciseSeeder::class,
+            HealthMetricSeeder::class,
+            SubscriptionSeeder::class,
+            GoalSeeder::class,
+            ConstraintSeeder::class,
+            MuscleSeeder::class,
+            EquipmentSeeder::class,
+            ExerciseRelationSeeder::class,
+            UserRelationSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }
