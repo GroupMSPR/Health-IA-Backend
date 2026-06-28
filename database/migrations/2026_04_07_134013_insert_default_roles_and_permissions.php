@@ -24,6 +24,8 @@ return new class extends Migration
             'view-equipments', 'create-equipments', 'update-equipments', 'delete-equipments',
             'view-muscles', 'create-muscles', 'update-muscles', 'delete-muscles',
             'view-subscriptions', 'create-subscriptions', 'update-subscriptions', 'delete-subscriptions',
+            'view-posts', 'create-posts', 'update-posts', 'delete-posts',
+            'view-comments', 'create-comments', 'update-comments', 'delete-comments',
         ];
 
         foreach ($permissions as $permission) {
@@ -43,6 +45,8 @@ return new class extends Migration
             'view-equipments',
             'view-muscles',
             'view-subscriptions',
+            'view-posts', 'create-posts', 'update-posts', 'delete-posts',
+            'view-comments', 'create-comments', 'update-comments', 'delete-comments',
         ]);
 
         $coachRole = Role::firstOrCreate(['name' => 'coach', 'guard_name' => 'api']);

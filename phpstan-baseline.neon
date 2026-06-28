@@ -4,6 +4,12 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Access/Controls/CommentControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Access/Controls/ConstraintControl.php
 
 		-
@@ -70,6 +76,12 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Access/Controls/PostControl.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasPermissionTo\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Access/Controls/SubscriptionControl.php
 
 		-
@@ -88,6 +100,12 @@ parameters:
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
 			identifier: property.notFound
 			count: 1
+			path: app/Rest/Resources/CommentResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
 			path: app/Rest/Resources/FoodResource.php
 
 		-
@@ -101,6 +119,12 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Rest/Resources/HealthMetricResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Rest/Resources/PostResource.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Contracts\\Database\\Eloquent\\Builder\:\:controlled\(\)\.$#'

@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
+use App\Http\Controllers\PostMediaController;
 use App\Http\Controllers\RegisterController;
+use App\Rest\Controllers\CommentController;
 use App\Rest\Controllers\ConstraintController;
 use App\Rest\Controllers\EquipmentController;
 use App\Rest\Controllers\ExercisesController;
@@ -12,6 +14,7 @@ use App\Rest\Controllers\FoodsController;
 use App\Rest\Controllers\GoalController;
 use App\Rest\Controllers\HealthMetricsController;
 use App\Rest\Controllers\MuscleController;
+use App\Rest\Controllers\PostController;
 use App\Rest\Controllers\SubscriptionController;
 use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -68,6 +71,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
     Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
     Rest::resource('muscles', MuscleController::class)->withSoftDeletes();
+    Rest::resource('posts', PostController::class)->withSoftDeletes();
+    Rest::resource('comments', CommentController::class)->withSoftDeletes();
 
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);
@@ -76,4 +81,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('ai/recommend', [IAController::class, 'recommend']);
 
     Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
+    Route::post('posts/upload', [PostMediaController::class, 'upload']);
+    Route::post('posts/{id}/update', [PostMediaController::class, 'update']);
+    Route::delete('posts/{id}/delete', [PostMediaController::class, 'destroy']);
+
+    Route::post('like', [PivotController::class, 'likePost']);
 });

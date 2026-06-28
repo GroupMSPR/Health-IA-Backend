@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class,
+            //            UserSeeder::class,
             //            FoodSeeder::class,
             //            ExerciseSeeder::class,
             //            HealthMetricSeeder::class,
@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             //            EquipmentSeeder::class,
             //            ExerciseRelationSeeder::class,
             //            UserRelationSeeder::class,
+            //            PostSeeder::class,
+            //            CommentSeeder::class,
         ]);
     }
 }
