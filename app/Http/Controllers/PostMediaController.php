@@ -18,7 +18,7 @@ class PostMediaController extends Controller
         $user = $request->user();
 
         $file = $request->file('image');
-        $path = \Storage::disk('public')->putFile('posts/' . $user->getKey(), $file);
+        $path = \Storage::disk('public')->putFile('posts/'.$user->getKey(), $file);
 
         $post = Post::create([
             'user_id' => $user->getKey(),
@@ -54,7 +54,7 @@ class PostMediaController extends Controller
                 \Storage::disk('public')->delete($post->image);
             }
 
-            $path = \Storage::disk('public')->putFile('posts/' . $post->getKey(), $request->file('image'));
+            $path = \Storage::disk('public')->putFile('posts/'.$post->getKey(), $request->file('image'));
 
             $post->image = $path;
         }

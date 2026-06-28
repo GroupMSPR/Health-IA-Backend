@@ -85,6 +85,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('posts/{id}/update', [PostMediaController::class, 'update']);
     Route::delete('posts/{id}/delete', [PostMediaController::class, 'destroy']);
 
-
     Route::post('like', [PivotController::class, 'likePost']);
 });
