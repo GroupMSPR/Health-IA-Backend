@@ -1,6 +1,7 @@
 <?php
 
-namespace Tests\Feature;
+
+namespace Feature\Handlers;
 
 use App\Models\Constraint;
 use App\Models\Exercise;
