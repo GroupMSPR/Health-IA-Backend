@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('post_id')->references('id')->on('posts');
-            $table->foreign('parent_id')->references('id')->on('comments')->nullOnDelete();
+            $table->foreignUuid('parent_id')->nullable()->references('id')->on('comments')->nullOnDelete();
             $table->text('content');
             $table->softDeletes();
             $table->timestamps();
