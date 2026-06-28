@@ -39,12 +39,9 @@ class CommentControl extends Control
                     return $ability ? $user->hasPermissionTo($ability, 'api') : false;
                 })
                 ->should(function (User $user, Comment $model) {
-                    $method = \request()->route()?->getActionMethod();
-
-                    if (in_array($method, ['update', 'destroy', 'forceDelete'])) {
+                    if ($model->exists) {
                         return $model->user_id === $user->getKey();
                     }
-
                     return true;
                 }),
         ];

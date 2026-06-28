@@ -110,6 +110,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Equipment::class, 'user_equipment');
     }
 
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function likedPosts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class, 'like')->withTimestamps();
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@healthai-coach.mspr');

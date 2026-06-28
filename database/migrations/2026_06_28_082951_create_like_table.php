@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('post_id')->references('id')->on('posts');
             $table->timestamps();
+            $table->softDeletes();
             $table->unique(['user_id', 'post_id']);
         });
     }

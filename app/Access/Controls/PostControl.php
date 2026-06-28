@@ -27,12 +27,9 @@ class PostControl extends Control
                     return $ability ? $user->hasPermissionTo($ability, 'api') : false;
                 })
                 ->should(function (Model $user, Post $model) {
-                    $method = request()->route()?->getActionMethod();
-
-                    if (in_array($method, ['update', 'destroy', 'forceDelete'])) {
+                    if ($model->exists) {
                         return $model->user_id === $user->getKey();
                     }
-
                     return true;
                 }),
         ];

@@ -82,4 +82,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
     Route::post('posts/upload-image', [PostMediaController::class, 'upload']);
+    Route::post('like', [PivotController::class, 'likePost']);
 });

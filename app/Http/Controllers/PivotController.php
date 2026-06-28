@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
@@ -108,5 +109,30 @@ class PivotController extends Controller
         return response()->json([
             'message' => 'Exercice ajouté',
         ], 201);
+    }
+
+    public function likePost(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'post_id' => ['required', 'uuid', 'exists:posts,id'],
+        ]);
+
+        $user = $request->user();
+
+        if ($user->likedPosts()->where('post_id', $validated['post_id'])->exists()) {
+            $user->likedPosts()->detach($validated['post_id']);
+
+            Post::where('id', $validated['post_id'])->where('like_count', '>', '0')->decrement('like_count');
+
+            return response()->json(['message' => 'Post unliké']);
+        }
+
+        $user->likedPosts()->attach($validated['post_id'], [
+            'id' => \Illuminate\Support\Str::uuid()
+        ]);
+
+        Post::where('id', $validated['post_id'])->increment('like_count');
+
+        return response()->json(['message' => 'Post liké'], 201);
     }
 }

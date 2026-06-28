@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,15 +12,27 @@ class PostMediaController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,jpg,png|max:5120',
+            'text' => 'nullable|string'
         ]);
 
+        $user = $request->user();
+
         $file = $request->file('image');
-        $path = \Storage::disk('public')->put('posts', $file);
+        $path = \Storage::disk('public')->putFile('posts/' . $user->getKey(), $file);
+
+        $post = Post::create([
+            'user_id' => $user->getKey(),
+            'text' => $request->input('text'),
+            'image' => $path,
+            'like_count' => 0,
+            'created_at' => now(),
+        ]);
 
         return response()->json([
-            'message' => 'Image bien uploadé',
+            'message' => 'Post bien uploadé',
             'path' => $path,
             'url' => \Storage::disk('public')->url($path),
+            'post' => $post,
         ], 201);
     }
 }
