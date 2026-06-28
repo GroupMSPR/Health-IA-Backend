@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Http;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -15,7 +14,7 @@ class AvatarControllerTest extends TestCase
 
     public function test_update_avatar_with_valid_image(): void
     {
-        \Storage::fake('public');
+        Storage::fake('public');
 
         $user = User::factory()->create();
 
@@ -31,7 +30,7 @@ class AvatarControllerTest extends TestCase
                 'image'
             ]);
 
-        \Storage::disk('public')->assertExists('avatars/' . $image->getClientOriginalName());
+        Storage::disk('public')->assertExists('avatars/' . $image->getClientOriginalName());
 
         $this->assertDatabaseHas('users', [
             'id' => $user->getKey(),

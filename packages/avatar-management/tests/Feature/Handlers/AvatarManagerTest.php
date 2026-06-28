@@ -1,20 +1,17 @@
 <?php
 
+namespace Tests\Feature\Handlers;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class AvatarControllerTest extends TestCase
+class AvatarManagerTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_update_avatar_with_valid_image(): void
     {
-        \Storage::fake('public');
+        Storage::fake('public');
 
         $user = User::factory()->create();
 
@@ -53,7 +50,7 @@ class AvatarControllerTest extends TestCase
 
     public function test_old_avatar_is_deleted_when_updating(): void
     {
-        \Storage::fake('public');
+        Storage::fake('public');
 
         $user = User::factory()->create(['profile_picture' => 'avatars/ancien_avatar.jpg']);
 

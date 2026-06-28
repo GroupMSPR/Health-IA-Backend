@@ -1,26 +1,21 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Http;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
-use \Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class PasswordResetControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test: email valide -> lien envoyé
-     * verifie que l'email existe en BDD
-     * Laravek envoie bien la notification et retourne 200
-     */
-
     public function test_send_reset_link_with_valid_email(): void
     {
-        \Notification::fake();
+        Notification::fake();
 
         $user = User::factory()->create(['email' => 'diana@test.com']);
 
@@ -88,7 +83,7 @@ class PasswordResetControllerTest extends TestCase
             ]);
 
         $user->refresh();
-        $this->assertTrue(\Hash::check('nouveau_password', $user->password),
+        $this->assertTrue(Hash::check('nouveau_password', $user->password),
             'Le mot de passe doit avoir été mis a jour en BDD');
 
         $this->assertDatabaseMissing('password_reset_tokens', [
@@ -98,7 +93,7 @@ class PasswordResetControllerTest extends TestCase
 
     public function test_reset_password_with_invalid_token(): void
     {
-        $user = User::factory()->create([
+        User::factory()->create([
             'email' => 'diana@test.com'
         ]);
 

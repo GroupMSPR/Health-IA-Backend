@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Http;
 
 use App\Models\Exercise;
 use App\Models\Food;
@@ -12,10 +12,10 @@ class PivotControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    //=================== CONSUME FOOD ===================
-
     public function test_consume_food_with_valid_food_id(): void
     {
+        $this->withoutExceptionHandling();
+
         $user = User::factory()->create();
         $food = Food::factory()->create();
 
@@ -37,7 +37,7 @@ class PivotControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user, 'sanctum') // ← sanctum
+        $response = $this->actingAs($user, 'sanctum')
         ->postJson('/api/consume', [
             'food_id' => '00000000-0000-0000-0000-000000000000',
         ]);
@@ -80,8 +80,6 @@ class PivotControllerTest extends TestCase
 
         $response->assertStatus(401);
     }
-
-    //=================== PRACTICE EXERCISE ===================
 
     public function test_practice_exercise_with_valid_exercise_id(): void
     {

@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Http;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use MSPR2\SdkIA\Handlers\IAManager;
@@ -14,14 +13,9 @@ class IAControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     *Image valide → appel IAManager → 200
-     */
-    // =================== ANALYZE MEAL ===================
-
     public function test_analyze_meal_with_valid_image(): void
     {
-        \Storage::fake('public');
+        Storage::fake('public');
 
         $user = User::factory()->create();
 
@@ -47,9 +41,6 @@ class IAControllerTest extends TestCase
 
     }
 
-    /**
-     *Image manquante → 422
-     */
     public function test_analyze_meal_without_image(): void
     {
         $user = User::factory()->create();
@@ -61,9 +52,6 @@ class IAControllerTest extends TestCase
             ->assertJsonValidationErrors(['image']);
     }
 
-    /**
-     *Non authentifié → 401
-     */
     public function test_analyze_meal_unauthenticated(): void
     {
         $image = UploadedFile::fake()->image('burger.jpg');
@@ -75,9 +63,6 @@ class IAControllerTest extends TestCase
         $response->assertStatus(401);
     }
 
-    /**
-     *IAManager retourne degraded → 200 avec status degraded
-     */
     public function test_analyze_meal_returns_degraded_when_service_unavailable(): void
     {
         Storage::fake('public');
@@ -104,10 +89,6 @@ class IAControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // =================== RECOMMEND ===================
-    /**
-     *Recommandations générées avec succes
-     */
     public function test_recommend_returns_predictions(): void
     {
         $user = User::factory()->create([
@@ -140,9 +121,6 @@ class IAControllerTest extends TestCase
             ->assertJsonFragment(['status' => 'success']);
     }
 
-    /**
-     * Service indisponible → degraded
-     */
     public function test_recommend_returns_degraded_when_service_unavailable(): void
     {
         $user = User::factory()->create([
@@ -170,9 +148,6 @@ class IAControllerTest extends TestCase
             ->assertJsonFragment(['status' => 'degraded']);
     }
 
-    /**
-     * Catégorie invalide → 422
-     */
     public function test_recommend_with_invalid_category(): void
     {
         $user = User::factory()->create();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Listeners;
 
 use App\Listeners\UpdateUserWeightAndBmi;
 use App\Models\HealthMetric;
@@ -12,12 +12,6 @@ class UpdateUserWeightAndBmiTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     *  Poids et BMI mis à jour correctement
-     *
-     * User : 63kg, 170cm
-     * BMI attendu = 63 / (1.70²) = 63 / 2.89 = 21.80
-     */
     public function test_weight_and_bmi_are_updated_when_health_metric_created(): void
     {
         $user = User::factory()->create([
@@ -42,10 +36,6 @@ class UpdateUserWeightAndBmiTest extends TestCase
         $this->assertEquals($expectedBmi, $user->bmi);
     }
 
-    /******
-     *
-     * Si weight est null -> rien se passe
-     *****/
     public function test_nothing_happens_when_weight_is_null(): void
     {
         $user = User::factory()->create([
@@ -66,11 +56,6 @@ class UpdateUserWeightAndBmiTest extends TestCase
         $this->assertEquals(50, $user->weight);
         $this->assertEquals(20, $user->bmi);
     }
-
-    /******
-     *
-     * Si height est 0 -> BMI non calculé mais poids mis a jour
-     *****/
 
     public function test_weight_updated_but_bmi_not_calculated_when_height_is_zero(): void
     {
