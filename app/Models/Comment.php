@@ -15,7 +15,7 @@ class Comment extends Model
     use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'post_id', 'parent_id', 'content'
+        'user_id', 'post_id', 'parent_id', 'content',
     ];
 
     public function user(): BelongsTo

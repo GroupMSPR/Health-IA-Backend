@@ -7,11 +7,13 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Access\Controls\Control;
+use Lomkit\Access\Perimeters\Perimeter;
 
 class CommentControl extends Control
 {
     /**
      * The model the control refers to.
+     *
      * @var class-string<Model>
      */
     protected string $model = Comment::class;
@@ -19,7 +21,7 @@ class CommentControl extends Control
     /**
      * Retrieve the list of perimeter definitions for the current control.
      *
-     * @return array<\Lomkit\Access\Perimeters\Perimeter> An array of Perimeter objects.
+     * @return array<Perimeter> An array of Perimeter objects.
      */
     protected function perimeters(): array
     {
@@ -44,7 +46,7 @@ class CommentControl extends Control
                     }
 
                     return true;
-                })
+                }),
         ];
     }
 }

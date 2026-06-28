@@ -2,8 +2,8 @@
 
 namespace App\Rest\Controllers;
 
-use App\Rest\Controllers\Controller;
 use App\Rest\Resources\PostResource;
+use Lomkit\Rest\Http\Resource;
 
 class PostController extends Controller
 {

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
+use App\Http\Controllers\PostMediaController;
 use App\Http\Controllers\RegisterController;
 use App\Rest\Controllers\CommentController;
 use App\Rest\Controllers\ConstraintController;
@@ -80,4 +81,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('ai/recommend', [IAController::class, 'recommend']);
 
     Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
-    Route::post('posts/upload-image', [\App\Http\Controllers\PostMediaController::class, 'upload']);});
+    Route::post('posts/upload-image', [PostMediaController::class, 'upload']);
+});
