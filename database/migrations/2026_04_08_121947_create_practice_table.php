@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('exercise_id')->references('id')->on('exercises');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
