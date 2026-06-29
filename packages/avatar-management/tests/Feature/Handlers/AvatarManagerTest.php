@@ -4,7 +4,6 @@ namespace Tests\Feature\Handlers;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use MSPR3\AvatarManagement\Facades\AvatarManager;
 use Tests\TestCase;
