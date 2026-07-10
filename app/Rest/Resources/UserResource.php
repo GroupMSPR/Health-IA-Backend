@@ -175,7 +175,7 @@ class UserResource extends Resource
         $changed = false;
 
         if ($weight && $height) {
-            $heightInMeters = $weight / 100;
+            $heightInMeters = $height / 100;
             if ($heightInMeters > 0) {
                 $model->bmi = round($weight / ($heightInMeters ** 2), 2);
                 $changed = true;

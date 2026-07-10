@@ -54,6 +54,8 @@ class PasswordResetController extends Controller
                 $user->forceFill([
                     'password' => bcrypt($password),
                 ])->save();
+
+                $user->tokens()->delete();
             }
         );
 

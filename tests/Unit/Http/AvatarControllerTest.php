@@ -30,12 +30,31 @@ class AvatarControllerTest extends TestCase
                 'image',
             ]);
 
-        Storage::disk('public')->assertExists('avatars/'.$image->getClientOriginalName());
+        $expectedPath = 'avatars/'.$user->getKey().'.jpg';
+
+        Storage::disk('public')->assertExists($expectedPath);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->getKey(),
-            'profile_picture' => 'avatars/'.$image->getClientOriginalName(),
+            'profile_picture' => $expectedPath,
         ]);
+    }
+
+    public function test_update_avatar_rejects_non_image(): void
+    {
+        Storage::fake('public');
+
+        $user = User::factory()->create();
+
+        $file = UploadedFile::fake()->create('malware.php', 10, 'text/x-php');
+
+        $response = $this->actingAs($user, 'sanctum')
+            ->postJson('/api/update-avatar', [
+                'image' => $file,
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['image']);
     }
 
     public function test_update_avatar_unauthenticated(): void
@@ -68,6 +87,6 @@ class AvatarControllerTest extends TestCase
 
         Storage::disk('public')->assertMissing('avatars/ancien_avatar.jpg');
 
-        Storage::disk('public')->assertExists('avatars/nouveau_avatar.jpg');
+        Storage::disk('public')->assertExists('avatars/'.$user->getKey().'.jpg');
     }
 }

@@ -25,10 +25,9 @@ use MSPR2\SdkIA\Http\IAController;
 Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
+    Route::post('reset-password', [PasswordResetController::class, 'reset']);
 });
-
-Route::post('forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
-Route::post('reset-password', [PasswordResetController::class, 'reset']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -70,7 +69,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Rest::resource('muscles', MuscleController::class)->withSoftDeletes()->only('search');
     Rest::resource('equipments', EquipmentController::class)->withSoftDeletes();
     Rest::resource('subscriptions', SubscriptionController::class)->withSoftDeletes();
-    Rest::resource('muscles', MuscleController::class)->withSoftDeletes();
     Rest::resource('posts', PostController::class)->withSoftDeletes();
     Rest::resource('comments', CommentController::class)->withSoftDeletes();
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,18 +10,19 @@ class AvatarController extends Controller
 {
     public function updateAvatar(Request $request): JsonResponse
     {
-        $image = $request->image;
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
         $disk = Storage::disk('public');
+        $user = $request->user();
+        $image = $request->file('image');
 
-        $user = User::where('id', '=', $request->user()->id)->firstOrFail();
-        $pp = $user->profile_picture;
-
-        $newPath = 'avatars/'.$image->getClientOriginalName();
-
-        if ($pp) {
-            $disk->delete($pp);
+        if ($user->profile_picture) {
+            $disk->delete($user->profile_picture);
         }
-        $disk->put($newPath, file_get_contents($image));
+
+        $newPath = $image->storeAs('avatars', $user->getKey().'.'.$image->extension(), 'public');
 
         $user->update([
             'profile_picture' => $newPath,
@@ -31,7 +31,7 @@ class AvatarController extends Controller
         return response()->json([
             'message' => 'Avatar updated successfully',
             'image' => $newPath,
+            'url' => $disk->url($newPath),
         ]);
-
     }
 }
