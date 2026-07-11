@@ -7,6 +7,7 @@ use App\Casts\LegacyEnum;
 use App\Enums\ActivityLevel;
 use App\Enums\ExerciseCategory;
 use App\Enums\Gender;
+use App\Notifications\QueuedResetPassword;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -152,5 +153,15 @@ class User extends Authenticatable implements FilamentUser
     public function getNameAttribute(): string
     {
         return trim($this->first_name.' '.$this->last_name);
+    }
+
+    /**
+     * Send the password reset notification through the queue.
+     *
+     * @param  string  $token
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new QueuedResetPassword($token));
     }
 }

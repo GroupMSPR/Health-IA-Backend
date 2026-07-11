@@ -168,8 +168,3 @@ parameters:
 			count: 5
 			path: packages/SDK-IA/tests/Feature/Handlers/IllegalExercisesHandlerTest.php
 
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: packages/SDK-IA/tests/Unit/Http/IAControllerTest.php

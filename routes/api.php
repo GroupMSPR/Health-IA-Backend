@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MetricsController;
@@ -21,7 +22,6 @@ use App\Rest\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lomkit\Rest\Facades\Rest;
-use MSPR2\SdkIA\Http\IAController;
 
 Route::middleware('throttle:5,1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
@@ -80,8 +80,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('consume', [PivotController::class, 'consumeFood']);
     Route::post('practice', [PivotController::class, 'practiceExercise']);
 
-    Route::post('ai/analyze-meal', [IAController::class, 'analyzeMeal']);
-    Route::post('ai/recommend', [IAController::class, 'recommend']);
+    Route::post('ai/analyze-meal', [AiController::class, 'analyzeMeal']);
+    Route::post('ai/recommend', [AiController::class, 'recommend']);
+    Route::get('ai/predictions/{id}', [AiController::class, 'show']);
 
     Route::post('update-avatar', [AvatarController::class, 'updateAvatar']);
     Route::post('posts/upload', [PostMediaController::class, 'upload']);

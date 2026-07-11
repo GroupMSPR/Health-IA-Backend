@@ -3,7 +3,8 @@
 namespace Tests\Unit\Http;
 
 use App\Models\User;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\QueuedResetPassword;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
@@ -28,7 +29,12 @@ class PasswordResetControllerTest extends TestCase
                 'message' => 'Si un compte correspond à cette adresse, un lien de réinitialisation a été envoyé.',
             ]);
 
-        Notification::assertSentTo($user, ResetPassword::class);
+        // The reset notification is sent AND queued (implements ShouldQueue).
+        Notification::assertSentTo(
+            $user,
+            QueuedResetPassword::class,
+            fn ($notification) => $notification instanceof ShouldQueue,
+        );
     }
 
     public function test_send_reset_link_with_invalid_email_format(): void
