@@ -31,7 +31,7 @@ class HealthMetricFactory extends Factory
 
         return [
             'date' => $this->faker->dateTimeBetween('-30 days'),
-            'user_id' => User::all()->random()->getKey(),
+            'user_id' => User::query()->inRandomOrder()->value('id') ?? User::factory(),
             'weight' => $weight,
             'resting_bpm' => $restingBpm,
             'avg_bpm' => $avgBpm,

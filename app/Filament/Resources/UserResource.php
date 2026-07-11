@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\ActivityLevel;
+use App\Enums\ExerciseCategory;
 use App\Enums\Gender;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
@@ -53,21 +54,19 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('body_fat_pct')
                     ->required()
                     ->numeric(),
-                Forms\Components\TagsInput::make('constraints')
-                    ->required(),
                 Forms\Components\Select::make('physical_activity_level')
                     ->options(ActivityLevel::class)
                     ->required(),
                 Forms\Components\TextInput::make('daily_caloric_intake')
                     ->required()
                     ->numeric(),
-                Forms\Components\Textarea::make('goal')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('subscription')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date_subscription'),
+                Forms\Components\Select::make('favorite_exercise_category')
+                    ->options(ExerciseCategory::class)
+                    ->required(),
+                Forms\Components\Select::make('constraints')
+                    ->relationship('constraints', 'name')
+                    ->multiple()
+                    ->preload(),
             ]);
     }
 
@@ -106,11 +105,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('daily_caloric_intake')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('subscription')
+                Tables\Columns\TextColumn::make('favorite_exercise_category')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('date_subscription')
-                    ->dateTime()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

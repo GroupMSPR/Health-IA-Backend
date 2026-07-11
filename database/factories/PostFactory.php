@@ -21,7 +21,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::query()->inRandomOrder()->value('id') ?? User::factory(),
             'text' => $this->faker->paragraph(),
             'image' => null,
             'like_count' => $this->faker->numberBetween(0, 100),
