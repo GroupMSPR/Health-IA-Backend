@@ -22,13 +22,11 @@ class PasswordResetController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink($request->only('email'));
+        Password::sendResetLink($request->only('email'));
 
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(['message' => 'Nous vous avons envoyé un lien de réinitialisation par email.']);
-        }
-
-        return response()->json(['message' => 'Impossible d\'envoyer le lien à cette adresse.'], 400);
+        return response()->json([
+            'message' => 'Si un compte correspond à cette adresse, un lien de réinitialisation a été envoyé.',
+        ]);
     }
 
     #[OA\Post(

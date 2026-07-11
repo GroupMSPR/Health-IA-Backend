@@ -25,7 +25,7 @@ class PasswordResetControllerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Nous vous avons envoyé un lien de réinitialisation par email.',
+                'message' => 'Si un compte correspond à cette adresse, un lien de réinitialisation a été envoyé.',
             ]);
 
         Notification::assertSentTo($user, ResetPassword::class);
@@ -41,16 +41,34 @@ class PasswordResetControllerTest extends TestCase
             ->assertJsonValidationErrors(['email']);
     }
 
-    public function test_send_reset_link_with_nonexistent_email(): void
+    public function test_send_reset_link_with_nonexistent_email_returns_generic_200(): void
     {
+        Notification::fake();
+
         $response = $this->postJson('/api/forgot-password', [
             'email' => 'inexistant@test.com',
         ]);
 
-        $response->assertStatus(400)
+        // Anti-enumeration: same 200 + message as an existing email, no mail sent.
+        $response->assertStatus(200)
             ->assertJson([
-                'message' => "Impossible d'envoyer le lien à cette adresse.",
+                'message' => 'Si un compte correspond à cette adresse, un lien de réinitialisation a été envoyé.',
             ]);
+
+        Notification::assertNothingSent();
+    }
+
+    public function test_forgot_password_response_is_identical_for_known_and_unknown_email(): void
+    {
+        Notification::fake();
+        User::factory()->create(['email' => 'known@test.com']);
+
+        $known = $this->postJson('/api/forgot-password', ['email' => 'known@test.com']);
+        $unknown = $this->postJson('/api/forgot-password', ['email' => 'unknown@test.com']);
+
+        // The endpoint must not leak which email is registered.
+        $this->assertSame($known->status(), $unknown->status());
+        $this->assertSame($known->json('message'), $unknown->json('message'));
     }
 
     public function test_send_reset_link_without_email(): void

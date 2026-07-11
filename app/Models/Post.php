@@ -33,9 +33,4 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
-
-    public function exercises(): BelongsToMany
-    {
-        return $this->belongsToMany(Exercise::class, 'associate')->withTimestamps();
-    }
 }
