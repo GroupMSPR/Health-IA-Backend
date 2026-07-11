@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PivotController;
 use App\Http\Controllers\PostMediaController;
@@ -28,6 +29,10 @@ Route::middleware('throttle:5,1')->group(function () {
     Route::post('forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
     Route::post('reset-password', [PasswordResetController::class, 'reset']);
 });
+
+// Prometheus scrape endpoint (guarded by a token in production). Kept outside
+// the auth:sanctum group so the monitoring stack can scrape it.
+Route::get('metrics', [MetricsController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
