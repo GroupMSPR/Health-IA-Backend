@@ -16,7 +16,7 @@ class Post extends Model
     use HasControl, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'text', 'image', 'like_count', 'created_on',
+        'user_id', 'text', 'image', 'like_count',
     ];
 
     public function user(): BelongsTo
@@ -31,7 +31,7 @@ class Post extends Model
 
     public function likers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'like')->withTimestamps();
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 
     public function exercises(): BelongsToMany

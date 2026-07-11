@@ -3,11 +3,13 @@
 namespace App\Rest\Resources;
 
 use App\Enums\ActivityLevel;
+use App\Enums\ExerciseCategory;
 use App\Enums\Gender;
 use App\Models\User;
 use App\Support\HealthCalculator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Lomkit\Rest\Http\Requests\MutateRequest;
 use Lomkit\Rest\Http\Requests\RestRequest;
 use Lomkit\Rest\Relations\BelongsToMany;
@@ -111,13 +113,13 @@ class UserResource extends Resource
             'password' => ['string', 'min:6'],
             'profile_picture' => ['image', 'mimes:jpeg,jpg,png', 'max:2048'],
             'birthdate' => ['date'],
-            'gender' => ['string', 'in:Homme,Femme,Autres'],
+            'gender' => [Rule::enum(Gender::class)],
             'weight' => ['numeric', 'between:1,500'],
             'height' => ['integer', 'between:1,300'],
             'body_fat_pct' => ['integer', 'between:1,100'],
-            'physical_activity_level' => ['string'],
+            'physical_activity_level' => [Rule::enum(ActivityLevel::class)],
             'daily_caloric_intake' => ['integer'],
-            'favorite_exercise_category' => ['string'],
+            'favorite_exercise_category' => [Rule::enum(ExerciseCategory::class)],
         ];
     }
 

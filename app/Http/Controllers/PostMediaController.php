@@ -25,7 +25,6 @@ class PostMediaController extends Controller
             'text' => $request->input('text'),
             'image' => $path,
             'like_count' => 0,
-            'created_at' => now(),
         ]);
 
         return response()->json([
@@ -41,7 +40,7 @@ class PostMediaController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->user_id !== $request->user()->getKey()) {
-            return response()->json(['message' => 'Action pas autorisé'], 403);
+            return response()->json(['message' => 'Action non autorisée'], 403);
         }
 
         $request->validate([
@@ -76,7 +75,7 @@ class PostMediaController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->user_id !== $request->user()->getKey()) {
-            return response()->json(['message' => 'Acion pas autorisé'], 403);
+            return response()->json(['message' => 'Action non autorisée'], 403);
         }
 
         if ($post->image) {

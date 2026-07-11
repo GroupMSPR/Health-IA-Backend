@@ -25,7 +25,6 @@ class PostFactory extends Factory
             'text' => $this->faker->paragraph(),
             'image' => null,
             'like_count' => $this->faker->numberBetween(0, 100),
-            'created_on' => now(),
         ];
     }
 }

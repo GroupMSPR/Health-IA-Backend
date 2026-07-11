@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('like', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        // "like" is a reserved SQL keyword; the join table is named "likes".
+        Schema::create('likes', function (Blueprint $table) {
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('post_id')->references('id')->on('posts');
             $table->timestamps();
-            $table->softDeletes();
-            $table->unique(['user_id', 'post_id']);
+            $table->primary(['user_id', 'post_id']);
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('like');
+        Schema::dropIfExists('likes');
     }
 };

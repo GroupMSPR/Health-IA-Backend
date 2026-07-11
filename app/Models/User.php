@@ -131,7 +131,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function likedPosts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'like')->withTimestamps();
+        return $this->belongsToMany(Post::class, 'likes')->withTimestamps();
     }
 
     public function canAccessPanel(Panel $panel): bool

@@ -2,8 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ActivityLevel;
+use App\Enums\ExerciseCategory;
+use App\Enums\Gender;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -28,13 +32,13 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'birthdate' => 'required|date',
-            'gender' => 'required|string|in:Homme,Femme,Autres',
+            'gender' => ['required', Rule::enum(Gender::class)],
             'weight' => 'required|numeric|between:1,500',
             'height' => 'required|integer|between:1,300',
             'body_fat_pct' => 'required|integer|between:1,100',
-            'physical_activity_level' => 'required|string|in:sedentary,moderate,active',
+            'physical_activity_level' => ['required', Rule::enum(ActivityLevel::class)],
             'daily_caloric_intake' => 'required|integer|min:1000',
-            'favorite_exercise_category' => 'required|string|in:Musculation,Cardio,Poids du corps',
+            'favorite_exercise_category' => ['required', Rule::enum(ExerciseCategory::class)],
         ];
     }
 }

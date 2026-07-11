@@ -29,13 +29,13 @@ class RegisterController extends Controller
                         new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john.doe@example.com'),
                         new OA\Property(property: 'password', description: 'Minimum 6 caractères', type: 'string', format: 'password', example: 'password123'),
                         new OA\Property(property: 'birthdate', type: 'string', format: 'date', example: '1999-11-28'),
-                        new OA\Property(property: 'gender', type: 'string', enum: ['Homme', 'Femme', 'Autres'], example: 'male'),
+                        new OA\Property(property: 'gender', type: 'string', enum: ['Homme', 'Femme', 'Autres'], example: 'Homme'),
                         new OA\Property(property: 'weight', description: 'Poids en kg (entre 1 et 500)', type: 'number', format: 'float', example: 75.5),
                         new OA\Property(property: 'height', description: 'Taille en cm (entre 1 et 300)', type: 'integer', example: 180),
                         new OA\Property(property: 'body_fat_pct', description: 'Pourcentage de masse grasse (entre 1 et 100)', type: 'integer', example: 18),
-                        new OA\Property(property: 'physical_activity_level', type: 'string', example: 'Actif'),
+                        new OA\Property(property: 'physical_activity_level', type: 'string', enum: ['sedentary', 'moderate', 'active'], example: 'active'),
                         new OA\Property(property: 'daily_caloric_intake', description: 'Apport calorique journalier ciblé', type: 'integer', example: 2200),
-                        new OA\Property(property: 'favorite_exercise_category', description: 'Votre catégorie préférée', type: 'string', example: 'Cardio'),
+                        new OA\Property(property: 'favorite_exercise_category', description: 'Votre catégorie préférée', type: 'string', enum: ['Musculation', 'Cardio', 'Poids du corps'], example: 'Cardio'),
                     ],
                     type: 'object'
                 )

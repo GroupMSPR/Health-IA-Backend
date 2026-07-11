@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes as OA;
 
 class PivotController extends Controller
@@ -119,21 +119,26 @@ class PivotController extends Controller
         ]);
 
         $user = $request->user();
+        $post = Post::findOrFail($validated['post_id']);
 
-        if ($user->likedPosts()->where('post_id', $validated['post_id'])->exists()) {
-            $user->likedPosts()->detach($validated['post_id']);
+        $liked = DB::transaction(function () use ($user, $post) {
+            if ($user->likedPosts()->wherePivot('post_id', $post->getKey())->exists()) {
+                $user->likedPosts()->detach($post->getKey());
+                $liked = false;
+            } else {
+                $user->likedPosts()->attach($post->getKey());
+                $liked = true;
+            }
 
-            Post::where('id', $validated['post_id'])->where('like_count', '>', '0')->decrement('like_count');
+            // Recompute from the source of truth so the denormalized counter
+            // stays consistent (and self-heals any previous drift).
+            $post->update(['like_count' => $post->likers()->count()]);
 
-            return response()->json(['message' => 'Post unliké']);
-        }
+            return $liked;
+        });
 
-        $user->likedPosts()->attach($validated['post_id'], [
-            'id' => Str::uuid(),
-        ]);
-
-        Post::where('id', $validated['post_id'])->increment('like_count');
-
-        return response()->json(['message' => 'Post liké'], 201);
+        return $liked
+            ? response()->json(['message' => 'Post liké'], 201)
+            : response()->json(['message' => 'Post unliké']);
     }
 }

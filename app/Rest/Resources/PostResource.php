@@ -30,7 +30,7 @@ class PostResource extends Resource
             'text',
             'image',
             'like_count',
-            'created_on',
+            'created_at',
         ];
     }
 

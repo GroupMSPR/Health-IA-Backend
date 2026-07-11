@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('text')->nullable();
             $table->string('image')->nullable();
             $table->integer('like_count')->default(0);
-            $table->timestamp('created_on')->useCurrent();
             $table->softDeletes();
             $table->timestamps();
         });

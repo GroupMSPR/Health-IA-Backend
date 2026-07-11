@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ActivityLevel;
+use App\Enums\Gender;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
@@ -37,11 +39,7 @@ class UserResource extends Resource
                 Forms\Components\DatePicker::make('birthdate')
                     ->required(),
                 Forms\Components\Select::make('gender')
-                    ->options([
-                        'male' => 'Male',
-                        'female' => 'Female',
-                        'other' => 'Other',
-                    ])
+                    ->options(Gender::class)
                     ->required(),
                 Forms\Components\TextInput::make('weight')
                     ->required()
@@ -57,9 +55,9 @@ class UserResource extends Resource
                     ->numeric(),
                 Forms\Components\TagsInput::make('constraints')
                     ->required(),
-                Forms\Components\TextInput::make('physical_activity_level')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('physical_activity_level')
+                    ->options(ActivityLevel::class)
+                    ->required(),
                 Forms\Components\TextInput::make('daily_caloric_intake')
                     ->required()
                     ->numeric(),
