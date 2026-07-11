@@ -8,13 +8,13 @@ use Filament\Support\Contracts\HasLabel;
  * Canonical stored values are French (aligned with the /register contract and
  * the ML service). fromLegacy() normalizes casing (e.g. "Poids du Corps").
  */
-enum ExerciseCategory: string implements HasLabel
+enum ExerciseCategory: string implements HasLabel, LegacyNormalizable
 {
     case Musculation = 'Musculation';
     case Cardio = 'Cardio';
     case PoidsDuCorps = 'Poids du corps';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->value;
     }

@@ -8,13 +8,13 @@ use Filament\Support\Contracts\HasLabel;
  * Canonical stored values are French (aligned with the /register contract).
  * Use fromLegacy() to normalize mixed inputs (EN from Filament, casing, etc.).
  */
-enum Gender: string implements HasLabel
+enum Gender: string implements HasLabel, LegacyNormalizable
 {
     case Homme = 'Homme';
     case Femme = 'Femme';
     case Autres = 'Autres';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::Homme => 'Homme',

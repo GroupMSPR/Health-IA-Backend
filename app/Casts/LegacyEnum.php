@@ -2,6 +2,7 @@
 
 namespace App\Casts;
 
+use App\Enums\LegacyNormalizable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,14 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Usage: 'gender' => LegacyEnum::class.':'.Gender::class
  *
- * The target enum must expose a static fromLegacy(?string): ?self method.
+ * The target enum must implement {@see LegacyNormalizable}.
  *
- * @implements CastsAttributes<\BackedEnum|null, \BackedEnum|string|null>
+ * @implements CastsAttributes<LegacyNormalizable|null, LegacyNormalizable|string|null>
  */
 class LegacyEnum implements CastsAttributes
 {
     /**
-     * @param  class-string  $enumClass
+     * @param  class-string<LegacyNormalizable>  $enumClass
      */
     public function __construct(protected string $enumClass) {}
 
@@ -38,7 +39,7 @@ class LegacyEnum implements CastsAttributes
             return null;
         }
 
-        if ($value instanceof $this->enumClass) {
+        if ($value instanceof \BackedEnum) {
             return $value->value;
         }
 
@@ -46,6 +47,6 @@ class LegacyEnum implements CastsAttributes
 
         // Keep the raw value when unrecognized so validation can reject it
         // instead of silently nulling the column.
-        return $enum?->value ?? $value;
+        return $enum instanceof \BackedEnum ? $enum->value : $value;
     }
 }

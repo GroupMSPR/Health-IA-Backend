@@ -8,13 +8,13 @@ use Filament\Support\Contracts\HasLabel;
  * Canonical stored values are English (aligned with the /register contract and
  * the ML service). label() exposes the French wording for display.
  */
-enum ActivityLevel: string implements HasLabel
+enum ActivityLevel: string implements HasLabel, LegacyNormalizable
 {
     case Sedentary = 'sedentary';
     case Moderate = 'moderate';
     case Active = 'active';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::Sedentary => 'Sédentaire',

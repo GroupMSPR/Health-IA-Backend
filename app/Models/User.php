@@ -21,6 +21,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Lomkit\Access\Controls\HasControl;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property Gender $gender
+ * @property ActivityLevel $physical_activity_level
+ * @property ExerciseCategory $favorite_exercise_category
+ */
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */

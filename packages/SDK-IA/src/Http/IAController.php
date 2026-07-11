@@ -209,12 +209,12 @@ class IAController extends Controller
         $user = $request->user();
 
         $userProfile = [
-            // physical_activity_level is a backed enum on the User model (canonical
-            // EN value); fall back to the previous default when it is not set.
-            'physical_activity_level' => $user->physical_activity_level?->value ?? 'moderate',
+            // physical_activity_level / favorite_exercise_category are backed enums
+            // on the User model exposing their canonical value.
+            'physical_activity_level' => $user->physical_activity_level->value,
             'bmi' => (float) $user->bmi,
             'birthdate' => $user->birthdate,
-            'favorite_exercise_category' => $validated['favorite_exercise_category'] ?? $user->favorite_exercise_category?->value ?? 'Cardio',
+            'favorite_exercise_category' => $validated['favorite_exercise_category'] ?? $user->favorite_exercise_category->value,
         ];
 
         $result = IAManager::recommend($userProfile);
