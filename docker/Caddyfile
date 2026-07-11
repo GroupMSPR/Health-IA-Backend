@@ -1,0 +1,15 @@
+{
+	# Enable the FrankenPHP app module.
+	frankenphp
+	# TLS is terminated by the platform edge (e.g. Railway), so serve plain HTTP.
+	auto_https off
+}
+
+# Bind to the port injected by the platform ($PORT), defaulting to 8000 locally.
+:{$PORT:8000} {
+	root * /app/public
+	encode zstd br gzip
+
+	# php_server sets up the Laravel front-controller (try_files -> index.php).
+	php_server
+}
