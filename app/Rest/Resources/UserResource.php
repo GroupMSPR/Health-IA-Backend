@@ -2,7 +2,10 @@
 
 namespace App\Rest\Resources;
 
+use App\Enums\ActivityLevel;
+use App\Enums\Gender;
 use App\Models\User;
+use App\Support\HealthCalculator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Lomkit\Rest\Http\Requests\MutateRequest;
@@ -142,18 +145,18 @@ class UserResource extends Resource
 
     public function mutating(MutateRequest $request, array $requestBody, Model $model): void
     {
-        $bmi = null;
+        if (($requestBody['operation'] ?? null) !== 'create') {
+            return;
+        }
 
         $attributes = $requestBody['attributes'] ?? [];
 
-        if (! empty($attributes['weight']) && ! empty($attributes['height'])) {
-            $heightInMeters = $attributes['height'] / 100;
-            if ($heightInMeters > 0) {
-                $bmi = $attributes['weight'] / ($heightInMeters * $heightInMeters);
-            }
-        }
+        $bmi = app(HealthCalculator::class)->bmi(
+            isset($attributes['weight']) ? (float) $attributes['weight'] : null,
+            isset($attributes['height']) ? (float) $attributes['height'] : null,
+        );
 
-        if (isset($requestBody['operation']) && $requestBody['operation'] === 'create' && $bmi !== null) {
+        if ($bmi !== null) {
             $model->bmi = $bmi;
         }
     }
@@ -166,44 +169,34 @@ class UserResource extends Resource
         }
 
         $attributes = $requestBody['attributes'] ?? [];
-        $weight = $attributes['weight'] ?? null;
-        $height = $attributes['height'] ?? null;
-        $birthdate = $attributes['birthdate'] ?? null;
-        $gender = $attributes['gender'] ?? null;
-        $activityLevel = $attributes['physical_activity_level'] ?? null;
 
+        $weight = isset($attributes['weight']) ? (float) $attributes['weight'] : null;
+        $height = isset($attributes['height']) ? (float) $attributes['height'] : null;
+        $age = isset($attributes['birthdate']) ? Carbon::parse($attributes['birthdate'])->age : null;
+        $gender = Gender::fromLegacy($attributes['gender'] ?? null);
+        $level = ActivityLevel::fromLegacy($attributes['physical_activity_level'] ?? null);
+
+        $calc = app(HealthCalculator::class);
         $changed = false;
 
-        if ($weight && $height) {
-            $heightInMeters = $height / 100;
-            if ($heightInMeters > 0) {
-                $model->bmi = round($weight / ($heightInMeters ** 2), 2);
+        $bmi = $calc->bmi($weight, $height);
+        if ($bmi !== null) {
+            $model->bmi = $bmi;
+            $changed = true;
+        }
+
+        // Preserve the original semantics: the target intake is only computed
+        // when the activity level is provided (all five inputs present).
+        if ($level !== null) {
+            $target = $calc->dailyCaloricTarget($gender, $level, $weight, $height, $age);
+            if ($target !== null) {
+                $model->daily_caloric_intake = $target;
                 $changed = true;
             }
-            if ($weight && $height && $birthdate && $gender && $activityLevel) {
-                $age = Carbon::parse($birthdate)->age;
+        }
 
-                $bmr = match (strtolower($gender)) {
-                    'homme', 'male' => 88.36 + (13.4 * $weight) + (4.8 * $height) - (5.7 * $age),
-                    'femme', 'female' => 447.6 + (9.2 * $weight) + (3.1 * $height) - (4.3 * $age),
-                    default => null
-                };
-
-                if ($bmr !== null) {
-                    $tdee = match (strtolower($activityLevel)) {
-                        'sedentary' => $bmr * 1.2,
-                        'moderate' => $bmr * 1.55,
-                        'active' => $bmr * 1.725,
-                        default => $bmr * 1.2
-                    };
-                    $model->daily_caloric_intake = round($tdee - 400);
-                    $changed = true;
-                }
-            }
-
-            if ($changed) {
-                $model->save();
-            }
+        if ($changed) {
+            $model->save();
         }
     }
 }

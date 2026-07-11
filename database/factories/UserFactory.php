@@ -2,7 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Enums\ActivityLevel;
+use App\Enums\ExerciseCategory;
+use App\Enums\Gender;
 use App\Models\User;
+use App\Support\HealthCalculator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,8 +30,7 @@ class UserFactory extends Factory
         $weight = $this->faker->numberBetween(40, 300);
         $height = $this->faker->numberBetween(100, 300);
 
-        $heightInMeters = $height / 100;
-        $bmi = round($weight / ($heightInMeters * $heightInMeters), 2);
+        $bmi = (new HealthCalculator)->bmi((float) $weight, (float) $height);
 
         return [
             'last_name' => $this->faker->lastName(),
@@ -35,14 +38,14 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password123'),
             'birthdate' => $this->faker->dateTimeBetween('-35 years', '-25 years'),
-            'gender' => $this->faker->randomElement(['Homme', 'Femme', 'Autres']),
+            'gender' => $this->faker->randomElement([Gender::Homme->value, Gender::Femme->value, Gender::Autres->value]),
             'weight' => $weight,
             'height' => $height,
             'bmi' => $bmi,
             'body_fat_pct' => $this->faker->numberBetween(1, 100),
-            'physical_activity_level' => $this->faker->randomElement(['Sedentaire', 'Moyennement Actif(ve)', 'Actif(ve)']),
+            'physical_activity_level' => $this->faker->randomElement([ActivityLevel::Sedentary->value, ActivityLevel::Moderate->value, ActivityLevel::Active->value]),
             'daily_caloric_intake' => $this->faker->numberBetween(1200, 5000),
-            'favorite_exercise_category' => $this->faker->randomElement(['Cardio', 'Poids du Corps', 'Musculation']),
+            'favorite_exercise_category' => $this->faker->randomElement([ExerciseCategory::Musculation->value, ExerciseCategory::Cardio->value, ExerciseCategory::PoidsDuCorps->value]),
         ];
     }
 }

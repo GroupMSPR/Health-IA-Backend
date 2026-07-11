@@ -209,10 +209,12 @@ class IAController extends Controller
         $user = $request->user();
 
         $userProfile = [
-            'physical_activity_level' => $this->mapActivityLevel($user->physical_activity_level),
+            // physical_activity_level is a backed enum on the User model (canonical
+            // EN value); fall back to the previous default when it is not set.
+            'physical_activity_level' => $user->physical_activity_level?->value ?? 'moderate',
             'bmi' => (float) $user->bmi,
             'birthdate' => $user->birthdate,
-            'favorite_exercise_category' => $validated['favorite_exercise_category'] ?? $user->favorite_exercise_category ?? 'Cardio',
+            'favorite_exercise_category' => $validated['favorite_exercise_category'] ?? $user->favorite_exercise_category?->value ?? 'Cardio',
         ];
 
         $result = IAManager::recommend($userProfile);
@@ -241,19 +243,5 @@ class IAController extends Controller
             'is_working' => $result['is_working'] ?? 1,
             'predictions' => $filtered,
         ]);
-    }
-
-    private function mapActivityLevel(string $level): string
-    {
-        $level = strtolower($level);
-
-        return match (true) {
-            str_contains($level, 'sédentaire'),
-            str_contains($level, 'sedentaire'),
-            str_contains($level, 'sedentary') => 'sedentary',
-            str_contains($level, 'actif'),
-            str_contains($level, 'active') => 'active',
-            default => 'moderate',
-        };
     }
 }

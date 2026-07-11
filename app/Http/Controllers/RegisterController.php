@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Support\HealthCalculator;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OA;
 
@@ -56,14 +57,10 @@ class RegisterController extends Controller
     )]
     public function register(RegisterRequest $request): JsonResponse
     {
-        $bmi = null;
-
-        if (! empty($request->weight) && ! empty($request->height)) {
-            $heightInMeters = $request->height / 100;
-            if ($heightInMeters > 0) {
-                $bmi = $request->weight / ($heightInMeters * $heightInMeters);
-            }
-        }
+        $bmi = app(HealthCalculator::class)->bmi(
+            $request->weight !== null ? (float) $request->weight : null,
+            $request->height !== null ? (float) $request->height : null,
+        );
 
         $user = User::create([
             'last_name' => $request->last_name,

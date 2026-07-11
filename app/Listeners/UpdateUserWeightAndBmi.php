@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Models\HealthMetric;
+use App\Support\HealthCalculator;
 
 class UpdateUserWeightAndBmi
 {
@@ -27,9 +28,10 @@ class UpdateUserWeightAndBmi
 
         $user->weight = $event->weight;
 
-        if ($user->height > 0) {
-            $heightInMeters = $user->height / 100;
-            $user->bmi = round($event->weight / ($heightInMeters ** 2), 2);
+        $bmi = app(HealthCalculator::class)->bmi((float) $event->weight, (float) $user->height);
+
+        if ($bmi !== null) {
+            $user->bmi = $bmi;
         }
 
         $user->save();

@@ -3,6 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Casts\LegacyEnum;
+use App\Enums\ActivityLevel;
+use App\Enums\ExerciseCategory;
+use App\Enums\Gender;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -72,6 +76,9 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
             'constraints' => 'array',
             'birthdate' => 'date',
+            'gender' => LegacyEnum::class.':'.Gender::class,
+            'physical_activity_level' => LegacyEnum::class.':'.ActivityLevel::class,
+            'favorite_exercise_category' => LegacyEnum::class.':'.ExerciseCategory::class,
         ];
     }
 
