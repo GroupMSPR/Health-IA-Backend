@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\BlockInProduction;
 use L5Swagger\Generator;
 use OpenApi\scan;
 
@@ -69,10 +70,10 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
              */
             'middleware' => [
-                'api' => [],
-                'asset' => [],
-                'docs' => [],
-                'oauth2_callback' => [],
+                'api' => [BlockInProduction::class],
+                'asset' => [BlockInProduction::class],
+                'docs' => [BlockInProduction::class],
+                'oauth2_callback' => [BlockInProduction::class],
             ],
 
             /*

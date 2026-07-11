@@ -19,7 +19,15 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    'allowed_origins' => [env('CORS_ALLOWED_ORIGINS', 'http://localhost'), 'http://localhost:5001', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:6000'],
+    // Comma-separated list, driven by CORS_ALLOWED_ORIGINS. Defaults to the
+    // local dev front-ends; set the real origin(s) in production.
+    'allowed_origins' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env(
+            'CORS_ALLOWED_ORIGINS',
+            'http://localhost,http://localhost:5001,http://localhost:5173,http://localhost:5174,http://localhost:6000'
+        ))
+    ))),
 
     'allowed_origins_patterns' => [],
 
